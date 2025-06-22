@@ -14,6 +14,6 @@ case $usu in                                                                    
 1) sh scriptusuarios.sh ;;                                                          #Ejecuta el script scriptusuarios.sh  
 2) sh scriptgrupos.sh ;;                                                            #Ejecuta el script scriptgrupos.sh  
 3) echo "Saliendo...";;                                                             #Sale del menú
-*) echo "La opcion $usu es invalida";;                                              #Muestra un mensaje de error si selecciona una opcion invalida
+*) echo "La opcion $usu es invalida, ingrese otra";;                                              #Muestra un mensaje de error si selecciona una opcion invalida
 esac                                                                                #Final del case
 done                                                                                #Final del do
