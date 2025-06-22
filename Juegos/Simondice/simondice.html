@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Simon Dice</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+
+    <h1>¡Simon Dice!</h1>
+    <button id="comienzaBtn" class="btn btn-success btn-jugar">Empezar</button>
+
+    <div class="container mt-4">
+        <div class="row justify-content-center">
+            <div class="col-6 col-md-3 p-2">
+                <img id="rojo" src="imgs/rojo.webp" class="color-btn">
+            </div>
+            <div class="col-6 col-md-3 p-2">
+                <img id="verde" src="imgs/verde.avif" class="color-btn">
+            </div>
+            <div class="col-6 col-md-3 p-2">
+                <img id="azul" src="imgs/azul.png" class="color-btn">
+            </div>
+            <div class="col-6 col-md-3 p-2">
+                <img id="amarillo" src="imgs/amarillo.jpg" class="color-btn">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var colores = ["rojo", "verde", "azul", "amarillo"];
+        var secuencia = [];
+        var jugador = [];
+        var puedeJugar = false;
+
+        var sonidoRojo = new Audio("sonidos/1.mp3");
+        var sonidoVerde = new Audio("sonidos/2.mp3");
+        var sonidoAzul = new Audio("sonidos/3.mp3");
+        var sonidoAmarillo = new Audio("sonidos/4.mp3");
+        var sonidoPierde = new Audio("sonidos/pierde.mp3");
+        var sonidoEmpieza = new Audio("sonidos/empieza.mp3");
+        var sonidoNivel10 = new Audio("sonidos/empieza.mp3");
+
+        var imgRojo = "imgs/rojo.webp";
+        var imgVerde = "imgs/verde.avif";
+        var imgAzul = "imgs/azul.png";
+        var imgAmarillo = "imgs/amarillo.avif";
+
+        var imgRojoOn = "imgs/rojo1.jpg";
+        var imgVerdeOn = "imgs/verde1.avif";
+        var imgAzulOn = "imgs/azul1.jpeg";
+        var imgAmarilloOn = "imgs/amarillo2.avif";
+
+        document.getElementById("comienzaBtn").addEventListener("click", comenzarJuego);
+
+        function comenzarJuego() {
+            sonidoEmpieza.play();
+            secuencia = [];
+            jugador = [];
+            puedeJugar = false;
+            setTimeout(nuevoNivel, 1000);
+        }
+
+        document.getElementById("rojo").addEventListener("click", function () {
+            tocarColor("rojo");
+        });
+
+        document.getElementById("verde").addEventListener("click", function () {
+            tocarColor("verde");
+        });
+
+        document.getElementById("azul").addEventListener("click", function () {
+            tocarColor("azul");
+        });
+
+        document.getElementById("amarillo").addEventListener("click", function () {
+            tocarColor("amarillo");
+        });
+
+        function tocarColor(color) {
+            if (puedeJugar == false) return;
+
+            reproducirColor(color);
+            jugador.push(color);
+            verificar(jugador.length - 1);
+        }
+
+        function nuevoNivel() {
+            puedeJugar = false;
+            var numero = Math.floor(Math.random() * 4);
+            var color = colores[numero];
+            secuencia.push(color);
+            jugador = [];
+
+            if ((secuencia.length - 1) > 0 && (secuencia.length - 1) % 10 == 0) {
+                sonidoNivel10.play();
+            }
+
+            mostrarSecuencia(0);
+        }
+
+        function mostrarSecuencia(i) {
+            if (i < secuencia.length) {
+                var color = secuencia[i];
+                reproducirColor(color);
+                setTimeout(function () {
+                    mostrarSecuencia(i + 1);
+                }, 800);
+            } else {
+                setTimeout(function () {
+                    puedeJugar = true;
+                }, 500);
+            }
+        }
+
+        function reproducirColor(color) {
+            var imagen = document.getElementById(color);
+            if (color == "rojo") {
+                imagen.src = imgRojoOn;
+                sonidoRojo.play();
+                setTimeout(function () {
+                    imagen.src = imgRojo;
+                }, 400);
+            } else if (color == "verde") {
+                imagen.src = imgVerdeOn;
+                sonidoVerde.play();
+                setTimeout(function () {
+                    imagen.src = imgVerde;
+                }, 400);
+            } else if (color == "azul") {
+                imagen.src = imgAzulOn;
+                sonidoAzul.play();
+                setTimeout(function () {
+                    imagen.src = imgAzul;
+                }, 400);
+            } else if (color == "amarillo") {
+                imagen.src = imgAmarilloOn;
+                sonidoAmarillo.play();
+                setTimeout(function () {
+                    imagen.src = imgAmarillo;
+                }, 400);
+            }
+        }
+
+        function verificar(pos) {
+            if (jugador[pos] != secuencia[pos]) {
+                sonidoPierde.play();
+                alert("¡Perdiste! Llegaste al nivel " + secuencia.length);
+                puedeJugar = false;
+                return;
+            }
+
+            if (jugador.length == secuencia.length) {
+                setTimeout(nuevoNivel, 1000);
+            }
+        }
+    </script>
+
+
+</body>
+
+</html>
+
+<style>
+    body {
+        background-color: #111;
+        color: white;
+        text-align: center;
+    }
+
+    .color-btn {
+        width: 200px;
+        height: 200px;
+        object-fit: cover;
+        cursor: pointer;
+        transition: transform 0.1s ease-in-out;
+    }
+
+    .color-btn:active {
+        transform: scale(0.95);
+    }
+</style>
