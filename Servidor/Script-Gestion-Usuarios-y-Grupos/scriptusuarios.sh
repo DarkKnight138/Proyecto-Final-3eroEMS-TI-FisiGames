@@ -15,32 +15,32 @@ read usu
 case $usu in
 #Crear Usuario
 1)
-   noExiste=true
-   while [ "$noExiste" == "true" ]; do 
+   ExisteUsuarioCreado=true
+   while [ "$ExisteUsuarioCreado" == "true" ]; do 
        echo "Ingrese nombre del usuario a crear:"
        read usuarioCreado
        clear
        if grep -q "^$usuarioCreado:" /etc/passwd; then
            echo "El usuario ya existe."
-           noExiste=true
+           ExisteUsuarioCreado=true
        else
-           noExiste=false
+           ExisteUsuarioCreado=false
        fi
    done
-
+    clear
    echo "Ingrese comentario:"
    read comentario
-
-   noExiste=true
-   while [ "$noExiste" == "true" ]; do 
+    clear
+   ExisteDirectorio=true
+   while [ "$ExisteDirectorio" == "true" ]; do 
        echo "Ingrese directorio personal:"
        read directorio
        clear
        if find /home -maxdepth 1 -type d -name "$directorio" | grep -q .; then
            echo "El directorio ya existe."
-           noExiste=true
+           ExisteDirectorio=true
        else
-           noExiste=false
+           ExisteDirectorio=false
        fi
    done
    clear
@@ -83,21 +83,22 @@ case $usu in
            useradd -c "$comentario" -d "/home/$directorio" -m -s /bin/bash "$usuarioCreado"
        fi
    fi
-
-   echo "Usuario $usuarioCreado creado correctamente." ;;
+   echo "$usuarioCreado:$usuarioCreado" | chpasswd
+   chage -d 7 "$usuarioCreado"
+   echo "Usuario $usuarioCreado creado correctamente, recuerde cambiar su contraseña por defecto antes de que pasen 7 días." ;;
 
 2) 
-   Existe=false
-   while [ "$Existe"=="false" ]; do 
+   ExisteUsuarioBorrado=false
+   while [ "$ExisteUsuarioBorrado"=="false" ]; do 
        echo "Ingrese nombre del usuario a borrar:"
        read usuarioBorrado
        clear
        if grep -q "^$usuarioBorrado:" /etc/passwd; then
            
-           Existe=true
+           ExisteUsuarioBorrado=true
        else
          echo "El usuario a borrar no existe"
-         Existe=false
+         ExisteUsuarioBorrado=false
        fi
    done
    userdel -r "$usuarioBorrado"
