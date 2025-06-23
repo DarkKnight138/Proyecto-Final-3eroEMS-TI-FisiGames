@@ -12,6 +12,7 @@ do
     echo "* 0) Salir                                                    *"
     echo "***************************************************************"
     read opcion
+    clear
     case $opcion in
         1) echo "Ingrese nombre del grupo a crear:"
            read grupoCreado

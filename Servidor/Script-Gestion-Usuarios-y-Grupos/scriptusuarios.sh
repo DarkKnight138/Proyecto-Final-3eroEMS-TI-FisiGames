@@ -12,6 +12,7 @@ echo "* 4) Listar Usuarios                                          *"
 echo "* 5) Salir                                                    *"
 echo "***************************************************************"
 read usu
+clear
 case $usu in
 #Crear Usuario
 1)
