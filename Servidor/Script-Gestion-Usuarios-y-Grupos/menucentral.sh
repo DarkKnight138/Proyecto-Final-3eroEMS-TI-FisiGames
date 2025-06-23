@@ -11,7 +11,7 @@ echo "* 3)Salir                                                              *"
 echo "************************************************************************"
 read usu                                                                            #Lee la variable usuario y le asigna el valor ingresado por el usuario 
 case $usu in                                                                        #Realiza una accion dependiendo el valor de de la variable usuario  
-1) sh scriptusuarios.sh ;;                                                          #Ejecuta el script scriptusuarios.sh  
+1) sh scriptusuariosfuncional.sh ;;                                                          #Ejecuta el script scriptusuarios.sh  
 2) sh scriptgrupos.sh ;;                                                            #Ejecuta el script scriptgrupos.sh  
 3) echo "Saliendo...";;                                                             #Sale del menú
 *) echo "La opcion $usu es invalida, ingrese otra";;                                              #Muestra un mensaje de error si selecciona una opcion invalida

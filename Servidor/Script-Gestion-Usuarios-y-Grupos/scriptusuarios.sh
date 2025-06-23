@@ -72,15 +72,15 @@ case $usu in
 
    if [ "$asignarGrupoPrimario" == "y" ]; then
        if [ "$asignarGrupoSecundario" == "y" ]; then
-           useradd -c "$comentario" -d "$directorio" -m -s /bin/bash -g "$grupo" -G "$grupos" "$usuarioCreado"
+           useradd -c "$comentario" -d "/home/$directorio" -m -s /bin/bash -g "$grupo" -G "$grupos" "$usuarioCreado"
        else
-           useradd -c "$comentario" -d "$directorio" -m -s /bin/bash -g "$grupo" "$usuarioCreado"
+           useradd -c "$comentario" -d "/home/$directorio" -m -s /bin/bash -g "$grupo" "$usuarioCreado"
        fi
    else
        if [ "$asignarGrupoSecundario" == "y" ]; then
-           useradd -c "$comentario" -d "$directorio" -m -s /bin/bash -G "$grupos" "$usuarioCreado"
+           useradd -c "$comentario" -d "/home/$directorio" -m -s /bin/bash -G "$grupos" "$usuarioCreado"
        else
-           useradd -c "$comentario" -d "$directorio" -m -s /bin/bash "$usuarioCreado"
+           useradd -c "$comentario" -d "/home/$directorio" -m -s /bin/bash "$usuarioCreado"
        fi
    fi
 
