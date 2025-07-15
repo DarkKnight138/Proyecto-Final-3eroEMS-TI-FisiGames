@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+     <link rel="stylesheet" href="./2048.css">
+    
+</head>
+<body>
+<h1>Bienvenido al 2048</h1><!--Título-->
+<button id="botonReglas" onclick="abrir()">Reglas</button> <!--Creacion del boton reglas-->
+<div id="cajadeReglas" class="modal"> <!--Creación de la caja donde va a ir el modal-->
+   <div class="modal-contenido"><!--Contenido del modal-->
+       <span class="cerrarBoton" onclick="cerrar()">&times;</span><!-- La “X” de cierre-->
+       <h1>Reglas</h1><!--Título de las reglas-->
+       <p>El objetivo del juego es crear una ficha con el número 2048 combinando fichas del mismo valor. El tablero
+           es de 5x5 y las fichas se deslizan en cuatro direcciones: arriba, abajo, izquierda o derecha. Al
+           deslizar las fichas, las que tienen el mismo número se combinan y se suman en una ficha con el valor
+           resultante. Después de cada movimiento, aparece una nueva ficha con el número 2 o 4 en una casilla vacía
+           aleatoria. El juego termina cuando el tablero está lleno y no hay más movimientos posibles. Ganas al
+           crear una ficha con el número 2048.</p><!--Reglas-->
+   </div>
+</div>
+<button id="AJugar" onclick="iniciarJuego()">Empezar</button><!--Botón de inicio de juego-->
+<button id="reiniciarJuego" onclick="reiniciarJuego()">Reiniciar Juego</button><!--Botón de reiniciar juego-->
+<div id="tabla" class="modal"><!--Creacion de la caja donde va a ir el tablero-->
+   <div class="modal-contenido"> <!--Contenido del modal del tablero -->
+       <span class="cerrarBoton" onclick="cerrar2()">&times;</span>
+       <table><!--creación del tablero-->
+           <tr>  <!-- fila de tabla-->
+               <td id="a1"></td> <!--celdas-->
+               <td id="a2"></td>
+               <td id="a3"></td>
+               <td id="a4"></td>
+               <td id="a5"></td>
+           </tr>
+           <tr> <!-- fila de tabla-->
+               <td id="b1"></td><!--celdas-->
+               <td id="b2"></td>
+               <td id="b3"></td>
+               <td id="b4"></td>
+               <td id="b5"></td>
+           </tr>
+           <tr> <!-- fila de tabla-->
+               <td id="c1"></td> <!--celdas -->
+               <td id="c2"></td>
+               <td id="c3"></td>
+               <td id="c4"></td>
+               <td id="c5"></td>
+           </tr>
+           <tr> <!-- fila de tabla-->
+               <td id="d1"></td> <!--celdas -->
+               <td id="d2"></td>
+               <td id="d3"></td>
+               <td id="d4"></td>
+               <td id="d5"></td>
+           </tr>
+           <tr> <!-- fila de tabla-->
+               <td id="e1"></td> <!--celdas -->
+               <td id="e2"></td>
+               <td id="e3"></td>
+               <td id="e4"></td>
+               <td id="e5"></td>
+           </tr>
+       </table>
+   </div>
+</div>
+<script src="./2048.js"></script>
+</body>
+</html>
