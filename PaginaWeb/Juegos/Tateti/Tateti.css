@@ -1,0 +1,40 @@
+ .btn {
+            border-radius: 10px;
+        }
+
+        .btnReinicio {
+            width: 150px;
+            border-color: black;
+        }
+
+        .vacio {
+            background: url(Img/15x15-gris-claro-1.png);
+            width: 50%;
+            max-width: 100px;
+            aspect-ratio: 1;
+            background-size: cover;
+
+        }
+
+        .cruz {
+            background: url(Img/cruz.png);
+            width: 50%;
+            max-width: 100px;
+            aspect-ratio: 1;
+            background-size: cover;
+        }
+
+        .circulo {
+            background: url(Img/circulo.png);
+            width: 50%;
+            max-width: 100px;
+            aspect-ratio: 1;
+            background-size: cover;
+        }
+
+        .vacio:hover {
+            background: url(Img/15x15-gris-claro-1.png);
+            background-size: cover;
+            opacity: 75%;
+
+        }
