@@ -30,11 +30,6 @@ class BaseDatos {
        return $arreglo;
    }
 /********************************************************************************/
-   public function existeUsuario(){
-       $existe=false
-
-
-      
-   }
+   
 }
 ?>
