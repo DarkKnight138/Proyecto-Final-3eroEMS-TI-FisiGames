@@ -5,7 +5,7 @@ require 'conexion.php'; // conecta con la base de datos
 
 // verifica si NO hay una sesión activa con el nombre del usuario
 if (!isset($_SESSION['nombre'])) {
-    header('Location: login.php'); // si no hay sesión, lo manda a la página de login
+    header('Location: ./login.php'); // si no hay sesión, lo manda a la página de login
     exit(); // termina el script para que no siga ejecutando nada
 }
 
