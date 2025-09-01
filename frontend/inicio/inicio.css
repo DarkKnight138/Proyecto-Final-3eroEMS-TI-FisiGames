@@ -1,0 +1,78 @@
+  main {
+      flex-grow: 1;
+      padding: 3rem 2rem;
+      text-align: center;
+  }
+
+  main h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      color: #00ffe7;
+      text-shadow: 0 0 10px #00ffe7;
+  }
+
+  main p {
+      font-size: 1.2rem;
+      max-width: 600px;
+      margin: 0 auto;
+      color: #ccc;
+  }
+
+
+  .games-section {
+      padding: 2rem;
+      text-align: center;
+  }
+
+  .games-section h2 {
+      color: #00ffe7;
+      margin-bottom: 2rem;
+      font-size: 2rem;
+      text-shadow: 0 0 10px #00ffe7;
+  }
+
+  .game-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-gap: 1.5rem;
+      justify-items: center;
+  }
+
+  .game-card {
+      background-color: #1a1a2e;
+      border: 2px solid #00ffe7;
+      border-radius: 15px;
+      padding: 1rem;
+      width: 100%;
+      max-width: 200px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 0 10px #00ffe74a;
+  }
+
+  .game-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0 15px #00ffe7;
+  }
+
+  .game-card img {
+      width: 100%;
+      height: 120px;
+      object-fit: contain;
+      background-color: #000;
+      border-radius: 10px;
+      margin-bottom: 0.8rem;
+  }
+
+  .game-card h3 {
+      color: #eee;
+      font-size: 1rem;
+  }
+  
+h3 a { /* Todos los links dentro de un h3 */
+  color: aliceblue;
+  text-decoration: none; /* opcional, quita el subrayado */
+}
+
+h1 {
+  margin-top: 15px;
+}

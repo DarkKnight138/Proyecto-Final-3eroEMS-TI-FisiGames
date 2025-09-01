@@ -1,43 +1,51 @@
 <!DOCTYPE html>
 <html lang="es">
-
-
 <head>
-    <meta charset="UTF-8">
-    <title>Juego de la Mosqueta</title>
-
+<meta charset="UTF-8">
+<title>Juego de la Mosqueta</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
 </head>
-
-
 <body>
 
 
-    <h1>Juego de la Mosqueta</h1>
-    <p id="dineroTxt">Tienes $1000</p>
 
 
-    <p>
-        ¿Cuánto quieres apostar?
-        <input type="text" id="apuesta">
-    </p>
+<nav id="navbar">
+ <div class="left-section">
+     <div class="logo">FisiGames</div>
+     <div class="nav-links left-links">
+         <a href="index.html"><i class="fas fa-home"></i> Volver al Inicio</a>
+         <a href="puntuaciones.html"><i class="fas fa-trophy"></i> Puntuaciones</a>
+         <a href="grupos.html"><i class="fas fa-users"></i> Grupos</a>
+     </div>
+ </div>
+ <div class="nav-links right-links">
+     <a href="perfil.html"><i class="fas fa-user"></i> Perfil</a>
+ </div>
+ <div class="menu-toggle" id="menu-toggle" aria-label="Menú de navegación">
+     <div></div>
+     <div></div>
+     <div></div>
+ </div>
+</nav>
 
 
-    <p>Elige un vaso:</p>
 
 
-    <div id="vasos">
-        <img src="imgs/vaso.png" class="vaso" onclick="jugar(1)">
-        <img src="imgs/vaso.png" class="vaso" onclick="jugar(2)">
-        <img src="imgs/vaso.png" class="vaso" onclick="jugar(3)">
-    </div>
-
-
-    <p id="mensaje"></p>
-
+<main>
+ <h1>Juego de la Mosqueta</h1>
+ <p id="dineroTxt">Tienes $1000</p>
+ <p>¿Cuánto quieres apostar?</p>
+ <input type="text" id="apuesta" placeholder="Ingresa tu apuesta">
+ <p>Elige un vaso:</p>
+ <div id="vasos">
+     <img src="imgs/vaso.png" class="vaso" id="vaso1" onclick="jugar(1)">
+     <img src="imgs/vaso.png" class="vaso" id="vaso2" onclick="jugar(2)">
+     <img src="imgs/vaso.png" class="vaso" id="vaso3" onclick="jugar(3)">
+ </div>
+ <p id="mensaje"></p>
+ <button id="reiniciarBtn" onclick="reiniciarJuego()">Reiniciar Juego</button>
+</main>
 </body>
-
-
 </html>
-
-
