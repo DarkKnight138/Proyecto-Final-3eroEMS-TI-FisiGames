@@ -1,0 +1,98 @@
+.container {
+	display: flex;/*Sus elementos hijos se acomodan a lo largo*/
+	justify-content: center;
+	/*Centra los elementos dentro del contenedor*/
+	align-items: flex-start;
+	gap: 2rem;
+	/*Espacio entre los elementos*/
+	padding: 2rem;
+	/*Espacidado interno del contenedor*/
+}
+
+.form-box {
+	background-color: rgba(26, 26, 46, 0.9);
+	padding: 2rem 2.5rem;/*Espaciado interno*/
+	border-radius: 10px;/*Bordes redondeados*/
+	box-shadow: 0 0 20px #00ffe7;/*Sombra color turquesa alrededor*/
+	max-width: 400px;/*Ancho máximo*/
+	width: 100%;/*Ocupa hasta el ancho máximo*/
+	text-align: center;/*Cemtra el texto dentro*/
+}
+
+h2 {
+	color: #00ffe7;
+	/* Color del título */
+	margin-bottom: 1.5rem;
+	/* Espacio debajo del título */
+	text-shadow: 0 0 8px #00ffe7;
+	/* Brillo alrededor del texto */
+}
+
+.input-group {
+	margin-bottom: 1.2rem;
+	/*Espacio entre la etiqueta y el input*/
+	text-align: left;
+	/*Alinea todo hacia la izquierda*/
+}
+
+label {
+	display: block;
+	/*Hace que el label ocupe toda la linea*/
+	margin-bottom: 0.3rem;
+	/*Espacio entre la etiqueta y el input*/
+	color: #ccc;
+	/*Color del texto*/
+}
+
+input[type="text"],
+/*Atributos para los inputs de texto y contraseña*/
+input[type="password"] {
+	width: 100%;
+	/*Los inputs ocupan todo el ancho disponible*/
+	padding: 10px;
+	/*Espaciado interno*/
+	border: none;
+	/*Elimina los bordes*/
+	border-radius: 6px;
+	/*Redondea los bordes */
+	font-size: 1rem;
+	/*Tamaño del texto*/
+	background-color: #1a1a2e;
+	/*Color de fondo*/
+	color: #eee;
+	/*Color de la letra*/
+}
+
+button {
+	/*atributnos para los botones*/
+	margin-top: 1rem;
+	/*Espacio arriba del boton*/
+	background-color: transparent;
+	/*Fondo transpartente*/
+	border: 2px solid #00ffe7;
+	/*Borde con color tuquesa*/
+	color: #00ffe7;
+	/*Color del texto*/
+	padding: 10px 18px;
+	/*Espacio interno del boton*/
+	border-radius: 20px;
+	/*Redondea mucho los bordes*/
+	font-size: 1rem;
+	/*Tamaño de la letra*/
+	font-weight: bold;
+	/*la letra es de color negrita*/
+	cursor: pointer;
+	/*Cambia el cursor a la manito cuando esta arriba del boton*/
+	transition: all 0.3s ease;
+	/*Tiempo que tardan las transiciones*/
+}
+
+button:hover {
+	/*Cuando pasas el mouse por arriba del boton*/
+	background-color: #00ffe7;
+	/*Se vuelve color turquesa*/
+	color: #1a1a2e;
+	/*El color de la letra se vuelve negro*/
+	box-shadow: 0 0 10px #00ffe7;
+	/*Resplandece con color turquesa*/
+}
