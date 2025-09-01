@@ -165,7 +165,7 @@
       formData.append("contraseña", contraseña); // Agrega "contraseña" al FormData
 
       const xhr = new XMLHttpRequest(); // Crea nueva solicitud HTTP
-      xhr.open("POST", "controladores/registrarse.php", true); // Configura la solicitud para enviar datos por POST al PHP
+      xhr.open("POST", "controladores/controladoresUsuarios/registrarse.php", true); // Configura la solicitud para enviar datos por POST al PHP
 
       xhr.onload = function () { // Define que hace cuando la respuesta llega del servidor
         console.log("Respuesta del servidor:", xhr.responseText); // Muestra la respuesta en consola
