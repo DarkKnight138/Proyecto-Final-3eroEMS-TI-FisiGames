@@ -1,19 +1,55 @@
-
- body {
-       /* Color de fondo blanco y fuente Arial sino una del estilo sans-serif que es un estilo moderno*/
-       background-color: #f1f1f1;
-       font-family: 'Arial', sans-serif;
-   }
-   h1 {
-       text-align: center;
-       /* Hace que el título esté centrado */
-       color: #4CAF50;
-       /* Que sea de color verde */
-       font-size: 48px;
-       /* Tamaño de letra de 48 px*/
-       margin-top: 50px;
-       /* Está a una distancia de 50px del elemento arriba*/
-   }
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    gap: 5px;
+    }
+    
+    
+    
+    
+    .menu-toggle div {
+    width: 25px;
+    height: 3px;
+    background-color: #00ffe7;
+    border-radius: 2px;
+    transition: 0.3s;
+    }
+    
+    
+    
+    
+    @media (max-width: 768px) {
+    .nav-links.left-links {
+      display: none;
+    }
+    .menu-toggle {
+      display: flex;
+    }
+    nav.expanded .nav-links.left-links {
+      display: flex;
+      flex-direction: column;
+      background-color: #1a1a2e;
+      position: absolute;
+      top: 60px;
+      left: 0;
+      width: 200px;
+      padding: 1rem 1.5rem;
+      border-radius: 0 0 10px 0;
+      box-shadow: 0 0 15px #00ffe7;
+    }
+    nav.expanded .nav-links.left-links a {
+      padding: 10px 0;
+      border-radius: 0;
+    }
+    }
+    main h1, h1 {
+      text-align: center;
+      color: #00ffe7;
+      font-size: 48px;
+      margin-top: 50px;
+      text-shadow: 0 0 10px #00ffe7;
+    }
    table {
        width: 500px;
        /*Establece un ancho de 500px*/
@@ -23,17 +59,18 @@
        /*Las celdas que están pegadas parecen que tienen un borde único*/
        margin: 50px auto;
        /*Hace que todos los objetos se encuentren a una distancia de 50px de este*/
-       background-color: #fafafa;
-       /*Color de fondo blanco*/
-       box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+       background-color: #1a1a2e;
+       /*Color de fondo negro*/
+       box-shadow: 0px 0px 20px #00ffe7;
        /*Pone una sombra a la tabla*/
+       border: 3px solid #00ffe7;/*Crea un borde color turquesa*/
    }
    td {
        width: 20%;
        /*Hace que el ancho de cada casilla sea del 20%(porque es 5x5)*/
        height: 20%;
        /*Hace que el alto de cada casilla sea del 20%(porque es 5x5)*/
-       border: 2px solid #ddd;
+       border: 2px solid #00ffe7;
        /*crea un borde solido de 2px de ancho de color gris claro*/
        text-align: center;
        /*El texto que aparece dentro de la casilla está centrado*/
@@ -43,90 +80,30 @@
        /*El tamaño del texto es de 32px*/
        font-weight: bold;
        /*El texto está en negrita*/
-       transition: background-color 0.3s ease;
-       /*Hace que el cambio de color de fondo sea suave y dure 0.3 segundos */
+       transition: background-color 0.3s ease, transform 0.1s ease;
+       /*Hace que los cambios no sean instantaneos*/
+       color: white;/*Hace que el color de fondo sea blanco*/
    }
    td.empty {
-       background-color: #f0f0f0;
-       /*El color de fondo de una celda vacía es blanco*/
+    background-color: rgba(255, 255, 255, 0.05);
+       /*El color de fondo de una celda vacía es negro*/
    }
-   td[data-value="2"] {
-       /* Para la celda que tenga un valor 2 establece: */
-       background-color: #eee4da;
-       /* un color de fondo blanco tirando a beige */
-       color: #776e65;
-       /* el  color del texto es un marrón */
-   }
-   td[data-value="4"] {
-       /* Para la celda que tenga un valor 4 establece: */
-       background-color: #ece0c8;
-       /* el color del fondo es un beige claro */
-       color: #776e65;
-       /* el color del texto es un marrón */
-   }
-   td[data-value="8"] {
-       /* Para la celda que tenga un valor 8 establece: */
-       background-color: #f2b179;
-       /* el color de fondo  es un naranja claro */
-       color: white;
-          /* el color del texto es blanco */
-   }
-   td[data-value="16"] {
-       /* Para la celda que tenga un valor 16 establece: */
-       background-color: #f59563;
-       /* el color del fondo es naranja */
-       color: white;
-       /* el color del texto es blanco */
-   }
-   td[data-value="32"] {
-       /* Para la celda que tenga un valor 32 establece: */
-       background-color: #f67c5f;
-       /* el color del fondo  es un naranja intenso */
-       color: white;
-      /* el color del texto es blanco */
-   }
-   td[data-value="64"] {
-       /* Para la celda que tenga un valor 64 establece: */
-       background-color: #f65e3b;
-       /* el color del fondo es un rojo-anaranjado */
-       color: white;
-        /* el color del texto es blanco */
-   }
-   td[data-value="128"] {
-       /* Para la celda que tenga un valor 128 establece: */
-       background-color: #edcf72;
-       /* el color del fondo es un amarillo claro */
-       color: white;
-       /* el color del texto es blanco */
-   }
-   td[data-value="256"] {
-       /* Para la celda que tenga un valor 256 establece: */
-       background-color: #edcc61;
-       /* un color de fondo amarillo */
-       color: white;
-      /* el color del texto es blanco */
-   }
-   td[data-value="512"] {
-       /* Para la celda que tenga un valor 512 establece: */
-       background-color: #edc850;
-       /* un color de fondo amarillo oscuro */
-       color: white;
-       /* el color del texto es blanco */
-   }
-   td[data-value="1024"] {
-       /* Para la celda que tenga un valor 1024 establece: */
-       background-color: #edc53f;
-       /* un color de fondo amarillo dorado */
-       color: white;
-       /* el color del texto es blanco */
-   }
-   td[data-value="2048"] {
-       /* Para la celda que tenga un valor 2048 establece: */
-       background-color: #edc22e;
-       /* un color de fondo amarillo oro intenso */
-       color: white;
-      /* el color del texto es blanco */
-   }
+
+   /* Colores por valor */
+td[data-value="2"]    { background-color: #1e293b; color: #00ffe7; }
+td[data-value="4"]    { background-color: #273449; color: #00ffe7; }
+td[data-value="8"]    { background-color: #00ffe7; color: #1a1a2e; }
+td[data-value="16"]   { background-color: #12d4cb; color: #1a1a2e; }
+td[data-value="32"]   { background-color: #00b8a9; color: #1a1a2e; }
+td[data-value="64"]   { background-color: #009c8e; color: #fff; }
+td[data-value="128"]  { background-color: #00897b; color: #fff; }
+td[data-value="256"]  { background-color: #00796b; color: #fff; }
+td[data-value="512"]  { background-color: #00695c; color: #fff; }
+td[data-value="1024"] { background-color: #00574b; color: #fff; }
+td[data-value="2048"] { background-color: #004d40; color: #fff; }
+
+
+
    /* Clase de los 3 botones con sus diferentes ids*/
    #botonReglas,
    #AJugar,
@@ -137,20 +114,25 @@
        height: 50px;/*El alto del botón  es de 50px*/
        margin: 20px auto;/*Mantiene una distancia de 20px arriba y abajo y centra el elemento dentro del contenedor*/
        font-size: 18px;/*Define el tamaño de la letra*/
-       background-color: #4CAF50;/*Establece el color de fondo*/
-       color: white;  /* el color del texto es blanco */
+       background-color: #00ffe7;/*Establece el color de fondo turquesa*/
+       color: #1a1a2e; /* el color del texto es negro*/
        border: none; /*La quita el borde si tiene alguno*/
-       border-radius: 5px;/* redondea las esquinas*/
+       border-radius: 8px;/* redondea las esquinas*/
        cursor: pointer;/*Cuando pasamos el cursor por arriba aparece como clickeable*/
-       transition: background-color 0.3s ease;/* La transición del color de fondo dura 0.3 segundos y se realiza de forma suave */
-   }
+       transition: transform 0.2s ease, box-shadow 0.3s ease;/*Hace que estos cambios tarden un poco y no sean instantaneos*/
+}
+   
 /*Cuando estamos arriba de uno de los 3 botones con estos ids:*/
    #botonReglas:hover,
    #AJugar:hover,
    #reiniciarJuego:hover {
-       background-color: #45a049;/*El color de fondo se vuelve verde*/
+    transform: scale(1.05);/*Hace que el boton sea un 5% mas grande*/
+    box-shadow: 0 0 15px #00ffe7;/*Resplandor turquesa sutil alrededor*/
    }
-   /* Modal de reglas */
+
+
+
+   /* Modal de las reglas */
    .modal {
        display: none;/*Oculta el elemento*/
        position: fixed;/*El modal permanece centrado aunque se haga scroll*/
@@ -161,24 +143,25 @@
        width: 100%;/*Ocupa todo el ancho del contenedor donde está*/
        height: 100%;/*Ocupa todo el alto del contenedor donde está*/
        overflow: auto;/*Hace que aparezcan barras para ver el resto del modal si no aparece todo el contenido*/
-       background-color: rgba(0, 0, 0, 0.4);/*detrás del modal hay un fondo semitransparente negro-grisaceo*/
+       background-color: rgba(0, 0, 0, 0.7);/*detrás del modal hay un fondo semitransparente negro-grisaceo*/
    }
-   .modal-contenido {/*El formato de lo que va dentro del modal*/
-  background-color: #fefefe;/*El color de fondo se vuelve blanco*/
-       margin: auto; /* Centra el modal horizontalmente dentro de su contenedor */
-       padding: 20px;/*El contenido tiene un espacio alrededor de 20 px*/
-       border: 1px solid #888;/*Crea un borde gris alrededor del modal de 1px*/
-       width: 60%;/*Ocupa el 60% del ancho del contenedor principal*/
-       border-radius: 8px; /*Redondea los bordes con un radio de 8px*/
-   }
+   .modal-contenido {
+    background-color: #1a1a2e;/*El color de fondo se vuelve negro*/
+    margin: auto; /* Centra el modal horizontalmente dentro de su contenedor */
+    padding: 20px;/*El contenido tiene un espacio alrededor de 20 px*/
+    border: 2px solid #00ffe7;/*Crea un borde turquesa alrededor del modal de 2px*/
+    width: 60%;/*Ocupa el 60% del ancho del contenedor principal*/
+    border-radius: 8px; /*Redondea los bordes con un radio de 8px*/
+    box-shadow: 0 0 20px #00ffe7;/*Crea una sombra  turquesa alrededor del modal*/
+    color: #eee;/*Hace que el color de texto sea blanco dentro del modal*/
+  }
    .cerrarBoton {/*Creacion de la “X” de cierre*/
-       color: #aaaaaa;/*Hace que sea de color gris claro*/
-       float: right;/*Hace que se coloque a la derecha*/
-       font-size: 28px;/*Hace que el tamaño de la letra sea de 28px asi es visible la “X”*/
-       font-weight: bold;/*Hace que la “X” esté en negrita*/
-   }
+    color: #00ffe7;/*Hace que sea de color turquesa*/
+    float: right;/*Hace que se coloque a la derecha*/
+    font-size: 28px;/*Hace que el tamaño de la letra sea de 28px asi es visible la “X”*/
+    font-weight: bold;/*Hace que la “X” esté en negrita*/
+}
    .cerrarBoton:hover {/*Cuando pasas el ratón por la “X”*/
-       color: #000;/*Cambia el color a negro*/
-       text-decoration: none;/*Elimina cualquier subrayado que pueda tener*/
-       cursor: pointer;/*Hace que cambie el ratón pareciendo que sea clickeable */
-   }
+    color: #fff;/*Cambia el color a blanco*/
+    cursor: pointer;/*Hace que cambie el ratón pareciendo que sea clickeable */
+  }
