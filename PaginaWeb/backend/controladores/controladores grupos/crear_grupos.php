@@ -11,7 +11,7 @@ $response = ["status" => "error", "message" => "Error desconocido"];
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $nombre_grupo = trim($_POST['nombre_grupo']);
-    $contraseña = trim($_POST['contraseña']);
+    $password = trim($_POST['password']);
 
     // Verificar sesión activa
     if (!isset($_SESSION['id_cuenta'])) {
@@ -21,9 +21,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $id_cuenta = intval($_SESSION['id_cuenta']);
 
-    if (strlen($nombre_grupo) >= 3 && strlen($contraseña) >= 4) {
-        $stmt = $conexion->prepare("INSERT INTO grupos (nombre, contraseña, creado_por) VALUES (?, ?, ?)");
-        $stmt->bind_param("ssi", $nombre_grupo, $contraseña, $id_cuenta);
+    if (strlen($nombre_grupo) >= 3 && strlen($password) >= 4) {
+        $stmt = $conexion->prepare("INSERT INTO grupos (nombre, password, creado_por) VALUES (?, ?, ?)");
+        $stmt->bind_param("ssi", $nombre_grupo, $password, $id_cuenta);
         if ($stmt->execute()) {
             $id_grupo = $stmt->insert_id;
 
@@ -38,7 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
         $stmt->close();
     } else {
-        $response = ["status" => "error", "message" => "El nombre debe tener al menos 3 letras y la contraseña 4 caracteres."];
+        $response = ["status" => "error", "message" => "El nombre debe tener al menos 3 letras y la password 4 caracteres."];
     }
 }
 

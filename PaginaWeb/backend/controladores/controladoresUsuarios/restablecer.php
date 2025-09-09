@@ -3,10 +3,10 @@ require '../conexion.php';
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $email = $_POST['email'];
-    $nueva_contraseña = password_hash($_POST['nueva_contraseña'], PASSWORD_DEFAULT);
+    $nueva_password = password_hash($_POST['nueva_password'], PASSWORD_DEFAULT);
 
-    $stmt = $conexion->prepare("UPDATE cuentas SET contraseña = ? WHERE email = ?");
-    $stmt->bind_param("ss", $nueva_contraseña, $email);
+    $stmt = $conexion->prepare("UPDATE cuentas SET password = ? WHERE email = ?");
+    $stmt->bind_param("ss", $nueva_password, $email);
     $stmt->execute();
 
     if ($stmt->affected_rows > 0) {

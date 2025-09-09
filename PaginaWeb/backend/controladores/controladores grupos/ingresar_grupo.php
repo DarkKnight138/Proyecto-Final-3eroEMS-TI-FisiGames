@@ -11,7 +11,7 @@ $response = ["status" => "error", "message" => "Error desconocido"];
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $nombre_grupo = trim($_POST['nombre_grupo']);
-    $contraseña = trim($_POST['contraseña']);
+    $password = trim($_POST['password']);
 
     // Usar ID de la sesión, no fijo
     if (!isset($_SESSION['id_cuenta'])) {
@@ -22,8 +22,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $id_cuenta = intval($_SESSION['id_cuenta']);
 
     // Verificar grupo
-    $stmt = $conexion->prepare("SELECT id_grupo FROM grupos WHERE nombre = ? AND contraseña = ?");
-    $stmt->bind_param("ss", $nombre_grupo, $contraseña);
+    $stmt = $conexion->prepare("SELECT id_grupo FROM grupos WHERE nombre = ? AND password = ?");
+    $stmt->bind_param("ss", $nombre_grupo, $password);
     $stmt->execute();
     $resultado = $stmt->get_result();
 
@@ -46,7 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         $response = ["status" => "ok", "message" => "Te uniste al grupo '$nombre_grupo'."];
     } else {
-        $response = ["status" => "error", "message" => "Grupo o contraseña incorrectos."];
+        $response = ["status" => "error", "message" => "Grupo o password incorrectos."];
     }
     $stmt->close();
 }

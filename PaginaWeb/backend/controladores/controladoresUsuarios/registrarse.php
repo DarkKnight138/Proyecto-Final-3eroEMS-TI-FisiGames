@@ -3,14 +3,14 @@ require '../conexion.php'; //conexión a la base de datos
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") { // Verifica si la solicitud es de tipo POST
 
-    if (!isset($_POST['nombre'], $_POST['email'], $_POST['contraseña'])) { // Verifica si todos los datos fueron enviados
+    if (!isset($_POST['nombre'], $_POST['email'], $_POST['password'])) { // Verifica si todos los datos fueron enviados
         echo "error"; // Si falta alguno, muestra "error"
         exit; // Termina la ejecución del script
     }
 
     $nombre = trim($_POST['nombre']); // Obtiene y limpia el campo "nombre"
     $email = trim($_POST['email']); // Obtiene y limpia el campo "email"
-    $contraseña = password_hash(trim($_POST['contraseña']), PASSWORD_DEFAULT); // Limpia y encripta la contraseña con hash
+    $password = password_hash(trim($_POST['password']), PASSWORD_DEFAULT); // Limpia y encripta la password con hash
     $permiso = 1; // Asigna el permiso por defecto
 
     $sql_check = "SELECT id_cuenta FROM cuentas WHERE email = ?"; // Consulta si el email está registrado
@@ -22,9 +22,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") { // Verifica si la solicitud es de t
     if ($result->num_rows > 0) { // Si ya existe una cuenta con ese email
         echo "email_ya_registrado"; // Devuelve que el email está en uso
     } else {
-        $sql = "INSERT INTO cuentas (nombre, email, contraseña, permiso) VALUES (?, ?, ?, ?)"; // Consulta para insertar una nueva cuenta
+        $sql = "INSERT INTO cuentas (nombre, email, password, permiso) VALUES (?, ?, ?, ?)"; // Consulta para insertar una nueva cuenta
         $stmt = $conexion->prepare($sql); // Prepara la consulta
-        $stmt->bind_param("sssi", $nombre, $email, $contraseña, $permiso); // Enlaza los valores a insertar
+        $stmt->bind_param("sssi", $nombre, $email, $password, $permiso); // Enlaza los valores a insertar
 
         if ($stmt->execute()) { // Si la inserción fue exitosa
             echo "ok"; // Devuelve "ok" al frontend

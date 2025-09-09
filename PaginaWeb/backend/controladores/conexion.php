@@ -10,3 +10,4 @@ if ($conexion->connect_errno) {
     die("Conexión fallida: " . $conexion->connect_error);
 }
 ?>
+    
