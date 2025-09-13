@@ -90,7 +90,7 @@ do
          sudo firewall-cmd --permanent --add-rich-rule="rule family='ipv4' source address='${ip}' port port='${puerto}' protocol='tcp' log prefix='conexion rechazada' limit value='1/m' reject"
          sudo firewall-cmd --reload
          ;;
-      0) echo "Volviendo....";;
+      0) sh menucentral.sh;;
       *) echo "La opcion $opcion es invalida";;
     esac
 done
