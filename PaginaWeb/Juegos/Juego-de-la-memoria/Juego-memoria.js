@@ -71,10 +71,6 @@
     img.src = imagenes[i];/*Camiba la carta del reverso por la imagen de la casilla */
     cartasVolteadas.push(imagenes[i]);/*La carta volteada es guardada en el array cartas volteadas*/
     idCartasVolteadas.push(i);/*Agrega el id de la carta al array para luego compararlo*/
-
-
-
-
     if (cartasVolteadas.length === 2) {/*Si hay 2 cartas volteadas pasa lo siguiente*/
       intentos++;/*Se agrega un intento*/
       bloquearClicks = true;/*Hace que no se pueda seleccionar otra carta*/
@@ -101,14 +97,6 @@
       }
     }
   }
-
-
-
-
-
-
-
-
   function resetTurno() {/*Cuando termina el turno pasa lo siguiente:*/
     cartasVolteadas = [];/*Vaciamos el array con las cartas volteadas*/
     idCartasVolteadas = [];/*Vaciamos el array con los ids de las cartas volteadas*/
