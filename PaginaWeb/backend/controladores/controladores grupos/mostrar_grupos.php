@@ -8,17 +8,19 @@ error_reporting(E_ALL);
 header('Content-Type: application/json');
 
 // Conexión a la base de datos
-require 'conexion.php';
+require '../conexion.php';
 
-// Consulta SQL para obtener los grupos y sus miembros
+// Consulta SQL para obtener los grupos, su creador y sus miembros
 $sql = "SELECT 
-            grupos.id_grupo,
-            grupos.nombre AS nombre_grupo,
-            cuentas.nombre AS nombre_usuario
-        FROM pertenece_a
-        JOIN grupos ON pertenece_a.id_grupo = grupos.id_grupo
-        JOIN cuentas ON pertenece_a.id_cuenta = cuentas.id_cuenta
-        ORDER BY grupos.id_grupo";
+            g.id_grupo,
+            g.nombre AS nombre_grupo,
+            creador.nombre AS nombre_creador,
+            miembro.nombre AS nombre_usuario
+        FROM grupos g
+        LEFT JOIN cuentas creador ON g.creado_por = creador.id_cuenta
+        LEFT JOIN pertenece_a pa ON g.id_grupo = pa.id_grupo
+        LEFT JOIN cuentas miembro ON pa.id_cuenta = miembro.id_cuenta
+        ORDER BY g.id_grupo";
 
 // Ejecutar la consulta
 $resultado = $conexion->query($sql);
@@ -37,10 +39,13 @@ while ($fila = $resultado->fetch_assoc()) {
     if (!isset($grupos[$id])) {
         $grupos[$id] = [
             'nombre_grupo' => $fila['nombre_grupo'],
+            'creador' => $fila['nombre_creador'] ?? 'Desconocido',
             'usuarios' => []
         ];
     }
-    $grupos[$id]['usuarios'][] = $fila['nombre_usuario'];
+    if ($fila['nombre_usuario']) {
+        $grupos[$id]['usuarios'][] = $fila['nombre_usuario'];
+    }
 }
 
 // Enviar los datos como JSON
