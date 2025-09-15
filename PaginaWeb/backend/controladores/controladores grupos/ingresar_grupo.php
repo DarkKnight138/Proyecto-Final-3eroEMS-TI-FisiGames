@@ -11,15 +11,9 @@ $response = ["status" => "error", "message" => "Error desconocido"];
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $nombre_grupo = trim($_POST['nombre_grupo']);
-<<<<<<< Updated upstream
-    $password = trim($_POST['password']);
-
-    // Usar ID de la sesión, no fijo
-=======
     $password = trim($_POST['password']); // sigue viniendo del form como "password"
 
     // Usar ID de la sesión
->>>>>>> Stashed changes
     if (!isset($_SESSION['id_cuenta'])) {
         echo json_encode(["status" => "error", "message" => "No hay usuario logueado."]);
         exit;
@@ -28,11 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $id_cuenta = intval($_SESSION['id_cuenta']);
 
     // Verificar grupo
-<<<<<<< Updated upstream
-    $stmt = $conexion->prepare("SELECT id_grupo FROM grupos WHERE nombre = ? AND password = ?");
-=======
     $stmt = $conexion->prepare("SELECT id_grupo, usuarios FROM grupos WHERE nombre = ? AND contraseña = ?");
->>>>>>> Stashed changes
     $stmt->bind_param("ss", $nombre_grupo, $password);
     $stmt->execute();
     $resultado = $stmt->get_result();
@@ -49,11 +39,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $res_check = $check->get_result();
 
         if ($res_check->num_rows == 0) {
-<<<<<<< Updated upstream
-            // Insertar relación
-=======
             // Insertar relación en pertenece_a
->>>>>>> Stashed changes
             $insert = $conexion->prepare("INSERT INTO pertenece_a (id_cuenta, id_grupo) VALUES (?, ?)");
             $insert->bind_param("ii", $id_cuenta, $id_grupo);
             $insert->execute();

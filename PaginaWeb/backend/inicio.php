@@ -185,11 +185,7 @@ if (!isset($_SESSION['usuario_id'])) {
 
    .game-grid {
      display: grid;
-<<<<<<< Updated upstream
-     grid-template-columns: repeat(4, 1fr);
-=======
      grid-template-columns: repeat(3, 1fr);
->>>>>>> Stashed changes
      grid-gap: 1.5rem;
      justify-items: center;
    }
@@ -251,48 +247,50 @@ if (!isset($_SESSION['usuario_id'])) {
 
 
  <main>
-   <h1>Bienvenido a FisiGames</h1>
-   <section class="games-section">
-     <h2>Juegos Disponibles</h2>
-     <div class="game-grid">
-       <div class="game-card">
-         <img src="ruta-del-juego1.jpg" alt="Juego 1" />
-         <h3>Juego 1</h3>
-       </div>
-       <div class="game-card">
-         <img src="ruta-del-juego2.jpg" alt="Juego 2" />
-         <h3>Juego 2</h3>
-       </div>
-       <div class="game-card">
-         <img src="ruta-del-juego3.jpg" alt="Juego 3" />
-         <h3>Juego 3</h3>
-       </div>
-       <div class="game-card">
-         <img src="ruta-del-juego4.jpg" alt="Juego 4" />
-         <h3>Juego 4</h3>
-       </div>
-       <div class="game-card">
-         <img src="ruta-del-juego5.jpg" alt="Juego 5" />
-         <h3>Juego 5</h3>
-       </div>
-       <div class="game-card">
-         <img src="ruta-del-juego6.jpg" alt="Juego 6" />
-         <h3>Juego 6</h3>
-       </div>
-<<<<<<< Updated upstream
-       <div class="game-card">
-         <img src="ruta-del-juego7.jpg" alt="Juego 7" />
-         <h3>Juego 7</h3>
-       </div>
-       <div class="game-card">
-         <img src="ruta-del-juego8.jpg" alt="Juego 8" />
-         <h3>Juego 8</h3>
-       </div>
-=======
->>>>>>> Stashed changes
-     </div>
-   </section>
- </main>
+  <h1>Bienvenido a FisiGames</h1>
+  <section class="games-section">
+    <h2>Juegos Disponibles</h2>
+    <div class="game-grid">
+      <div class="game-card">
+        <a href="../Juegos/2048/2048.html">
+          <img src="../imgs/2048.jpg" />
+          <h3>2048</h3>
+        </a>
+      </div>
+      <div class="game-card">
+        <a href="../Juegos/JuegoMemoria/Juego-memoria.html">
+          <img src="../imgs/memoria.png"  />
+          <h3>Juego de la memoria</h3>
+        </a>
+      </div>
+      <div class="game-card">
+        <a href="../Juegos/JuegoMosqueta/mosqueta.html">
+          <img src="../imgs/mosqueta.jpg" />
+          <h3>Juego de la mosqueta</h3>
+        </a>
+      </div>
+      <div class="game-card">
+        <a href="../Juegos/SimonDice/simondice.html">
+          <img src="../imgs/simon.jpg" />
+          <h3>Simon dice</h3>
+        </a>
+      </div>
+      <div class="game-card">
+        <a href="../Juegos/Tateti/tateti.html">
+          <img src="../imgs/tateti.jpg" />
+          <h3>Tateti</h3>
+        </a>
+      </div>
+      <div class="game-card">
+        <a href="../Juegos/Montyhall/monty.html">
+          <img src="../imgs/monty.jpg"  />
+          <h3>Monty Hall</h3>
+        </a>
+      </div>
+    </div>
+  </section>
+</main>
+
 
 
  <script>
