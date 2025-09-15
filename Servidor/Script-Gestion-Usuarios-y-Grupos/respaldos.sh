@@ -15,6 +15,8 @@ do
     case $opcion in
       
       0) sh menucentral.sh;;
+      1) 
+      2) sh editarcron.sh;;
       *) echo "La opcion $opcion es invalida";;
     esac
 done
