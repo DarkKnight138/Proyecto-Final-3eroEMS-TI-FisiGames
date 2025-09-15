@@ -1,17 +1,40 @@
 body {
-        background-color: #111;
-        color: white;
-        text-align: center;
-    }
+    background-color: #111;
+    color: white;
+    text-align: center;
+}
 
-    .color-btn {
-        width: 200px;
-        height: 200px;
-        object-fit: cover;
-        cursor: pointer;
-        transition: transform 0.1s ease-in-out;
-    }
+.color-btn {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    cursor: pointer;
+    transition: transform 0.1s ease-in-out;
+}
 
-    .color-btn:active {
-        transform: scale(0.95);
-    }
+.color-btn:active {
+    transform: scale(0.95);
+}
+
+#start-btn {
+    background: linear-gradient(135deg, #00ffe7, #00b3b3);
+    color: #1a1a2e;
+    border: 2px solid #00ffe7;
+    padding: 12px 30px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 10px rgba(0, 255, 231, 0.6);
+}
+
+#start-btn:hover {
+    background: #00ffe7;
+    color: #1a1a2e;
+    box-shadow: 0 0 20px #00ffe7;
+}
+
+#start-btn:active {
+    transform: scale(0.95);
+}
