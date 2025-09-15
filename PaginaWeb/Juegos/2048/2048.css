@@ -1,95 +1,153 @@
-.menu-toggle {
-    display: none;
-    flex-direction: column;
-    cursor: pointer;
-    gap: 5px;
-    }
-    
-    
-    
-    
-    .menu-toggle div {
-    width: 25px;
-    height: 3px;
-    background-color: #00ffe7;
-    border-radius: 2px;
-    transition: 0.3s;
-    }
-    
-    
-    
-    
-    @media (max-width: 768px) {
-    .nav-links.left-links {
-      display: none;
-    }
-    .menu-toggle {
-      display: flex;
-    }
-    nav.expanded .nav-links.left-links {
-      display: flex;
-      flex-direction: column;
-      background-color: #1a1a2e;
-      position: absolute;
-      top: 60px;
-      left: 0;
-      width: 200px;
-      padding: 1rem 1.5rem;
-      border-radius: 0 0 10px 0;
-      box-shadow: 0 0 15px #00ffe7;
-    }
-    nav.expanded .nav-links.left-links a {
-      padding: 10px 0;
-      border-radius: 0;
-    }
-    }
-    main h1, h1 {
-      text-align: center;
-      color: #00ffe7;
-      font-size: 48px;
-      margin-top: 50px;
-      text-shadow: 0 0 10px #00ffe7;
-    }
-   table {
-       width: 500px;
-       /*Establece un ancho de 500px*/
-       height: 500px;
-       /*Establece un alto de 500px*/
-       border-collapse: collapse;
-       /*Las celdas que están pegadas parecen que tienen un borde único*/
-       margin: 50px auto;
-       /*Hace que todos los objetos se encuentren a una distancia de 50px de este*/
-       background-color: #1a1a2e;
-       /*Color de fondo negro*/
-       box-shadow: 0px 0px 20px #00ffe7;
-       /*Pone una sombra a la tabla*/
-       border: 3px solid #00ffe7;/*Crea un borde color turquesa*/
-   }
-   td {
-       width: 20%;
-       /*Hace que el ancho de cada casilla sea del 20%(porque es 5x5)*/
-       height: 20%;
-       /*Hace que el alto de cada casilla sea del 20%(porque es 5x5)*/
-       border: 2px solid #00ffe7;
-       /*crea un borde solido de 2px de ancho de color gris claro*/
-       text-align: center;
-       /*El texto que aparece dentro de la casilla está centrado*/
-       vertical-align: middle;
-       /*El texto que aparece dentro de la casilla está centrado con respecto al alto*/
-       font-size: 32px;
-       /*El tamaño del texto es de 32px*/
-       font-weight: bold;
-       /*El texto está en negrita*/
-       transition: background-color 0.3s ease, transform 0.1s ease;
-       /*Hace que los cambios no sean instantaneos*/
-       color: white;/*Hace que el color de fondo sea blanco*/
-   }
-   td.empty {
-    background-color: rgba(255, 255, 255, 0.05);
-       /*El color de fondo de una celda vacía es negro*/
-   }
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap');
 
-   /* Colores por valor */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Orbitron', sans-serif;
+  background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+  color: #eee;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Navbar */
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #1a1a2e;
+  padding: 0 2rem;
+  height: 60px;
+  box-shadow: 0 0 15px #00ffe7;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.left-section {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.logo {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #00ffe7;
+  letter-spacing: 2px;
+  user-select: none;
+  cursor: default;
+  white-space: nowrap;
+}
+
+.nav-links {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #eee;
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 8px 12px;
+  border-radius: 6px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+  background-color: #00ffe7;
+  color: #1a1a2e;
+  box-shadow: 0 0 8px #00ffe7;
+}
+
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  gap: 5px;
+}
+
+.menu-toggle div {
+  width: 25px;
+  height: 3px;
+  background-color: #00ffe7;
+  border-radius: 2px;
+  transition: 0.3s;
+}
+
+@media (max-width: 768px) {
+  .nav-links.left-links {
+    display: none;
+  }
+
+  .menu-toggle {
+    display: flex;
+  }
+
+  nav.expanded .nav-links.left-links {
+    display: flex;
+    flex-direction: column;
+    background-color: #1a1a2e;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    width: 200px;
+    padding: 1rem 1.5rem;
+    border-radius: 0 0 10px 0;
+    box-shadow: 0 0 15px #00ffe7;
+  }
+
+  nav.expanded .nav-links.left-links a {
+    padding: 10px 0;
+    border-radius: 0;
+  }
+}
+
+main h1, h1 {
+  text-align: center;
+  color: #00ffe7;
+  font-size: 48px;
+  margin-top: 50px;
+  text-shadow: 0 0 10px #00ffe7;
+}
+
+/* Tabla y celdas */
+table {
+  width: 500px;
+  height: 500px;
+  border-collapse: collapse;
+  margin: 50px auto;
+  background-color: #1a1a2e;
+  box-shadow: 0px 0px 20px #00ffe7;
+  border: 3px solid #00ffe7;
+}
+
+td {
+  width: 20%;
+  height: 20%;
+  border: 2px solid #00ffe7;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 32px;
+  font-weight: bold;
+  transition: background-color 0.3s ease, transform 0.1s ease;
+  color: white;
+}
+
+td.empty {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
 td[data-value="2"]    { background-color: #1e293b; color: #00ffe7; }
 td[data-value="4"]    { background-color: #273449; color: #00ffe7; }
 td[data-value="8"]    { background-color: #00ffe7; color: #1a1a2e; }
@@ -102,66 +160,63 @@ td[data-value="512"]  { background-color: #00695c; color: #fff; }
 td[data-value="1024"] { background-color: #00574b; color: #fff; }
 td[data-value="2048"] { background-color: #004d40; color: #fff; }
 
-
-
-   /* Clase de los 3 botones con sus diferentes ids*/
-   #botonReglas,
-   #AJugar,
-   #reiniciarJuego {
-       display: block;/*Mantiene el alto y ancho definido y   
-        “presiona” un enter por cada elemento*/
-       width: 200px;/*El ancho del botón es de 200px*/
-       height: 50px;/*El alto del botón  es de 50px*/
-       margin: 20px auto;/*Mantiene una distancia de 20px arriba y abajo y centra el elemento dentro del contenedor*/
-       font-size: 18px;/*Define el tamaño de la letra*/
-       background-color: #00ffe7;/*Establece el color de fondo turquesa*/
-       color: #1a1a2e; /* el color del texto es negro*/
-       border: none; /*La quita el borde si tiene alguno*/
-       border-radius: 8px;/* redondea las esquinas*/
-       cursor: pointer;/*Cuando pasamos el cursor por arriba aparece como clickeable*/
-       transition: transform 0.2s ease, box-shadow 0.3s ease;/*Hace que estos cambios tarden un poco y no sean instantaneos*/
+/* Botones */
+#botonReglas,
+#AJugar,
+#reiniciarJuego {
+  display: block;
+  width: 200px;
+  height: 50px;
+  margin: 20px auto;
+  font-size: 18px;
+  background-color: #00ffe7;
+  color: #1a1a2e;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
 }
-   
-/*Cuando estamos arriba de uno de los 3 botones con estos ids:*/
-   #botonReglas:hover,
-   #AJugar:hover,
-   #reiniciarJuego:hover {
-    transform: scale(1.05);/*Hace que el boton sea un 5% mas grande*/
-    box-shadow: 0 0 15px #00ffe7;/*Resplandor turquesa sutil alrededor*/
-   }
 
-
-
-   /* Modal de las reglas */
-   .modal {
-       display: none;/*Oculta el elemento*/
-       position: fixed;/*El modal permanece centrado aunque se haga scroll*/
-       z-index: 1;/*Se coloca por encima de los demás elementos*/
-       padding-top: 100px;/*El contenido aparece 100px más abajo*/
-       left: 0;/*Coloca el modal en la izquierda*/
-       top: 0;/*Coloca el modal en la parte superior*/
-       width: 100%;/*Ocupa todo el ancho del contenedor donde está*/
-       height: 100%;/*Ocupa todo el alto del contenedor donde está*/
-       overflow: auto;/*Hace que aparezcan barras para ver el resto del modal si no aparece todo el contenido*/
-       background-color: rgba(0, 0, 0, 0.7);/*detrás del modal hay un fondo semitransparente negro-grisaceo*/
-   }
-   .modal-contenido {
-    background-color: #1a1a2e;/*El color de fondo se vuelve negro*/
-    margin: auto; /* Centra el modal horizontalmente dentro de su contenedor */
-    padding: 20px;/*El contenido tiene un espacio alrededor de 20 px*/
-    border: 2px solid #00ffe7;/*Crea un borde turquesa alrededor del modal de 2px*/
-    width: 60%;/*Ocupa el 60% del ancho del contenedor principal*/
-    border-radius: 8px; /*Redondea los bordes con un radio de 8px*/
-    box-shadow: 0 0 20px #00ffe7;/*Crea una sombra  turquesa alrededor del modal*/
-    color: #eee;/*Hace que el color de texto sea blanco dentro del modal*/
-  }
-   .cerrarBoton {/*Creacion de la “X” de cierre*/
-    color: #00ffe7;/*Hace que sea de color turquesa*/
-    float: right;/*Hace que se coloque a la derecha*/
-    font-size: 28px;/*Hace que el tamaño de la letra sea de 28px asi es visible la “X”*/
-    font-weight: bold;/*Hace que la “X” esté en negrita*/
+#botonReglas:hover,
+#AJugar:hover,
+#reiniciarJuego:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px #00ffe7;
 }
-   .cerrarBoton:hover {/*Cuando pasas el ratón por la “X”*/
-    color: #fff;/*Cambia el color a blanco*/
-    cursor: pointer;/*Hace que cambie el ratón pareciendo que sea clickeable */
-  }
+
+/* Modal */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  padding-top: 100px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.modal-contenido {
+  background-color: #1a1a2e;
+  margin: auto;
+  padding: 20px;
+  border: 2px solid #00ffe7;
+  width: 60%;
+  border-radius: 8px;
+  box-shadow: 0 0 20px #00ffe7;
+  color: #eee;
+}
+
+.cerrarBoton {
+  color: #00ffe7;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.cerrarBoton:hover {
+  color: #fff;
+  cursor: pointer;
+}

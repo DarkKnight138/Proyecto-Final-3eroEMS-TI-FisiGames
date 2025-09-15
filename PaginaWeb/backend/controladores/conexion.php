@@ -5,7 +5,9 @@ $user   = "root";
 $pass   = "";
 
 $conexion = new mysqli($server, $user, $pass, $db);
-if ($conexion->conexionect_errno) {
-    die("Conexión fallida: " . $conexion->conexionect_error);
+
+if ($conexion->connect_errno) { 
+    die("Conexión fallida: " . $conexion->connect_error);
 }
 ?>
+    
