@@ -234,11 +234,19 @@ if (!isset($_SESSION['usuario_id'])) {
  <nav>
    <div class="logo">FisiGames</div>
    <div class="nav-left">
+<<<<<<< Updated upstream
      <a href="inicio.html"><i class="fas fa-home"></i> Inicio</a>
      <a href="puntuaciones.html"><i class="fas fa-users"></i>Puntuacoines</a>
    </div>
    <div class="nav-right">
      <a href="perfil.html"><i class="fas fa-user"></i> Perfil</a>
+=======
+     <a href="inicio.php"><i class="fas fa-home"></i> Inicio</a>
+     <a href="puntuaciones.php"><i class="fas fa-users"></i>Puntuacoines</a>
+   </div>
+   <div class="nav-right">
+     <a href="perfil.php"><i class="fas fa-user"></i> Perfil</a>
+>>>>>>> Stashed changes
    </div>
  </nav>
 
@@ -384,8 +392,12 @@ if (!isset($_SESSION['usuario_id'])) {
 </body>
 
 
+<<<<<<< Updated upstream
 </html>
 
 
 
 
+=======
+</html>
+>>>>>>> Stashed changes

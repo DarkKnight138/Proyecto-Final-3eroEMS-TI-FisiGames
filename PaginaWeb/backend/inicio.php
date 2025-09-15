@@ -185,7 +185,11 @@ if (!isset($_SESSION['usuario_id'])) {
 
    .game-grid {
      display: grid;
+<<<<<<< Updated upstream
      grid-template-columns: repeat(4, 1fr);
+=======
+     grid-template-columns: repeat(3, 1fr);
+>>>>>>> Stashed changes
      grid-gap: 1.5rem;
      justify-items: center;
    }
@@ -275,6 +279,7 @@ if (!isset($_SESSION['usuario_id'])) {
          <img src="ruta-del-juego6.jpg" alt="Juego 6" />
          <h3>Juego 6</h3>
        </div>
+<<<<<<< Updated upstream
        <div class="game-card">
          <img src="ruta-del-juego7.jpg" alt="Juego 7" />
          <h3>Juego 7</h3>
@@ -283,6 +288,8 @@ if (!isset($_SESSION['usuario_id'])) {
          <img src="ruta-del-juego8.jpg" alt="Juego 8" />
          <h3>Juego 8</h3>
        </div>
+=======
+>>>>>>> Stashed changes
      </div>
    </section>
  </main>
