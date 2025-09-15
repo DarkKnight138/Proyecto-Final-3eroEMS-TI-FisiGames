@@ -1,89 +1,92 @@
-for (let index = 0; index < 9; index++) {
-    document.getElementById(index).setAttribute("class", "vacio btn");
-    document.getElementById(index).disabled = false;
-    document.getElementById(index).setAttribute("onclick", "elijeCasilla(this.id)");
-}
-let $casillas = [0, 1, 2, 3, 4, 5, 6, 7, 8];
-let contador = 0;
-const combinacionesGanadoras = [
-    [0, 1, 2], [3, 4, 5], [6, 7, 8], 
-    [0, 3, 6], [1, 4, 7], [2, 5, 8], 
-    [0, 4, 8], [2, 4, 6]             
-];
-function reiniciar() {
-    for (let index = 0; index < 9; index++) {
-        let btn = document.getElementById(index);
-        btn.setAttribute("class", "vacio btn");
-        btn.disabled = false;
-        btn.innerText = ""; // limpio X y O
-        btn.setAttribute("onclick", "elijeCasilla(this.id)");
-    }
-    $casillas = [0, 1, 2, 3, 4, 5, 6, 7, 8];
-    contador = 0;
-}
-function elijeCasilla(id) {
-    let eleccion = $casillas[id];
-    let btn = document.getElementById(eleccion);
-    btn.disabled = true;
-    btn.classList.add("cruz");
-    btn.innerText = "X";
-    $casillas[eleccion] = 10;
+* { box-sizing: border-box; }
 
-    if (hayGanador(combinacionesGanadoras, "cruz")) {
-        setTimeout(() => {
-            alert("¡Ganaste!");
-            reiniciar();
-        }, 500);
-        return;
-    }
-
-    if (esEmpate()) {
-        setTimeout(() => {
-            alert("Empate 😅");
-            reiniciar();
-        }, 500);
-        return;
-    }
-    let eleccionBot;
-    let elegido = false;
-    do {
-        eleccionBot = Math.floor(Math.random() * 9);
-        if ($casillas[eleccionBot] === eleccionBot) {
-            elegido = true;
-            let btnBot = document.getElementById(eleccionBot);
-            btnBot.disabled = true;
-            btnBot.classList.add("circulo");
-            btnBot.innerText = "O";
-            $casillas[eleccionBot] = 10;
-        }
-    } while (!elegido && contador < 4);
-
-    if (hayGanador(combinacionesGanadoras, "circulo")) {
-        setTimeout(() => {
-            alert("Perdiste...");
-            reiniciar();
-        }, 500);
-        return;
-    }
-
-    if (esEmpate()) {
-        setTimeout(() => {
-            alert("Empate 😅");
-            reiniciar();
-        }, 500);
-    }
-
-    contador++;
+.tablero {
+  display: grid;
+  grid-template-columns: repeat(3, 120px);
+  grid-auto-rows: 120px;
+  gap: 8px;
+  background: #2f2f45;
+  padding: 8px;
+  border-radius: 10px;
+  border: 4px solid #2b2b3a;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.6);
+  margin: 20px auto;
+  width: max-content;
 }
-function hayGanador(combinaciones, clase) {
-    for (let combinacion of combinaciones) {
-        if (combinacion.every(id => document.getElementById(id).classList.contains(clase))) {
-            return true;
-        }
-    }
-    return false;
+
+.tablero > button {
+  width: 100%;
+  height: 100%;
+  background-color: #1f1f1f;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 3rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color .12s ease, transform .08s ease;
 }
-function esEmpate() {
-    return $casillas.every((c, i) => c === 10);
+
+.tablero > button:enabled:hover {
+  transform: scale(1.03);
+  background-color: #2b2b2b;
 }
-document.getElementById("reiniciar").addEventListener("click", reiniciar);
+
+.cruz { 
+  color: #1abc9c;  
+}
+
+.circulo { 
+  color: #ffffff;  
+}
+
+.btnReinicio {
+  margin-top: 10px;
+  padding: 10px 18px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  background-color: #555;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  transition: background-color .12s ease;
+}
+.btnReinicio:hover { background-color: #777; }
+
+
+main h1 {
+  color: #1abc9c;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+
+main#contenedor {
+  padding-top: 80px; 
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+}
+
+
+.btnReinicio {
+  margin-top: 15px;
+  padding: 10px 18px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  background-color: #555;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  transition: background-color .12s ease;
+  display: block;
+}
+.btnReinicio:hover { background-color: #777; }
+.tablero > button {
+  margin-top: -2px; 
+}
