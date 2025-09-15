@@ -1,0 +1,1 @@
+0 14 * * 0 tar -czf /backups/home-backup-$(date +\%Y\%m\%d).tar.gz /home
