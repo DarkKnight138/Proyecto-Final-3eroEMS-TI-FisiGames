@@ -1,130 +1,196 @@
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap');
 
-
-  * {
+/* Importa la fuente 'Orbitron'*/
+* {
     box-sizing: border-box;
+    /*Hace que el padding y border se incluyan dentro del ancho y alto del elemento*/
     margin: 0;
+    /*Elimina el margen*/
     padding: 0;
-  }
+    /*Elimina el padding*/
+}
 
-
-  body {
+body {
     font-family: 'Orbitron', sans-serif;
+    /* Usa la fuente 'Orbitron', sino sans-serif */
     background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+    /* Fondo degradado en diagonal (colores oscuros)*/
     color: #eee;
+    /*Color del texto gris tirando a blanco*/
     min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-top: 60px; /* espacio para navbar */
-  }
+    /* La altura mínima del body es el 100% de la altura visible de la ventana */
+}
 
-
-  nav {
+nav {
     width: 100%;
+    /* El navbar ocupa todo el ancho*/
     height: 60px;
+    /* Altura de 60 píxeles */
     background-color: #1a1a2e;
+    /* Color de fondo azul oscuro */
     box-shadow: 0 0 15px #00ffe7;
+    /*Le da un sombreado azul neon para hacerlo más llamativo*/
+    display: flex;
+    /*Hace que sea flexible para que los elementos se puedan alinear correctamente*/
+    justify-content: space-between;
+    /*Justifica lo elementos y los separa lo máximo posible*/
+    align-items: center;
+    /*Centra verticalmente los elementos*/
+    padding: 0 2rem;
+    /*Separa los elementos del borde*/
+    position: fixed;
+    /*Fija el nav bar*/
+    top: 0;
+    /*Hace que el nav bar se encuentre arriba del todo*/
+    left: 0;
+    /*Hace que el nav bar se encuentre a la izquierda del todo*/
+    z-index: 1000;
+    /*Hace que el elemento quede por encima de los otros*/
+}
+
+.left-section {
+    /* Sección izquierda del contenedor */
+    display: flex;
+    /* Usa flexbox para organizar los elementos */
+    align-items: center;
+    /* Centra los elementos verticalmente */
+    gap: 2rem;
+    /*Establece el espacio entre elementos hijos*/
+}
+
+.logo {
+    font-size: 1.8rem;
+    /* Tamaño de 1.8 veces el tamaño de fuente raíz*/
+    font-weight: 700;
+    /*Texto en negrita*/
+    color: #00ffe7;
+    /* Color del texto turquesa claro */
+    letter-spacing: 2px;
+    /* Aumenta el espaciado entre letras en 2 píxeles */
+    user-select: none;
+    /* Evita que el texto pueda ser seleccionado con el cursor */
+    white-space: nowrap;
+    /* Evita que el texto se divida en varias líneas*/
+}
+
+.nav-links {
+    display: flex;
+    /* Coloca los enlaces en fila (flexbox) */
+    gap: 2rem;
+    /* Espacio entre cada enlace */
+    align-items: center;
+    /* Alinea los enlaces verticalmente al centro */
+}
+
+.nav-links a {
+    text-decoration: none;
+    /* Quita el subrayado */
+    color: #eee;
+    /* Color de texto gris claro */
+    font-weight: 600;
+    /* Texto en semi-negrita */
+    font-size: 1rem;
+    /* Tamaño de letra estándar */
+    padding: 8px 12px;
+    /* Espaciado interno */
+    border-radius: 6px;
+    /* Bordes redondeados */
+    transition: background-color 0.3s ease,
+        /* Transición suave de color de fondo */
+        color 0.3s ease;
+    /* Transición suave de color de texto */
+    display: flex;
+    /* Permite íconos y texto alineados */
+    align-items: center;
+    /* Centra verticalmente */
+    gap: 6px;
+    /* Espacio entre ícono y texto */
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+    background-color: #00ffe7;
+    /* Fondo celeste brillante */
+    color: #1a1a2e;
+    /* Texto oscuro */
+    box-shadow: 0 0 8px #00ffe7;
+    /* Brillo alrededor */
+}
+
+button,
+.btn-login {
+    margin-top: 1rem;
+    /* Margen superior */
+    background-color: transparent;
+    /* Fondo transparente */
+    border: 2px solid #00ffe7;
+    /* Borde celeste */
+    color: #00ffe7;
+    /* Texto celeste */
+    padding: 10px 18px;
+    /* Espaciado interno */
+    border-radius: 20px;
+    /* Bordes bien redondeados */
+    font-size: 1rem;
+    /* Tamaño de letra estándar */
+    font-weight: bold;
+    /* Texto en negrita */
+    cursor: pointer;
+    /* Cursor tipo “mano” */
+    transition: all 0.3s ease;
+    /* Transiciones suaves en hover */
+}
+
+button:hover,
+.btn-login:hover {
+    background-color: #00ffe7;
+    /* Fondo celeste */
+    color: #1a1a2e;
+    /* Texto oscuro */
+    box-shadow: 0 0 10px #00ffe7;
+    /* Brillo alrededor */
+}
+
+input[type="text"],
+input[type="password"],
+input[type="contraseña"] {
+    width: 100%;
+    /* Ocupa todo el ancho disponible */
+    padding: 10px;
+    /* Espaciado interno */
+    border: none;
+    /* Sin borde por defecto */
+    border-radius: 6px;
+    /* Bordes redondeados */
+    outline: none;
+    /* Quita borde azul de foco */
+    font-size: 1rem;
+    /* Tamaño de letra estándar */
+    background-color: #1a1a2e;
+    /* Fondo oscuro */
+    color: #eee;
+    /* Texto claro */
+    box-shadow: inset 0 0 5px #00ffe7;
+    /* Brillo celeste hacia adentro */
+}
+
+#navbar {
     display: flex;
     align-items: center;
-    padding: 0 2rem;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 1000;
-  }
 
+}
 
-  .logo {
-    font-size: 1.8rem;
-    font-weight: 700;
-    color: #00ffe7;
-    letter-spacing: 2px;
-    user-select: none;
-  }
+.left-section {
+    display: flex;
+    align-items: center;
+}
 
+.nav-links {
+    display: flex;
+    gap: 15px;
 
-  .login-container {
-    background-color: rgba(26, 26, 46, 0.9);
-    padding: 2rem 2.5rem;
-    border-radius: 10px;
-    box-shadow: 0 0 20px #00ffe7;
-    max-width: 400px;
-    width: 100%;
-    text-align: center;
-    margin-top: 80px; /* 🔹 Separación del navbar */
-  }
+}
 
-
-  h2 {
-    color: #00ffe7;
-    margin-bottom: 1.5rem;
-    text-shadow: 0 0 8px #00ffe7;
-  }
-
-
-  .input-group {
-    margin-bottom: 1.2rem;
-    text-align: left;
-  }
-
-
-  label {
-    display: block;
-    margin-bottom: 0.3rem;
-    color: #ccc;
-  }
-
-
-  input[type="text"],
-  input[type="password"] {
-    width: 100%;
-    padding: 10px;
-    border: none;
-    border-radius: 6px;
-    outline: none;
-    font-size: 1rem;
-    background-color: #1a1a2e;
-    color: #eee;
-    box-shadow: inset 0 0 5px #00ffe7;
-  }
-
-
-  .btn-login {
-    margin-top: 1rem;
-    background-color: transparent;
-    border: 2px solid #00ffe7;
-    color: #00ffe7;
-    padding: 10px 18px;
-    border-radius: 20px;
-    font-size: 1rem;
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.3s ease;
-  }
-
-
-  .btn-login:hover {
-    background-color: #00ffe7;
-    color: #1a1a2e;
-    box-shadow: 0 0 10px #00ffe7;
-  }
-
-
-  .no-account {
-    margin-top: 1.5rem;
-    color: #ccc;
-    font-size: 0.9rem;
-  }
-
-
-  .no-account a {
-    color: #00ffe7;
-    text-decoration: none;
-    font-weight: bold;
-  }
-
-
-  .no-account a:hover {
-    text-decoration: underline;
-  }
+.right-links {
+    margin-left: auto;
+}
