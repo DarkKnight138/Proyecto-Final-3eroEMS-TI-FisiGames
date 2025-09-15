@@ -1,45 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
-    <link rel="stylesheet" href="./Tateti.css">
+    <title>Juego del Tateti</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="tateti.css">
+    <script src="tateti.js" defer></script>
 </head>
-
 <body>
-    <center>
-        <br>
-        <h1>Bienvenido al Juego del Tateti</h1>
-        <br><br>
-        <div>
-
-            <button id="0" class="vacio btn "></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
-            <button id="1" class="vacio btn"></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
-            <button id="2" class="vacio btn"></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <br><br>
-            <button id="3" class="vacio btn "></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
-            <button id="4" class="vacio btn"></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
-            <button id="5" class="vacio btn"></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <br><br>
-            <button id="6" class="vacio btn "></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
-            <button id="7" class="vacio btn"></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
-            <button id="8" class="vacio btn"></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
+    <nav id="navbar">
+        <div class="left-section">
+            <div class="logo" onclick="window.location.href='index.html'">FisiGames</div>
+            <div class="nav-links left-links">
+                <a href="index.html"><i class="fas fa-home"></i> Volver al Inicio</a>
+                <a href="puntuaciones.html"><i class="fas fa-trophy"></i> Puntuaciones</a>
+                <a href="grupos.html"><i class="fas fa-users"></i> Grupos</a>
+            </div>
         </div>
-        <br>
-        <div id="contenedor"></div>
-    </center>
-    <script src="./Tateti.js"></script>
+        <div class="nav-links right-links">
+            <a href="perfil.html"><i class="fas fa-user"></i> Perfil</a>
+        </div>
+        <div class="menu-toggle" id="menu-toggle" aria-label="Menú de navegación">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </nav>
+    <main id="contenedor">
+        <h1>Tateti</h1>
+        <div class="tablero">
+            <button id="0"></button>
+            <button id="1"></button>
+            <button id="2"></button>
+            <button id="3"></button>
+            <button id="4"></button>
+            <button id="5"></button>
+            <button id="6"></button>
+            <button id="7"></button>
+            <button id="8"></button>
+        </div>
+        <button id="reiniciar" class="btnReinicio">Reiniciar</button>
+    </main>
 </body>
-
 </html>
