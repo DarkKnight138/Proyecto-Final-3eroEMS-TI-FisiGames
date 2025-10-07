@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <?php
 session_start();
@@ -235,10 +236,11 @@ if (!isset($_SESSION['usuario_id'])) {
    <div class="logo">FisiGames</div>
    <div class="nav-left">
      <a href="inicio.php"><i class="fas fa-home"></i> Inicio</a>
-     <a href="puntuaciones.php"><i class="fas fa-users"></i>Puntuacoines</a>
+     <a href="puntuaciones.php"><i class="fas fa-trophy"></i>Puntuacoines</a>
+     <a href="grupos.php"><i class="fas fa-users"></i> Grupos</a>
    </div>
    <div class="nav-right">
-     <a href="perfil.php"><i class="fas fa-user"></i> Perfil</a>
+     <a href="perfil.php"><i class="fas fa-users"></i> Perfil</a>
    </div>
  </nav>
 
