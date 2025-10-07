@@ -192,6 +192,7 @@ url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap');
   <div class="nav-links">
     <div class="nav-left">
       <a href="inicio.php"><i class="fas fa-home"></i> Inicio</a>
+      <a href="puntuaciones.php"><i class="fas fa-trophy"></i> Puntuaciones</a>
       <a href="grupos.php"><i class="fas fa-users"></i> Grupos</a>
     </div>
     <div class="nav-right">
@@ -203,7 +204,12 @@ url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap');
 
 <main>
   <h1>Ranking de Puntuaciones</h1>
-  <button class="switch-button" onclick="toggleRanking()">Cambiar a vista de Grupos</button>
+  <div class="switch-buttons">
+    <button class="switch-button" onclick="toggleRankingUsu()">Vista de Usuarios</button>
+    <button class="switch-button" onclick="toggleRankingGru()">Vista de Grupos</button>
+  </div>
+  
+ 
 
 
   <div class="ranking-container">
@@ -266,19 +272,14 @@ url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap');
   const rankingJugadores = document.getElementById("ranking-jugadores");
   const rankingGrupos = document.getElementById("ranking-grupos");
   const switchBtn = document.querySelector(".switch-button");
-
-
-  function toggleRanking() {
-    const showingJugadores = !rankingJugadores.classList.contains("hidden");
-    if (showingJugadores) {
-      rankingJugadores.classList.add("hidden");
-      rankingGrupos.classList.remove("hidden");
-      switchBtn.textContent = "Cambiar a vista de Jugadores";
-    } else {
+  function toggleRankingUsu() {
       rankingJugadores.classList.remove("hidden");
       rankingGrupos.classList.add("hidden");
-      switchBtn.textContent = "Cambiar a vista de Grupos";
-    }
+  
+  }
+  function toggleRankingGru() {
+      rankingJugadores.classList.add("hidden");
+      rankingGrupos.classList.remove("hidden");
   }
 </script>
 </body>
