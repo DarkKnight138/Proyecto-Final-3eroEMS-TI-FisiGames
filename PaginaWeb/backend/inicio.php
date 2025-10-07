@@ -231,6 +231,7 @@ if (!isset($_SESSION['usuario_id'])) {
    <div class="left-section">
      <div class="logo">FisiGames</div>
      <div class="nav-links left-links">
+      <a href="inicio.html"><i class="fas fa-home"></i> Inicio</a>
        <a href="puntuaciones.php"><i class="fas fa-trophy"></i> Puntuaciones</a>
        <a href="grupos.php"><i class="fas fa-users"></i> Grupos</a>
      </div>
