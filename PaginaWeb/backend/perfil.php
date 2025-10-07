@@ -88,17 +88,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['crear_admin'])) {
  </style>
 </head>
 <body>
- <nav>
-   <div class="logo">FisiGames</div>
-   <div class="nav-left">
-     <a href="inicio.php"><i class="fas fa-home"></i> Inicio</a>
-     <a href="puntuaciones.php"><i class="fas fa-users"></i> Puntuaciones</a>
-   </div>
-   <div class="nav-right">
-     <a href="perfil.php" class="active"><i class="fas fa-user"></i> Perfil</a>
-     <a href="controladores/controladoresUsuarios/logout.php" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a>
-   </div>
- </nav>
+  <nav>
+    <div class="logo">FisiGames</div>
+    <div class="nav-left">
+      <a href="inicio.php"><i class="fas fa-home"></i> Inicio</a>
+      <a href="puntuaciones.php"><i class="fas fa-trophy"></i>Puntuaciones</a>
+      <a href="grupos.php"><i class="fas fa-users"></i> Grupos</a>
+    </div>
+    <div class="nav-right">
+      <a href="perfil.php"><i class="fas fa-users"></i> Perfil</a>
+    </div>
+  </nav>
+  
 
  <div class="container">
    <div class="form-box" id="perfil-box">
