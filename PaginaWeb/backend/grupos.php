@@ -29,7 +29,6 @@ if (!isset($_SESSION['usuario_id'])) {
      background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
      color: #eee;
      min-height: 100vh;
-     padding-top: 70px;
    }
 
 nav {
