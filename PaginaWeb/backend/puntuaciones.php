@@ -80,16 +80,12 @@ url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap');
  margin-bottom: 3rem;
  padding-bottom: 40px;
 }
-
-
   h1 {
     color: #00ffe7;
     font-size: 2.5rem;
     margin-bottom: 2rem;
     text-shadow: 0 0 10px #00ffe7;
   }
-
-
   .switch-button {
     background-color: #00ffe7;
     color: #1a1a2e;
@@ -102,21 +98,15 @@ url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap');
     transition: background-color 0.3s ease, transform 0.3s ease;
     margin-bottom: 2rem;
   }
-
-
   .switch-button:hover {
     background-color: #02e0d0;
     transform: scale(1.05);
   }
-
-
   .ranking-container {
     max-width: 600px;
     margin: 0 auto;
     position: relative;
   }
-
-
   .ranking-table {
     background-color: #1a1a2e;
     border: 2px solid #00ffe7;
@@ -129,34 +119,24 @@ url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap');
     left: 0;
     top: 0;
   }
-
-
   .ranking-table.hidden {
     opacity: 0;
     pointer-events: none;
   }
-
-
   /* Contenedor con scroll */
   .scrollable-table {
     max-height: 350px; /* altura para aprox. 10 filas */
     overflow-y: auto;
     border-radius: 10px;
   }
-
-
   table {
     width: 100%;
     border-collapse: collapse;
   }
-
-
   th, td {
     padding: 12px;
     border-bottom: 1px solid #00ffe722;
   }
-
-
   th {
     color: #00ffe7;
     font-size: 1.1rem;
@@ -165,21 +145,15 @@ url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap');
     background-color: #1a1a2e;
     z-index: 2;
   }
-
-
   td {
     color: #eee;
     font-size: 1rem;
   }
-
-
   .nav-links {
     display: flex;
     justify-content: space-between;
     width: 100%;
   }
-
-
   .nav-left, .nav-right {
     display: flex;
     gap: 10px;
@@ -188,7 +162,7 @@ url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap');
 </head>
 <body>
 <nav>
-  <div class="logo">FisiGames</div>
+  <div class="logo" style="padding-left: 20px; padding-right: 20px;">FisiGames</div>
   <div class="nav-links">
     <div class="nav-left">
       <a href="inicio.php"><i class="fas fa-home"></i> Inicio</a>
@@ -200,20 +174,13 @@ url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap');
     </div>
   </div>
 </nav>
-
-
 <main>
-  <h1>Ranking de Puntuaciones</h1>
+  <h1 style="margin-top: -20px;">Ranking de Puntuaciones</h1>
   <div class="switch-buttons">
     <button class="switch-button" onclick="toggleRankingUsu()">Vista de Usuarios</button>
     <button class="switch-button" onclick="toggleRankingGru()">Vista de Grupos</button>
   </div>
-  
- 
-
-
   <div class="ranking-container">
-    <!-- Tabla de jugadores -->
     <div id="ranking-jugadores" class="ranking-table">
       <div class="scrollable-table">
         <table>
@@ -237,9 +204,6 @@ url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap');
         </table>
       </div>
     </div>
-
-
-    <!-- Tabla de grupos -->
     <div id="ranking-grupos" class="ranking-table hidden">
       <div class="scrollable-table">
         <table>
@@ -266,8 +230,6 @@ url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap');
   </div>
   <br><br><br><br>
 </main>
-
-
 <script>
   const rankingJugadores = document.getElementById("ranking-jugadores");
   const rankingGrupos = document.getElementById("ranking-grupos");
@@ -275,7 +237,6 @@ url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap');
   function toggleRankingUsu() {
       rankingJugadores.classList.remove("hidden");
       rankingGrupos.classList.add("hidden");
-  
   }
   function toggleRankingGru() {
       rankingJugadores.classList.add("hidden");
