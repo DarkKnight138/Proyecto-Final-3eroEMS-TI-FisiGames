@@ -26,53 +26,63 @@ url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap');
     display: flex;
     flex-direction: column;
   }
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #1a1a2e;
+  padding: 0 2rem;
+  height: 60px;
+  box-shadow: 0 0 15px #00ffe7;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
 
+.logo {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #00ffe7;
+  letter-spacing: 2px;
+  user-select: none;
+  cursor: default;
+  white-space: nowrap;
+  padding-left: 20px;
+  padding-right: 20px;
+}
 
-  nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #1a1a2e;
-    padding: 0 2rem;
-    height: 60px;
-    box-shadow: 0 0 15px #00ffe7;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-  }
+.nav-links {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
 
+.nav-left,
+.nav-right {
+  display: flex;
+  gap: 10px;
+}
 
-  .logo {
-    font-size: 1.8rem;
-    font-weight: 700;
-    color: #00ffe7;
-    letter-spacing: 2px;
-    user-select: none;
-    cursor: default;
-    white-space: nowrap;
-  }
+.nav-links a {
+  text-decoration: none;
+  color: #eee;
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 8px 12px;
+  border-radius: 6px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
 
+.nav-links a:hover,
+.nav-links a.active {
+  background-color: #00ffe7;
+  color: #1a1a2e;
+  box-shadow: 0 0 8px #00ffe7;
+}
 
-  .nav-links a {
-    text-decoration: none;
-    color: #eee;
-    font-weight: 600;
-    font-size: 1rem;
-    padding: 8px 12px;
-    border-radius: 6px;
-    transition: background-color 0.3s ease, color 0.3s ease;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-  }
-
-
-  .nav-links a:hover,
-  .nav-links a.active {
-    background-color: #00ffe7;
-    color: #1a1a2e;
-    box-shadow: 0 0 8px #00ffe7;
-  }
   main {
  flex-grow: 1;
  padding: 3rem 2rem;
@@ -162,7 +172,7 @@ url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap');
 </head>
 <body>
 <nav>
-  <div class="logo" style="padding-left: 20px; padding-right: 20px;">FisiGames</div>
+  <div class="logo">FisiGames</div>
   <div class="nav-links">
     <div class="nav-left">
       <a href="inicio.php"><i class="fas fa-home"></i> Inicio</a>
@@ -174,6 +184,7 @@ url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap');
     </div>
   </div>
 </nav>
+
 <main>
   <h1 style="margin-top: -20px;">Ranking de Puntuaciones</h1>
   <div class="switch-buttons">
