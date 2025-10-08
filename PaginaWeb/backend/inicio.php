@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+!DOCTYPE html>
 <html lang="es">
   <?php
 session_start();
@@ -144,49 +144,42 @@ if (!isset($_SESSION['usuario_id'])) {
    }
 
 
-   /* Main content */
    main {
-     flex-grow: 1;
-     padding: 3rem 2rem;
-     text-align: center;
-   }
+  flex-grow: 1;
+  padding: 1rem 1.5rem 1.5rem;
+  text-align: center;
+}
 
+main {
+  flex-grow: 1;
+  padding: 2rem 1rem 1.5rem;
+  text-align: center;
+}
 
-   main h1 {
-     font-size: 3rem;
-     margin-bottom: 1rem;
-     color: #00ffe7;
-     text-shadow: 0 0 10px #00ffe7;
-   }
+main h1 {
+  font-size: 2.5rem;
+  margin-bottom: 0.3rem; /* antes era mucho mayor */
+  color: #00ffe7;
+  text-shadow: 0 0 8px #00ffe7;
+}
 
+.games-section {
+  padding: 1rem 0;
+}
 
-   main p {
-     font-size: 1.2rem;
-     max-width: 600px;
-     margin: 0 auto;
-     color: #ccc;
-   }
-
-
-   /* Juegos */
-   .games-section {
-     padding: 2rem;
-     text-align: center;
-   }
-
-
-   .games-section h2 {
-     color: #00ffe7;
-     margin-bottom: 2rem;
-     font-size: 2rem;
-     text-shadow: 0 0 10px #00ffe7;
-   }
+.games-section h2 {
+  font-size: 1.8rem;
+  color: #00ffe7;
+  margin-top: 0; /* sin separación arriba */
+  margin-bottom: 1rem;
+  text-shadow: 0 0 8px #00ffe7;
+}
 
 
    .game-grid {
      display: grid;
      grid-template-columns: repeat(3, 1fr);
-     grid-gap: 1.5rem;
+     grid-gap: 1rem;
      justify-items: center;
    }
 
@@ -245,10 +238,8 @@ if (!isset($_SESSION['usuario_id'])) {
      <div></div>
    </div>
  </nav>
-
-
  <main>
-  <h1>Bienvenido a FisiGames</h1>
+  <h1 >Bienvenido a FisiGames</h1>
   <section class="games-section">
     <h2>Juegos Disponibles</h2>
     <div class="game-grid">
