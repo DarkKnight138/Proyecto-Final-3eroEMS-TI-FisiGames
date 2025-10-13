@@ -1,4 +1,4 @@
-
+  var puntuacion = 0;
    var empieza = 0;//Crea la variable empieza
    var modal = document.getElementById("cajadeReglas");/*Crea una variable que se refiere a la caja de reglas*/
    var modal2 = document.getElementById("tabla");/*Crea una variable que se refiere al tablero*/
@@ -261,4 +261,5 @@ function Ganaste() {//Función que revisa si ganaste
      }
  }
  return false; // No reinicia el juego
+   puntuacion++;
 }
