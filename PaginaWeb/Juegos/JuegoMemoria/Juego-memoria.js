@@ -1,3 +1,4 @@
+puntuacion = 0;
 const menuToggle = document.getElementById('menu-toggle');
         const navbar = document.getElementById('navbar');
         menuToggle.addEventListener('click', () => {
@@ -110,6 +111,7 @@ const menuToggle = document.getElementById('menu-toggle');
         function comprobarFin() {
             if (cartasEmparejadas.every(val => val)) {/*Si todas las cartas están emparejadas*/
                 document.getElementById('mensaje').textContent = `¡Felicidades! Terminaste en ${intentos} intentos.`;/*Te da un mensaje de felicidades y cuántos intentos te tarda*/
+                    puntuacion++;
             }
         }
         function reiniciarJuego() {/*Al presionar el botón “reinicia” el juego (lo inicia de nuevo)*/
