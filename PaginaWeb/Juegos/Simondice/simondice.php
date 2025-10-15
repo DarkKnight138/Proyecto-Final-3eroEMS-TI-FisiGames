@@ -1,3 +1,13 @@
+<?php
+session_start();
+
+// Si no está logueado, redirige a login
+if (!isset($_SESSION['usuario_id'])) {
+    header("Location: ../../backend/login.php");
+    exit;
+}
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -5,7 +15,7 @@
   <title>Simon Dice - FisiGames</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- Bootstrap (para grid) -->
+  <!-- Bootstrap -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
   <!-- Font Awesome -->
@@ -15,8 +25,8 @@
   <link rel="stylesheet" href="simondice.css">
 </head>
 <body>
-  <!-- Navbar igual al de inicio.php -->
-   <nav id="navbar">
+  <!-- Navbar -->
+  <nav id="navbar">
     <div class="left-section">
       <div class="logo">FisiGames</div>
       <div class="nav-links left-links">
@@ -36,9 +46,9 @@
   </nav>
 
   <!-- Contenido del juego -->
-  <main>
-    <button id="start-btn">Empezar</button>
-    <div class="container mt-4">
+  <main class="text-center mt-4">
+    <button id="start-btn" class="btn btn-primary mb-3">Empezar</button>
+    <div class="container">
       <div class="row justify-content-center">
         <div class="col-6 col-md-3 p-2">
           <img id="rojo" src="imgs/rojo.webp" class="color-btn">
@@ -59,7 +69,6 @@
   <!-- Scripts -->
   <script src="simondice.js"></script>
   <script>
-    // Script para el menú responsive
     const menuToggle = document.getElementById('menu-toggle');
     const navbar = document.getElementById('navbar');
     menuToggle.addEventListener('click', () => {
