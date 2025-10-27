@@ -170,6 +170,10 @@
     <div class="no-account">
       ¿No tenés cuenta? <a href="register.php">Registrate</a>
     </div>
+    <div class="no-account">
+      ¿Olvidaste tu contrasenia? <a href="restablecer-contrasenia">Toca aqui</a>
+    </div>
+    
   </div>
 
 
