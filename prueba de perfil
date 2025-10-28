@@ -1,0 +1,251 @@
+<?php
+session_start();
+if (!isset($_SESSION['usuario_id'])) {
+    header("Location: login.php");
+    exit();
+}
+
+require 'controladores/conexion.php';
+
+// Buscar datos del usuario logueado
+$stmt = $conexion->prepare("SELECT nombre, email, puntuacion_total, permiso FROM cuentas WHERE id_cuenta = ?");
+$stmt->bind_param("i", $_SESSION['usuario_id']);
+$stmt->execute();
+$result = $stmt->get_result();
+$usuario = $result->fetch_assoc();
+
+// Mensaje de feedback
+$msg = "";
+
+// --- Eliminar usuario ---
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['eliminar_usuario'])) {
+    if ($_SESSION['permiso'] == 2 || $_SESSION['permiso'] == 3) {
+        $id = intval($_POST['id_usuario']);
+        if ($id !== $_SESSION['usuario_id']) {
+            $stmt = $conexion->prepare("DELETE FROM cuentas WHERE id_cuenta = ?");
+            $stmt->bind_param("i", $id);
+            if ($stmt->execute()) {
+                $msg = "Usuario eliminado correctamente.";
+            } else {
+                $msg = "Error al eliminar usuario.";
+            }
+        } else {
+            $msg = "No podés eliminar tu propia cuenta.";
+        }
+    } else {
+        $msg = "No tenés permisos para eliminar usuarios.";
+    }
+}
+
+// --- Crear nuevo admin ---
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['crear_admin'])) {
+    if ($_SESSION['permiso'] == 3) {
+        $nombre = $_POST['nombre_admin'];
+        $email = $_POST['email_admin'];
+        $pass = password_hash($_POST['password_admin'], PASSWORD_BCRYPT);
+
+        $stmt = $conexion->prepare("INSERT INTO cuentas (nombre, email, password, permiso, puntuacion_total) VALUES (?, ?, ?, 2, 0)");
+        $stmt->bind_param("sss", $nombre, $email, $pass);
+        if ($stmt->execute()) {
+            $msg = "Admin creado correctamente.";
+        } else {
+            $msg = "Error al crear admin: " . $conexion->error;
+        }
+    } else {
+        $msg = "No tenés permisos para crear admins.";
+    }
+}
+
+// --- Eliminar grupo ---
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['eliminar_grupo'])) {
+    if ($_SESSION['permiso'] >= 2) {
+        $id_grupo = intval($_POST['id_grupo']);
+        $stmt = $conexion->prepare("DELETE FROM grupos WHERE id_grupo = ?");
+        $stmt->bind_param("i", $id_grupo);
+        if ($stmt->execute()) {
+            $msg = "Grupo eliminado correctamente.";
+        } else {
+            $msg = "Error al eliminar grupo: " . $conexion->error;
+        }
+    } else {
+        $msg = "No tenés permisos para eliminar grupos.";
+    }
+}
+
+// --- Cambiar rol de usuario ---
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['cambiar_rol'])) {
+    if ($_SESSION['permiso'] == 3) {
+        $id_usuario = intval($_POST['id_usuario_rol']);
+        $nuevo_rol = intval($_POST['nuevo_rol']);
+        $stmt = $conexion->prepare("UPDATE cuentas SET permiso = ? WHERE id_cuenta = ?");
+        $stmt->bind_param("ii", $nuevo_rol, $id_usuario);
+        if ($stmt->execute()) {
+            $msg = "Rol actualizado correctamente.";
+        } else {
+            $msg = "Error al cambiar rol: " . $conexion->error;
+        }
+    } else {
+        $msg = "No tenés permisos para cambiar roles.";
+    }
+}
+
+// Obtener usuarios (menos el actual)
+$usuarios = [];
+if ($_SESSION['permiso'] >= 2) {
+    $sql = "SELECT id_cuenta, nombre FROM cuentas WHERE id_cuenta != ?";
+    $stmt = $conexion->prepare($sql);
+    $stmt->bind_param("i", $_SESSION['usuario_id']);
+    $stmt->execute();
+    $usuarios = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+}
+
+// Obtener grupos
+$grupos = [];
+if ($_SESSION['permiso'] >= 2) {
+    $sql = "SELECT id_grupo, nombre_grupo FROM grupos";
+    $stmt = $conexion->prepare($sql);
+    $stmt->execute();
+    $grupos = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+}
+?>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+ <meta charset="UTF-8" />
+ <meta name="viewport" content="width=device-width, initial-scale=1" />
+ <title>Perfil - FisiGames</title>
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+ <style>
+   @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap');
+   * { box-sizing: border-box; margin: 0; padding: 0; }
+   body { font-family: 'Orbitron', sans-serif; background: linear-gradient(135deg,#0f0c29,#302b63,#24243e); color: #eee; min-height: 100vh; padding-top: 70px; }
+   nav { width: 100%; height: 60px; background-color: #1a1a2e; box-shadow: 0 0 15px #00ffe7; display: flex; align-items: center; padding: 0 2rem; position: fixed; top: 0; left: 0; z-index: 1000; gap: 2rem; }
+   .logo { font-size: 1.8rem; font-weight: 700; color: #00ffe7; letter-spacing: 2px; }
+   .nav-left { display: flex; gap: 1.5rem; flex-grow: 1; }
+   .nav-right { display: flex; gap: 1rem; align-items: center; }
+   .nav-left a, .nav-right a, .logout-btn { text-decoration: none; color: #eee; font-weight: 600; font-size: 1rem; padding: 8px 12px; border-radius: 6px; transition: 0.3s; display: inline-flex; align-items: center; gap: 6px; }
+   .nav-left a:hover, .nav-right a:hover, .logout-btn:hover { background-color: #00ffe7; color: #1a1a2e; box-shadow: 0 0 8px #00ffe7; }
+   .logout-btn { border: 2px solid #00ffe7; border-radius: 20px; cursor: pointer; }
+   .container { display: flex; justify-content: center; align-items: flex-start; padding: 2rem; }
+   .form-box { background-color: rgba(26,26,46,0.95); padding: 2rem 2.5rem; border-radius: 12px; box-shadow: 0 0 20px #00ffe7; max-width: 700px; width: 100%; text-align: center; transition: transform 0.3s ease; }
+   .form-box:hover { transform: scale(1.02); }
+   h2 { color: #00ffe7; margin-bottom: 1.5rem; text-shadow: 0 0 8px #00ffe7; }
+   p { margin: 0.5rem 0; }
+   .tablero { margin-top: 2rem; padding: 1rem; background: rgba(20,20,40,0.9); border-radius: 8px; text-align: left; box-shadow: 0 0 10px #00ffe7; }
+   .tablero h3 { margin-bottom: 1rem; color: #00ffe7; }
+   input[type="text"], input[type="email"], input[type="password"], input[type="number"], select { width: 100%; padding: 8px; border-radius: 6px; border: none; margin-bottom: 1rem; background-color: #1a1a2e; color: #eee; box-shadow: inset 0 0 5px #00ffe7; }
+   button { margin-top: 0.5rem; background-color: transparent; border: 2px solid #00ffe7; color: #00ffe7; padding: 8px 14px; border-radius: 20px; font-size: 0.9rem; font-weight: bold; cursor: pointer; transition: all 0.3s ease; }
+   button:hover { background-color: #00ffe7; color: #1a1a2e; box-shadow: 0 0 10px #00ffe7; }
+   .msg { margin: 1rem 0; padding: 0.5rem; border-radius: 6px; background: rgba(0,255,231,0.1); color: #0ff; text-align: center; }
+ </style>
+</head>
+<body>
+  <nav>
+    <div class="logo">FisiGames</div>
+    <div class="nav-left">
+      <a href="inicio.php"><i class="fas fa-home"></i> Inicio</a>
+      <a href="puntuaciones.php"><i class="fas fa-trophy"></i>Puntuaciones</a>
+      <a href="grupos.php"><i class="fas fa-users"></i> Grupos</a>
+    </div>
+    <div class="nav-right">
+      <a href="perfil.php"><i class="fas fa-users"></i> Perfil</a>
+    </div>
+  </nav>
+
+ <div class="container">
+   <div class="form-box" id="perfil-box">
+     <h2>Perfil</h2>
+     <?php if (!empty($msg)) echo "<div class='msg'>$msg</div>"; ?>
+     <p><strong>Nombre:</strong> <?= htmlspecialchars($usuario['nombre']) ?></p>
+     <p><strong>Email:</strong> <?= htmlspecialchars($usuario['email']) ?></p>
+     <p><strong>Puntos:</strong> <?= intval($usuario['puntuacion_total']) ?></p>
+     <p><strong>Rol:</strong> <?= $usuario['permiso']==1?"Usuario":($usuario['permiso']==2?"Admin":"Superadmin") ?></p>
+
+     <?php if ($_SESSION['permiso'] >= 2): ?>
+     <div class="tablero">
+       <h3>Usuarios</h3>
+       <input type="text" id="buscarUsuario" placeholder="Buscar usuario..." onkeyup="filtrarUsuarios()">
+       <select id="comboUsuarios">
+         <?php foreach ($usuarios as $u): ?>
+           <option value="<?= $u['id_cuenta'] ?>"><?= htmlspecialchars($u['id_cuenta'] . " - " . $u['nombre']) ?></option>
+         <?php endforeach; ?>
+       </select>
+
+       <form method="POST">
+         <input type="hidden" name="id_usuario" id="selectedUsuarioId">
+         <button type="submit" name="eliminar_usuario"><i class="fas fa-user-minus"></i> Eliminar Usuario</button>
+       </form>
+
+       <?php if ($_SESSION['permiso'] == 3): ?>
+       <form method="POST">
+         <input type="hidden" name="id_usuario_rol" id="selectedUsuarioIdRol">
+         <select name="nuevo_rol">
+           <option value="2">Admin</option>
+           <option value="3">Superadmin</option>
+         </select>
+         <button type="submit" name="cambiar_rol"><i class="fas fa-user-cog"></i> Cambiar Rol</button>
+       </form>
+       <?php endif; ?>
+     </div>
+
+     <div class="tablero">
+       <h3>Grupos</h3>
+       <input type="text" id="buscarGrupo" placeholder="Buscar grupo..." onkeyup="filtrarGrupos()">
+       <select id="comboGrupos">
+         <?php foreach ($grupos as $g): ?>
+           <option value="<?= $g['id_grupo'] ?>"><?= htmlspecialchars($g['id_grupo'] . " - " . $g['nombre_grupo']) ?></option>
+         <?php endforeach; ?>
+       </select>
+       <form method="POST">
+         <input type="hidden" name="id_grupo" id="selectedGrupoId">
+         <button type="submit" name="eliminar_grupo"><i class="fas fa-users-slash"></i> Eliminar Grupo</button>
+       </form>
+     </div>
+     <?php endif; ?>
+
+     <?php if ($_SESSION['permiso'] == 3): ?>
+     <div class="tablero">
+       <h3>Crear Administrador</h3>
+       <form method="POST">
+         <input type="text" name="nombre_admin" placeholder="Nombre del admin" required>
+         <input type="email" name="email_admin" placeholder="Email del admin" required>
+         <input type="password" name="password_admin" placeholder="Contraseña" required>
+         <button type="submit" name="crear_admin"><i class="fas fa-user-plus"></i> Crear Admin</button>
+       </form>
+     </div>
+     <?php endif; ?>
+   </div>
+ </div>
+
+<script>
+  function filtrarUsuarios() {
+    const input = document.getElementById("buscarUsuario").value.toLowerCase();
+    const select = document.getElementById("comboUsuarios");
+    const options = select.options;
+    for (let i = 0; i < options.length; i++) {
+      const texto = options[i].text.toLowerCase();
+      options[i].style.display = texto.includes(input) ? "block" : "none";
+    }
+  }
+
+  function filtrarGrupos() {
+    const input = document.getElementById("buscarGrupo").value.toLowerCase();
+    const select = document.getElementById("comboGrupos");
+    const options = select.options;
+    for (let i = 0; i < options.length; i++) {
+      const texto = options[i].text.toLowerCase();
+      options[i].style.display = texto.includes(input) ? "block" : "none";
+    }
+  }
+
+  document.getElementById('comboUsuarios').addEventListener('change', function() {
+    document.getElementById('selectedUsuarioId').value = this.value;
+    document.getElementById('selectedUsuarioIdRol').value = this.value;
+  });
+
+  document.getElementById('comboGrupos').addEventListener('change', function() {
+    document.getElementById('selectedGrupoId').value = this.value;
+  });
+</script>
+</body>
+</html>

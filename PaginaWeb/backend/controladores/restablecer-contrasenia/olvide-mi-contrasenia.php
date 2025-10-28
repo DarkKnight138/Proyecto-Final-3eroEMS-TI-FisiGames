@@ -1,3 +1,6 @@
+<?php
+
+?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -156,14 +159,10 @@
     <h2>Iniciar Sesión</h2>
     <form id="login-form">
       <div class="input-group">
-        <label for="email">Email</label>
+        <label for="email">Ingrese su Email</label>
         <input type="text" id="email" name="email" required />
       </div>
-      <div class="input-group">
-        <label for="password">Contraseña</label>
-        <input type="password" id="password" name="password" required />
-      </div>
-      <button type="submit" class="btn-login"><i class="fas fa-sign-in-alt"></i> Entrar</button>
+      <button type="submit" class="btn-login"><i class="fas fa-sign-in-alt"></i> Enviar</button>
     </form>
 
 
