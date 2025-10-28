@@ -64,6 +64,7 @@ if (!isset($_SESSION['usuario_id'])) {
   <div class="nav-links">
     <div class="nav-left">
       <a href="inicio.php"><i class="fas fa-home"></i> Inicio</a>
+      <a href="puntuaciones.php" class="active"><i class="fas fa-trophy"></i> Puntuaciones</a>
       <a href="grupos.php"><i class="fas fa-users"></i> Grupos</a>
     </div>
     <div class="nav-right">
@@ -77,13 +78,11 @@ if (!isset($_SESSION['usuario_id'])) {
   <button id="switchBtn" class="switch-button" type="button">Cambiar a vista de Grupos</button>
 
   <div class="ranking-container">
-    <!-- Tabla de jugadores -->
+    <!-- Ranking jugadores -->
     <div id="ranking-jugadores" class="ranking-table" aria-hidden="false">
       <div class="scrollable-table">
         <table>
-          <thead>
-            <tr><th>Posición</th><th>Jugador</th><th>Puntos</th></tr>
-          </thead>
+          <thead><tr><th>Posición</th><th>Jugador</th><th>Puntos</th></tr></thead>
           <tbody>
 <?php
 require 'controladores/conexion.php';
@@ -112,13 +111,11 @@ if (!isset($conexion)) {
       </div>
     </div>
 
-    <!-- Tabla de grupos -->
+    <!-- Ranking grupos -->
     <div id="ranking-grupos" class="ranking-table hidden" aria-hidden="true">
       <div class="scrollable-table">
         <table>
-          <thead>
-            <tr><th>Posición</th><th>Grupo</th><th>Puntos</th></tr>
-          </thead>
+          <thead><tr><th>Posición</th><th>Grupo</th><th>Puntos</th></tr></thead>
           <tbody>
 <?php
 if (!isset($conexion)) {
@@ -154,8 +151,6 @@ if (!isset($conexion)) {
       </div>
     </div>
   </div>
-
-  <br><br><br><br>
 </main>
 
 <script>
@@ -180,16 +175,13 @@ if (!isset($conexion)) {
     btn.textContent = 'Cambiar a vista de Jugadores';
   }
 
-  // estado inicial
-  showJugadores();
-
-  btn.addEventListener('click', function(){
-    if (jugadores.classList.contains('hidden')) {
-      showJugadores();
-    } else {
-      showGrupos();
-    }
+  btn.addEventListener('click', () => {
+    if (jugadores.classList.contains('hidden')) showJugadores();
+    else showGrupos();
   });
+
+  // Estado inicial
+  showJugadores();
 })();
 </script>
 </body>

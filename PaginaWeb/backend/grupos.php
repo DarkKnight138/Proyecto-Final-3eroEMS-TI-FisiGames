@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <?php
 session_start();
@@ -28,83 +29,64 @@ if (!isset($_SESSION['usuario_id'])) {
      background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
      color: #eee;
      min-height: 100vh;
-     padding-top: 70px;
    }
 
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #1a1a2e;
+  padding: 0 2rem;
+  height: 60px;
+  box-shadow: 0 0 15px #00ffe7;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
 
-   nav {
-     width: 100%;
-     height: 60px;
-     background-color: #1a1a2e;
-     box-shadow: 0 0 15px #00ffe7;
-     display: flex;
-     align-items: center;
-     padding: 0 2rem;
-     position: fixed;
-     top: 0;
-     left: 0;
-     z-index: 1000;
-     gap: 2rem;
-   }
+.logo {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #00ffe7;
+  letter-spacing: 2px;
+  user-select: none;
+  cursor: default;
+  white-space: nowrap;
+  padding-left: 20px;
+  padding-right: 20px;
+}
 
+.nav-links {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
 
-   .logo {
-     font-size: 1.8rem;
-     font-weight: 700;
-     color: #00ffe7;
-     letter-spacing: 2px;
-   }
+.nav-left,
+.nav-right {
+  display: flex;
+  gap: 10px;
+}
 
+.nav-links a {
+  text-decoration: none;
+  color: #eee;
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 8px 12px;
+  border-radius: 6px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
 
-   .nav-left {
-     display: flex;
-     gap: 1.5rem;
-     flex-grow: 1;
-   }
-
-
-   .nav-right {
-     display: flex;
-   }
-
-
-   .nav-left a,
-   .nav-right a {
-     text-decoration: none;
-     color: #eee;
-     font-weight: 600;
-     font-size: 1rem;
-     padding: 8px 12px;
-     border-radius: 6px;
-     transition: background-color 0.3s ease, color 0.3s ease;
-     display: inline-flex;
-     align-items: center;
-     gap: 6px;
-   }
-
-
-   .nav-left a:hover,
-   .nav-right a:hover {
-     background-color: #00ffe7;
-     color: #1a1a2e;
-     box-shadow: 0 0 8px #00ffe7;
-   }
-
-
-   /* Si quieres que active no ilumine por defecto, sino solo hover */
-   .nav-left a.active {
-     background-color: transparent;
-     color: #eee;
-     box-shadow: none;
-   }
-
-
-   .nav-left a.active:hover {
-     background-color: #00ffe7;
-     color: #1a1a2e;
-     box-shadow: 0 0 8px #00ffe7;
-   }
-
+.nav-links a:hover,
+.nav-links a.active {
+  background-color: #00ffe7;
+  color: #1a1a2e;
+  box-shadow: 0 0 8px #00ffe7;
+}
 
    .container {
      display: flex;
@@ -231,16 +213,20 @@ if (!isset($_SESSION['usuario_id'])) {
 <body>
 
 
- <nav>
-   <div class="logo">FisiGames</div>
-   <div class="nav-left">
-     <a href="inicio.php"><i class="fas fa-home"></i> Inicio</a>
-     <a href="puntuaciones.php"><i class="fas fa-users"></i>Puntuacoines</a>
-   </div>
-   <div class="nav-right">
-     <a href="perfil.php"><i class="fas fa-user"></i> Perfil</a>
-   </div>
- </nav>
+<nav>
+  <div class="logo">FisiGames</div>
+  <div class="nav-links">
+    <div class="nav-left">
+      <a href="inicio.php"><i class="fas fa-home"></i> Inicio</a>
+      <a href="puntuaciones.php"><i class="fas fa-trophy"></i> Puntuaciones</a>
+      <a href="grupos.php"><i class="fas fa-users"></i> Grupos</a>
+    </div>
+    <div class="nav-right">
+      <a href="perfil.php"><i class="fas fa-user"></i> Perfil</a>
+    </div>
+  </div>
+</nav>
+
 
 
  <div class="container">
