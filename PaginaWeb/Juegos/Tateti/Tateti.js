@@ -39,7 +39,7 @@ function elijeCasilla(id) {
 
     if (esEmpate()) {
         setTimeout(() => {
-            alert("Empate 😅");
+            alert("Empate");
             reiniciar();
         }, 500);
         return;
@@ -68,7 +68,7 @@ function elijeCasilla(id) {
 
     if (esEmpate()) {
         setTimeout(() => {
-            alert("Empate 😅");
+            alert("Empate");
             reiniciar();
         }, 500);
     }
