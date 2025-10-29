@@ -12,7 +12,6 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  text-align: center;
 }
 
 /* Navbar */
@@ -69,4 +68,47 @@ nav {
   background-color: #00ffe7;
   color: #1a1a2e;
   box-shadow: 0 0 8px #00ffe7;
+}
+
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  gap: 5px;
+}
+
+.menu-toggle div {
+  width: 25px;
+  height: 3px;
+  background-color: #00ffe7;
+  border-radius: 2px;
+  transition: 0.3s;
+}
+
+@media (max-width: 768px) {
+  .nav-links.left-links {
+    display: none;
+  }
+
+  .menu-toggle {
+    display: flex;
+  }
+
+  nav.expanded .nav-links.left-links {
+    display: flex;
+    flex-direction: column;
+    background-color: #1a1a2e;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    width: 200px;
+    padding: 1rem 1.5rem;
+    border-radius: 0 0 10px 0;
+    box-shadow: 0 0 15px #00ffe7;
+  }
+
+  nav.expanded .nav-links.left-links a {
+    padding: 10px 0;
+    border-radius: 0;
+  }
 }
