@@ -1,126 +1,113 @@
-var colores = ["rojo", "verde", "azul", "amarillo"];
-        var secuencia = [];
-        var jugador = [];
-        var puedeJugar = false;
+const colores = ["rojo", "verde", "azul", "amarillo"];
+let secuencia = [];
+let secuenciaJugador = [];
+let nivel = 0;
+let puedeJugar = false;
 
-        var sonidoRojo = new Audio("sonidos/1.mp3");
-        var sonidoVerde = new Audio("sonidos/2.mp3");
-        var sonidoAzul = new Audio("sonidos/3.mp3");
-        var sonidoAmarillo = new Audio("sonidos/4.mp3");
-        var sonidoPierde = new Audio("sonidos/pierde.mp3");
-        var sonidoEmpieza = new Audio("sonidos/empieza.mp3");
-        var sonidoNivel10 = new Audio("sonidos/empieza.mp3");
+const startBtn = document.getElementById("start-btn");
+const nivelTexto = document.getElementById("nivel-texto");
 
-        var imgRojo = "imgs/rojo.webp";
-        var imgVerde = "imgs/verde.avif";
-        var imgAzul = "imgs/azul.png";
-        var imgAmarillo = "imgs/amarillo.avif";
+startBtn.addEventListener("click", iniciarJuego);
 
-        var imgRojoOn = "imgs/rojo1.jpg";
-        var imgVerdeOn = "imgs/verde1.avif";
-        var imgAzulOn = "imgs/azul1.jpeg";
-        var imgAmarilloOn = "imgs/amarillo2.avif";
+function iniciarJuego() {
+  nivel = 0;
+  secuencia = [];
+  secuenciaJugador = [];
+  siguienteNivel();
+}
 
-        document.getElementById("comienzaBtn").addEventListener("click", comenzarJuego);
+function siguienteNivel() {
+  nivel++;
+  nivelTexto.textContent = "Nivel: " + nivel;
+  secuenciaJugador = [];
+  puedeJugar = false;
 
-        function comenzarJuego() {
-            sonidoEmpieza.play();
-            secuencia = [];
-            jugador = [];
-            puedeJugar = false;
-            setTimeout(nuevoNivel, 1000);
-        }
+  const colorAleatorio = colores[Math.floor(Math.random() * 4)];
+  secuencia.push(colorAleatorio);
 
-        document.getElementById("rojo").addEventListener("click", function () {
-            tocarColor("rojo");
-        });
+  reproducirSecuencia();
+}
 
-        document.getElementById("verde").addEventListener("click", function () {
-            tocarColor("verde");
-        });
+function reproducirSecuencia() {
+  let i = 0;
+  const intervalo = setInterval(() => {
+    iluminarColor(secuencia[i]);
+    i++;
+    if (i >= secuencia.length) {
+      clearInterval(intervalo);
+      puedeJugar = true;
+    }
+  }, 800);
+}
 
-        document.getElementById("azul").addEventListener("click", function () {
-            tocarColor("azul");
-        });
+function iluminarColor(color) {
+  const boton = document.getElementById(color);
+  const sonido = new Audio("sounds/" + color + ".mp3");
+  sonido.play();
+  boton.classList.add("activo");
+  setTimeout(() => boton.classList.remove("activo"), 400);
+}
 
-        document.getElementById("amarillo").addEventListener("click", function () {
-            tocarColor("amarillo");
-        });
+// Detectar clics del jugador
+colores.forEach(color => {
+  document.getElementById(color).addEventListener("click", () => manejarInput(color));
+});
 
-        function tocarColor(color) {
-            if (puedeJugar == false) return;
+function manejarInput(color) {
+  if (!puedeJugar) return;
+  const sonido = new Audio("sounds/" + color + ".mp3");
+  sonido.play();
 
-            reproducirColor(color);
-            jugador.push(color);
-            verificar(jugador.length - 1);
-        }
+  secuenciaJugador.push(color);
+  verificarRespuesta();
+}
 
-        function nuevoNivel() {
-            puedeJugar = false;
-            var numero = Math.floor(Math.random() * 4);
-            var color = colores[numero];
-            secuencia.push(color);
-            jugador = [];
+function verificarRespuesta() {
+  const i = secuenciaJugador.length - 1;
 
-            if ((secuencia.length - 1) > 0 && (secuencia.length - 1) % 10 == 0) {
-                sonidoNivel10.play();
-            }
+  if (secuenciaJugador[i] !== secuencia[i]) {
+    perder();
+    return;
+  }
 
-            mostrarSecuencia(0);
-        }
+  if (secuenciaJugador.length === secuencia.length) {
+    if (nivel === 10) {
+      ganar();
+    } else {
+      setTimeout(siguienteNivel, 1000);
+    }
+  }
+}
 
-        function mostrarSecuencia(i) {
-            if (i < secuencia.length) {
-                var color = secuencia[i];
-                reproducirColor(color);
-                setTimeout(function () {
-                    mostrarSecuencia(i + 1);
-                }, 800);
-            } else {
-                setTimeout(function () {
-                    puedeJugar = true;
-                }, 500);
-            }
-        }
+function perder() {
+  const sonido = new Audio("sounds/perder.mp3");
+  sonido.play();
+  alert("¡Perdiste en el nivel " + nivel + "!");
+  sumarPuntos(false);
+}
 
-        function reproducirColor(color) {
-            var imagen = document.getElementById(color);
-            if (color == "rojo") {
-                imagen.src = imgRojoOn;
-                sonidoRojo.play();
-                setTimeout(function () {
-                    imagen.src = imgRojo;
-                }, 400);
-            } else if (color == "verde") {
-                imagen.src = imgVerdeOn;
-                sonidoVerde.play();
-                setTimeout(function () {
-                    imagen.src = imgVerde;
-                }, 400);
-            } else if (color == "azul") {
-                imagen.src = imgAzulOn;
-                sonidoAzul.play();
-                setTimeout(function () {
-                    imagen.src = imgAzul;
-                }, 400);
-            } else if (color == "amarillo") {
-                imagen.src = imgAmarilloOn;
-                sonidoAmarillo.play();
-                setTimeout(function () {
-                    imagen.src = imgAmarillo;
-                }, 400);
-            }
-        }
+function ganar() {
+  alert("¡Ganaste! Superaste los 10 niveles 🎉");
+  sumarPuntos(true);
+}
 
-        function verificar(pos) {
-            if (jugador[pos] != secuencia[pos]) {
-                sonidoPierde.play();
-                alert("¡Perdiste! Llegaste al nivel " + secuencia.length);
-                puedeJugar = false;
-                return;
-            }
+// 🟢 SUMA DE PUNTOS
+function sumarPuntos(gano) {
+  let puntos = 0;
 
-            if (jugador.length == secuencia.length) {
-                setTimeout(nuevoNivel, 1000);
-            }
-        }
+  if (gano) puntos = 100;
+  else if (nivel >= 5) puntos = 50;
+  else puntos = 20;
+
+  fetch("../../backend/controladores/actualizar_puntos.php", {
+    method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: "puntos=" + puntos
+  })
+  .then(res => res.text())
+  .then(data => {
+    console.log(data);
+    alert("Has ganado " + puntos + " puntos.");
+  })
+  .catch(err => console.error("Error al actualizar puntos:", err));
+}
