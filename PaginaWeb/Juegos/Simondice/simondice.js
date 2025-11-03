@@ -13,15 +13,15 @@ var sonidoEmpieza = new Audio("sonidos/empieza.mp3");
 var sonidoNivel10 = new Audio("sonidos/empieza.mp3");
 
 // Imágenes
-var imgRojo = "img/rojo.webp";
-var imgVerde = "img/verde.avif";
-var imgAzul = "img/azul.png";
-var imgAmarillo = "img/amarillo.jpg";
+var imgRojo = "imgs/rojo.webp";
+var imgVerde = "imgs/verde.avif";
+var imgAzul = "imgs/azul.png";
+var imgAmarillo = "imgs/amarillo.jpg";
 
-var imgRojoOn = "img/rojo1.jpg";
-var imgVerdeOn = "img/verde1.avif";
-var imgAzulOn = "img/azul1.jpeg";
-var imgAmarilloOn = "img/amarillo2.avif";
+var imgRojoOn = "imgs/rojo1.webp";
+var imgVerdeOn = "imgs/verde1.avif";
+var imgAzulOn = "imgs/azul1.jpeg";
+var imgAmarilloOn = "imgs/amarillo2.avif";
 
 const mensaje = document.getElementById("mensaje");
 document.getElementById("start-btn").addEventListener("click", comenzarJuego);
