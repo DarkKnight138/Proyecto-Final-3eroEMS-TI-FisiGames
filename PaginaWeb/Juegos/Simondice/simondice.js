@@ -5,6 +5,7 @@ var puedeJugar = false;
 var temporizadorInactividad; 
 var puntuacion = 0; 
 
+// Sonidos
 var sonidoRojo = new Audio("sonidos/1.mp3");
 var sonidoVerde = new Audio("sonidos/2.mp3");
 var sonidoAzul = new Audio("sonidos/3.mp3");
@@ -13,7 +14,7 @@ var sonidoPierde = new Audio("sonidos/pierde.mp3");
 var sonidoEmpieza = new Audio("sonidos/empieza.mp3");
 var sonidoNivel10 = new Audio("sonidos/empieza.mp3");
 
-
+// Imágenes
 var imgRojo = "imgs/rojo.webp";
 var imgVerde = "imgs/verde.avif";
 var imgAzul = "imgs/azul.png";
@@ -48,7 +49,6 @@ function comenzarJuego() {
 	setTimeout(nuevoNivel, 1000);
 }
 
-// Eventos de clic en colores
 document.getElementById("rojo").addEventListener("click", () => tocarColor("rojo"));
 document.getElementById("verde").addEventListener("click", () => tocarColor("verde"));
 document.getElementById("azul").addEventListener("click", () => tocarColor("azul"));
@@ -56,8 +56,6 @@ document.getElementById("amarillo").addEventListener("click", () => tocarColor("
 
 function tocarColor(color) {
 	if (!puedeJugar) return;
-
-	
 	reiniciarTemporizador();
 
 	reproducirColor(color);
@@ -119,14 +117,12 @@ function verificar(pos) {
 	if (jugador.length == secuencia.length) {
     	puntuacion += 5; 
     	actualizarPuntuacion();
-    	sumarPuntos(); 
+    	sumarPuntos();
     	mostrarMensaje("Nivel " + secuencia.length + " completado ");
     	clearTimeout(temporizadorInactividad);
     	setTimeout(nuevoNivel, 1000);
 	}
 }
-
-
 function perder(texto) {
 	sonidoPierde.play();
 	mostrarMensaje(texto, "#ff4b4b");
@@ -139,12 +135,10 @@ function reiniciarTemporizador() {
 	clearTimeout(temporizadorInactividad);
 	temporizadorInactividad = setTimeout(() => {
     	if (puedeJugar) {
-        	perder("¡Tiempo agotado! Tardaste más de 10 segundos ⏰");
+        	perder("¡Tiempo agotado! Tardaste más de 10 segundos");
     	}
-	}, 10000); 
+	}, 10000);
 }
-
-
 function sumarPuntos() {
 	const puntosGanados = 5; 
 	fetch("../../backend/controladores/actualizar_puntos.php", {
@@ -155,7 +149,7 @@ function sumarPuntos() {
     	.then(res => res.text())
     	.then(data => {
         	console.log(data);
+			);
     	})
     	.catch(err => console.error("Error al actualizar puntos:", err));
 }
-
