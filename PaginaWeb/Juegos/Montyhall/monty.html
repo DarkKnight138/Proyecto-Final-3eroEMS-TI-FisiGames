@@ -1,3 +1,13 @@
+<?php
+session_start();
+
+// Si no está logueado, redirige a login
+if (!isset($_SESSION['usuario_id'])) {
+    header("Location: ../../backend/login.php");
+    exit;
+}
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -5,11 +15,9 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Monty Hall - FisiGames</title>
 
-  <!-- Font Awesome (para los iconos del navbar) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"/>
 
   <style>
-    /* ---- RESET + TIPOGRAFÍA ---- */
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Orbitron', sans-serif; }
     body {
       background: linear-gradient(135deg,#0f0c29,#302b63,#24243e);
@@ -18,7 +26,6 @@
       text-align: center;
     }
 
-    /* ---- NAVBAR (igual que los anteriores) ---- */
     nav#navbar {
       background-color: #1a1a2e;
       color: #eee;
@@ -49,7 +56,6 @@
       }
     }
 
-    /* ---- CONTENEDOR PRINCIPAL (bajo navbar) ---- */
     main { padding: 100px 1rem 40px; max-width:1100px; margin:0 auto; }
 
     h2.title {
@@ -59,7 +65,6 @@
       text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
     }
 
-    /* ---- GRID DE PUERTAS ---- */
     .doors {
       display:grid;
       grid-template-columns: repeat(3, 1fr);
@@ -92,7 +97,6 @@
     .door.goat { background:#2b2622; color:#ffddcc; }
     .door.prize { background:#0f5236; color:#fff1c7; box-shadow:0 0 18px #00ffe7; }
 
-    /* ---- ACCIONES y MENSAJES ---- */
     .controls { margin-top:1.4rem; display:flex; gap:1rem; justify-content:center; align-items:center; flex-wrap:wrap; }
     .btn {
       background:transparent; color:#00ffe7; border:2px solid #00ffe7; padding:10px 18px; border-radius:12px; font-weight:700; cursor:pointer;
@@ -101,11 +105,8 @@
     .btn:hover { background:#00ffe7; color:#1a1a2e; box-shadow:0 0 10px #00ffe7; transform:translateY(-3px); }
     .btn.primary { background:#00ffe7; color:#1a1a2e; }
     .message { margin-top:1rem; font-weight:700; color:#00ffe7; text-shadow:0 0 8px #00ffe7; min-height:1.2em; }
-
-    /* reiniciar siempre visible al final */
     .btn-restart { background:#00ffe7; color:#1a1a2e; padding:10px 18px; border-radius:10px; border:none; font-weight:700; cursor:pointer; }
 
-    /* micro-responsivo */
     @media (max-width:560px) {
       .doors { grid-template-columns: 1fr; max-width:320px; }
       .door { max-width:320px; font-size:3.4rem; }
@@ -113,8 +114,7 @@
   </style>
 </head>
 <body>
-  <!-- NAVBAR unificado -->
-   <nav id="navbar">
+  <nav id="navbar">
     <div class="left-section">
       <div class="logo">FisiGames</div>
       <div class="nav-links left-links">
@@ -127,15 +127,12 @@
       <a href="../../backend/perfil.php"><i class="fa-solid fa-user"></i> Perfil</a>
     </div>
     <div class="menu-toggle" id="menu-toggle" aria-label="Menú de navegación">
-      <div></div>
-      <div></div>
-      <div></div>
+      <div></div><div></div><div></div>
     </div>
   </nav>
 
-
   <main>
-    <h2 class="title">🎲 Monty Hall — Elige una puerta</h2>
+    <h2 class="title">Monty Hall — Elige una puerta</h2>
 
     <div class="doors" id="doors">
       <div class="door" data-index="0" id="door-0" role="button" aria-label="Puerta 1">🚪</div>
@@ -144,17 +141,15 @@
     </div>
 
     <div class="controls" id="controls" aria-live="polite">
-      <!-- botones ocultos hasta la apertura -->
       <button class="btn" id="btn-mantener" style="display:none">Mantener</button>
       <button class="btn" id="btn-cambiar" style="display:none">Cambiar</button>
-      <button class="btn-restart" id="btn-reiniciar" style="display:none">🔄 Reiniciar</button>
+      <button class="btn-restart" id="btn-reiniciar" style="display:none">Reiniciar</button>
     </div>
 
     <div class="message" id="message">Elige una puerta para empezar.</div>
   </main>
 
   <script>
-    // Monty Hall - lógica
     (function(){
       const doors = Array.from(document.querySelectorAll('.door'));
       const message = document.getElementById('message');
@@ -164,13 +159,12 @@
       const menuToggle = document.getElementById('menu-toggle');
       const navbar = document.getElementById('navbar');
 
-      // menú responsive
       menuToggle?.addEventListener('click', ()=> navbar.classList.toggle('expanded'));
 
       let prizeDoor = null;
       let playerChoice = null;
       let openedDoor = null;
-      let stage = 'idle'; // 'idle' -> pick, 'opened' -> choose switch/stay, 'result' -> finished
+      let stage = 'idle';
 
       function initGame(){
         prizeDoor = Math.floor(Math.random()*3);
@@ -178,7 +172,6 @@
         openedDoor = null;
         stage = 'pick';
 
-        // reset UI
         doors.forEach((d,i)=>{
           d.className = 'door';
           d.textContent = '🚪';
@@ -194,23 +187,17 @@
         if(stage !== 'pick') return;
         playerChoice = index;
         doors.forEach((d,i)=> d.classList.toggle('selected', i===playerChoice));
-        // el anfitrión abre una puerta que no es la elegida y no contiene el premio
         abrirPuertaAnfitrion();
       }
 
       function abrirPuertaAnfitrion(){
-        // posibles puertas a abrir: no la elegida y no la del premio
         const candidatos = [0,1,2].filter(i => i !== playerChoice && i !== prizeDoor);
-        // si el jugador eligió la puerta premiada, el anfitrión elige aleatoriamente entre las dos cabras
         openedDoor = candidatos[Math.floor(Math.random()*candidatos.length)];
-
-        // mostrar cabra en la puerta abierta
         const d = doors[openedDoor];
         d.textContent = '🐐';
         d.classList.add('opened','goat');
-        d.onclick = null; // desactivar
+        d.onclick = null;
 
-        // preparar opción de cambiar o mantener
         stage = 'opened';
         message.textContent = 'El anfitrión abrió una puerta. ¿Quieres cambiar tu elección?';
         btnCambiar.style.display = 'inline-block';
@@ -222,12 +209,10 @@
 
       function finalizar(usarCambio){
         if(stage !== 'opened') return;
-        // si cambia, la nueva elección es la puerta que no sea playerChoice y no sea openedDoor
         let finalChoice = playerChoice;
         if(usarCambio){
           finalChoice = [0,1,2].find(i => i !== playerChoice && i !== openedDoor);
         }
-        // revelar todas las puertas
         revealAll(finalChoice);
       }
 
@@ -247,26 +232,30 @@
 
         const win = finalChoice === prizeDoor;
         if(win){
-          message.textContent = '¡Ganaste! 🎉';
+          message.textContent = '¡Ganaste!(+20 puntos)';
+          sumarPuntos(20); 
         } else {
-          message.textContent = 'Perdiste. 😞';
+          message.textContent = 'Perdiste.';
         }
 
-        // resaltar la elección del jugador
-        doors[finalChoice].style.outline = '4px solid rgba(255,255,255,0.08)';
-        // ocultar botones cambiar/mantener y mostrar reinicio
         btnCambiar.style.display = 'none';
         btnMantener.style.display = 'none';
         btnReiniciar.style.display = 'inline-block';
         stage = 'result';
         btnReiniciar.onclick = initGame;
       }
+      function sumarPuntos(puntos){
+        fetch("../../backend/controladores/actualizar_puntos.php", {
+          method: "POST",
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          body: "puntos=" + puntos
+        })
+        .then(res => res.text())
+        .then(data => console.log("Servidor:", data))
+        .catch(err => console.error("Error al enviar puntos:", err));
+      }
 
-      // inicializa todo
       initGame();
-
-      // exponer para consola si necesario (debug)
-      window.__Monty = { initGame };
     })();
   </script>
 </body>
