@@ -21,36 +21,38 @@ $pertenece = ($res && $res->num_rows > 0);
  <title>Grupos - FisiGames</title>
  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
  <style>
-   @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap');
-   * { box-sizing: border-box; margin: 0; padding: 0; }
-   body { font-family: 'Orbitron', sans-serif; background: linear-gradient(135deg,#0f0c29,#302b63,#24243e); color: #eee; min-height: 100vh; padding-top: 70px; }
-   nav { width: 100%; height: 60px; background-color: #1a1a2e; box-shadow: 0 0 15px #00ffe7; display: flex; align-items: center; padding: 0 2rem; position: fixed; top: 0; left: 0; z-index: 1000; gap: 2rem; }
-   .logo { font-size:1.8rem;color:#00ffe7;font-weight:700; }
-   .nav-left{display:flex;gap:1.5rem;flex-grow:1;}
-   .nav-left a, .nav-right a { text-decoration:none;color:#eee;padding:8px 12px;border-radius:6px;display:inline-flex;align-items:center;gap:6px;font-weight:600;}
-   .nav-left a:hover, .nav-right a:hover { background:#00ffe7;color:#1a1a2e; box-shadow:0 0 8px #00ffe7; }
-   .container { padding:2rem; max-width:1000px; margin:80px auto 40px; }
-   .form-box { background:rgba(26,26,46,0.95); padding:1.6rem; border-radius:12px; box-shadow:0 0 20px #00ffe7; margin-bottom:1rem; }
-   input[type="text"], input[type="password"] { width:100%; padding:10px; border-radius:6px; border:none; background:#1a1a2e; color:#eee; box-shadow: inset 0 0 5px #00ffe7; }
-   button { background:transparent;border:2px solid #00ffe7;color:#00ffe7;padding:8px 12px;border-radius:12px;cursor:pointer;}
-   button:hover { background:#00ffe7;color:#1a1a2e; }
-   .grupo { display:flex; justify-content:space-between; align-items:center; gap:12px; background:rgba(20,20,40,0.9); padding:10px; border-radius:8px; margin-bottom:10px; box-shadow:0 0 10px #00ffe7; }
-   .grupo .info { text-align:left; }
-   .small { font-size:0.9rem; color:#ccc; }
- </style>
+  @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap');
+  @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css');
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Orbitron', sans-serif; background: linear-gradient(135deg,#0f0c29,#302b63,#24243e); color: #eee; min-height: 100vh; padding-top: 70px; }
+  nav { width: 100%; height: 60px; background-color: #1a1a2e; box-shadow: 0 0 15px #00ffe7; display: flex; align-items: center; padding: 0 2rem; position: fixed; top: 0; left: 0; z-index: 1000; gap: 2rem; }
+  .logo { font-size:1.8rem;color:#00ffe7;font-weight:700; }
+  .nav-left{display:flex;gap:1.5rem;flex-grow:1;}
+  .nav-left a, .nav-right a { text-decoration:none;color:#eee;padding:8px 12px;border-radius:6px;display:inline-flex;align-items:center;gap:6px;font-weight:600;}
+  .nav-left a:hover, .nav-right a:hover { background:#00ffe7;color:#1a1a2e; box-shadow:0 0 8px #00ffe7; }
+  .container { padding:2rem; max-width:1000px; margin:80px auto 40px; }
+  .form-box { background:rgba(26,26,46,0.95); padding:1.6rem; border-radius:12px; box-shadow:0 0 20px #00ffe7; margin-bottom:1rem; }
+  input[type="text"], input[type="password"] { width:100%; padding:10px; border-radius:6px; border:none; background:#1a1a2e; color:#eee; box-shadow: inset 0 0 5px #00ffe7; }
+  button { background:transparent;border:2px solid #00ffe7;color:#00ffe7;padding:8px 12px;border-radius:12px;cursor:pointer;}
+  button:hover { background:#00ffe7;color:#1a1a2e; }
+  .grupo { display:flex; justify-content:space-between; align-items:center; gap:12px; background:rgba(20,20,40,0.9); padding:10px; border-radius:8px; margin-bottom:10px; box-shadow:0 0 10px #00ffe7; }
+  .grupo .info { text-align:left; }
+  .small { font-size:0.9rem; color:#ccc; }
+</style>
+
 </head>
 <body>
  <nav>
-   <div class="logo">FisiGames</div>
-   <div class="nav-left">
-     <a href="inicio.php"><i class="fas fa-home"></i> Inicio</a>
-     <a href="puntuaciones.php"><i class="fas fa-users"></i> Puntuaciones</a>
-     <a href="grupos.php"><i class="fas fa-users"></i> Grupos</a>
-   </div>
-   <div class="nav-right">
-     <a href="perfil.php"><i class="fas fa-user"></i> Perfil</a>
-   </div>
- </nav>
+  <div class="logo">FisiGames</div>
+  <div class="nav-left">
+    <a href="inicio.php"><i class="fas fa-home"></i> Inicio</a>
+    <a href="puntuaciones.php"><i class="fas fa-trophy"></i> Puntuaciones</a>
+  </div>
+  <div class="nav-right">
+    <a href="perfil.php"><i class="fas fa-user"></i> Perfil</a>
+  </div>
+</nav>
 
  <div class="container">
    <div class="form-box">
