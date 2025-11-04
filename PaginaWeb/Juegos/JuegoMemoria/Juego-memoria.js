@@ -7,10 +7,21 @@ let puedeSeleccionar = false;
 const tablero = document.getElementById("tablero");
 const mensaje = document.getElementById("mensaje");
 
-// Genera un tablero de 4x4 con pares de imágenes (o emojis)
+// 🖼️ Imágenes de los agentes (en carpeta img/)
+const imagenes = [
+  "img/Brim.jpg",
+  "img/Chamber.jpg",
+  "img/Fenix.jpg",
+  "img/gekko.jpg",
+  "img/jett.jpg",
+  "img/Key_0.jpg",
+  "img/omen.jpg",
+  "img/reina.jpg"
+];
+
+// 🔀 Genera y mezcla las cartas
 function generarCartas() {
-  const iconos = ["🍎", "🍌", "🍒", "🍇", "🍉", "🍓", "🍍", "🥝"];
-  cartas = [...iconos, ...iconos].sort(() => 0.5 - Math.random());
+  cartas = [...imagenes, ...imagenes].sort(() => 0.5 - Math.random());
 }
 
 function dibujarTablero() {
@@ -22,7 +33,14 @@ function dibujarTablero() {
       const celda = document.createElement("td");
       celda.dataset.index = index;
       celda.classList.add("carta");
-      celda.addEventListener("click", () => seleccionarCarta(celda));
+
+      // crea la imagen con el reverso
+      const img = document.createElement("img");
+      img.src = "img/reverso.jpg";
+      img.classList.add("img-carta");
+      celda.appendChild(img);
+
+      celda.addEventListener("click", () => seleccionarCarta(celda, img));
       fila.appendChild(celda);
       index++;
     }
@@ -35,7 +53,7 @@ function iniciarJuego() {
   dibujarTablero();
   aciertos = 0;
   intentos = 0;
-  mensaje.textContent = "Encuentra todas las parejas!";
+  mensaje.textContent = "¡Encuentra todas las parejas!";
   puedeSeleccionar = true;
 }
 
@@ -43,14 +61,15 @@ function reiniciarJuego() {
   iniciarJuego();
 }
 
-function seleccionarCarta(celda) {
+function seleccionarCarta(celda, img) {
   if (!puedeSeleccionar) return;
   const index = celda.dataset.index;
 
-  // Evita volver a seleccionar la misma carta
-  if (seleccionadas.includes(celda) || celda.textContent !== "") return;
+  // Evita volver a seleccionar la misma carta o una ya descubierta
+  if (seleccionadas.includes(celda) || img.classList.contains("descubierta")) return;
 
-  celda.textContent = cartas[index];
+  img.src = cartas[index];
+  img.classList.add("descubierta");
   seleccionadas.push(celda);
 
   if (seleccionadas.length === 2) {
@@ -64,42 +83,41 @@ function seleccionarCarta(celda) {
 }
 
 function compararCartas() {
-  const [carta1, carta2] = seleccionadas;
+  const [c1, c2] = seleccionadas;
+  const img1 = c1.querySelector("img");
+  const img2 = c2.querySelector("img");
 
-  if (carta1.textContent === carta2.textContent) {
+  if (img1.src === img2.src) {
     aciertos++;
-    carta1.style.backgroundColor = "#90EE90";
-    carta2.style.backgroundColor = "#90EE90";
+    c1.style.backgroundColor = "#90EE90";
+    c2.style.backgroundColor = "#90EE90";
     if (aciertos === 8) {
       mensaje.textContent = `¡Ganaste en ${intentos} intentos! 🎉`;
       sumarPuntos();
     }
   } else {
-    carta1.textContent = "";
-    carta2.textContent = "";
+    img1.src = "img/reverso.jpg";
+    img2.src = "img/reverso.jpg";
+    img1.classList.remove("descubierta");
+    img2.classList.remove("descubierta");
   }
 
   seleccionadas = [];
 }
 
-// 🟢 SUMAR PUNTOS AL TERMINAR
+// 🟢 SUMAR 30 PUNTOS AL GANAR
 function sumarPuntos() {
-  let puntosGanados = 0;
-
-  if (intentos <= 12) puntosGanados = 100;
-  else if (intentos <= 20) puntosGanados = 70;
-  else if (intentos <= 30) puntosGanados = 40;
-  else puntosGanados = 20;
+  const puntosGanados = 30;
 
   fetch("../../backend/controladores/actualizar_puntos.php", {
     method: "POST",
     headers: { "Content-Type": "application/x-www-form-urlencoded" },
     body: "puntos=" + puntosGanados
   })
-  .then(res => res.text())
-  .then(data => {
-    console.log(data);
-    alert(`¡Ganaste ${puntosGanados} puntos!`);
-  })
-  .catch(err => console.error("Error al actualizar puntos:", err));
+    .then(res => res.text())
+    .then(data => {
+      console.log(data);
+      alert(`¡Ganaste ${puntosGanados} puntos! 🧠`);
+    })
+    .catch(err => console.error("Error al actualizar puntos:", err));
 }

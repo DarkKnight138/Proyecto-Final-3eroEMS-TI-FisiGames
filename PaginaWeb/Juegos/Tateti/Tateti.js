@@ -18,28 +18,61 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function manejarClick(e) {
         const index = e.target.id;
-        if (tablero[index] !== "" || !juegoActivo) return;
+        if (tablero[index] !== "" || !juegoActivo || jugadorActual !== "X") return;
 
-        tablero[index] = jugadorActual;
-        e.target.textContent = jugadorActual;
+        tablero[index] = "X";
+        e.target.textContent = "X";
 
-        if (verificarGanador()) {
+        if (verificarGanador("X")) {
             juegoActivo = false;
             alert("¡Ganaste!");
-            sumarPuntos(); // 💥 ahora llama al backend
-        } else if (!tablero.includes("")) {
+            sumarPuntos();
+            return;
+        }
+
+        if (!tablero.includes("")) {
             juegoActivo = false;
             alert("Empate");
-        } else {
-            jugadorActual = jugadorActual === "X" ? "O" : "X";
+            return;
         }
+
+        // 💻 turno del bot después de un pequeño retraso
+        jugadorActual = "O";
+        setTimeout(turnoBot, 500);
     }
 
-    function verificarGanador() {
-        return combinacionesGanadoras.some(combinacion => {
-            const [a, b, c] = combinacion;
-            return tablero[a] && tablero[a] === tablero[b] && tablero[a] === tablero[c];
-        });
+    function turnoBot() {
+        if (!juegoActivo) return;
+
+        // obtiene los índices vacíos
+        const vacios = tablero.map((v, i) => v === "" ? i : null).filter(v => v !== null);
+
+        if (vacios.length === 0) return;
+
+        // elige una posición aleatoria
+        const randomIndex = vacios[Math.floor(Math.random() * vacios.length)];
+        tablero[randomIndex] = "O";
+        casillas[randomIndex].textContent = "O";
+
+        if (verificarGanador("O")) {
+            juegoActivo = false;
+            alert("Perdiste 😢");
+            return;
+        }
+
+        if (!tablero.includes("")) {
+            juegoActivo = false;
+            alert("Empate");
+            return;
+        }
+
+        jugadorActual = "X";
+    }
+
+    function verificarGanador(jugador) {
+        return combinacionesGanadoras.some(([a, b, c]) =>
+            tablero[a] === jugador && tablero[b] === jugador && tablero[c] === jugador
+        );
     }
 
     function reiniciarJuego() {

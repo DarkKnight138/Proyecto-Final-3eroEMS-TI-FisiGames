@@ -202,23 +202,24 @@ function sumarPuntos(puntos) {
         body: "puntos=" + puntos
     })
     .then(response => response.text())
-    .then(data => console.log("Servidor:", data))
+    .then(data => {
+        console.log("Servidor:", data);
+        alert("¡Ganaste " + puntos + " puntos! 🧠");
+    })
     .catch(error => console.error("Error al enviar puntos:", error));
 }
+
 
 function Ganaste() {
     for (var i = 0; i < 5; i++) {
         for (var j = 0; j < 5; j++) {
-            if (tablero[i][j] === 1024) {
-                alert("¡Muy bien! Llegaste a 1024 (+50 puntos)");
-                sumarPuntos(50);
-                return true;
-            }
+            // 🧩 Si llega a 2048 → 50 puntos
             if (tablero[i][j] === 2048) {
-                alert("¡Felicidades! Has ganado (2048) (+100 puntos)");
-                sumarPuntos(100);
+                alert("¡Felicidades! Llegaste a 2048 (+50 puntos)");
+                sumarPuntos(50);
                 return true;
             }
         }
     }
+    return false;
 }

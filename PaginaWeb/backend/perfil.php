@@ -12,7 +12,7 @@ $msg = "";
 
 // helper seguro: obtener entero
 function gi($v){ return intval($v ?? 0); }
-
+/*
 // --- Cambiar nombre propio ---
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'change_name') {
     $nuevo = trim($_POST['nombre']);
@@ -128,7 +128,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
         } else $msg = "Datos inválidos para cambiar permiso.";
     } else $msg = "Solo superadmin puede cambiar permisos.";
 }
-
+*/
 
 // --- Obtener datos del usuario logueado ---
 $stmt = $conexion->prepare("SELECT nombre, email, puntuacion_total, permiso, habilitado FROM cuentas WHERE id_cuenta = ?");
