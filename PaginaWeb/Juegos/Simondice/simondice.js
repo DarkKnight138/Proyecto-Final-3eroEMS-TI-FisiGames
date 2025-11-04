@@ -123,13 +123,15 @@ function verificar(pos) {
     	setTimeout(nuevoNivel, 1000);
 	}
 }
+
 function perder(texto) {
 	sonidoPierde.play();
-	mostrarMensaje(texto, "#ff4b4b");
+	// Calcular los puntos ganados según el nivel alcanzado
+	let puntosGanados = (secuencia.length - 1) * 5; 
+	mostrarMensaje(texto + " — Ganaste " + puntosGanados + " puntos", "#ff4b4b");
 	puedeJugar = false;
 	clearTimeout(temporizadorInactividad);
 }
-
 
 function reiniciarTemporizador() {
 	clearTimeout(temporizadorInactividad);
@@ -139,6 +141,7 @@ function reiniciarTemporizador() {
     	}
 	}, 10000);
 }
+
 function sumarPuntos() {
 	const puntosGanados = 5; 
 	fetch("../../backend/controladores/actualizar_puntos.php", {
@@ -149,7 +152,6 @@ function sumarPuntos() {
     	.then(res => res.text())
     	.then(data => {
         	console.log(data);
-			);
     	})
     	.catch(err => console.error("Error al actualizar puntos:", err));
 }
