@@ -244,37 +244,37 @@ main h1 {
     <h2>Juegos Disponibles</h2>
     <div class="game-grid">
       <div class="game-card">
-        <a href="../Juegos/2048/2048.html">
+        <a href="../Juegos/2048/2048.php">
           <img src="../imgs/2048.jpg" />
           <h3>2048</h3>
         </a>
       </div>
       <div class="game-card">
-        <a href="../Juegos/JuegoMemoria/Juego-memoria.html">
+        <a href="../Juegos/JuegoMemoria/Juego-memoria.php">
           <img src="../imgs/memoria.png"  />
           <h3>Juego de la memoria</h3>
         </a>
       </div>
       <div class="game-card">
-        <a href="../Juegos/JuegoMosqueta/mosqueta.html">
+        <a href="../Juegos/JuegoMosqueta/mosqueta.php">
           <img src="../imgs/mosqueta.jpg" />
           <h3>Juego de la mosqueta</h3>
         </a>
       </div>
       <div class="game-card">
-        <a href="../Juegos/SimonDice/simondice.html">
+        <a href="../Juegos/SimonDice/simondice.php">
           <img src="../imgs/simon.jpg" />
           <h3>Simon dice</h3>
         </a>
       </div>
       <div class="game-card">
-        <a href="../Juegos/Tateti/tateti.html">
+        <a href="../Juegos/Tateti/tateti.php">
           <img src="../imgs/tateti.jpg" />
           <h3>Tateti</h3>
         </a>
       </div>
       <div class="game-card">
-        <a href="../Juegos/Montyhall/monty.html">
+        <a href="../Juegos/Montyhall/monty.php">
           <img src="../imgs/monty.jpg"  />
           <h3>Monty Hall</h3>
         </a>
