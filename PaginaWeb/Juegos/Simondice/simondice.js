@@ -5,7 +5,6 @@ var puedeJugar = false;
 var temporizadorInactividad; 
 var puntuacion = 0; 
 
-// Sonidos
 var sonidoRojo = new Audio("sonidos/1.mp3");
 var sonidoVerde = new Audio("sonidos/2.mp3");
 var sonidoAzul = new Audio("sonidos/3.mp3");
@@ -14,7 +13,6 @@ var sonidoPierde = new Audio("sonidos/pierde.mp3");
 var sonidoEmpieza = new Audio("sonidos/empieza.mp3");
 var sonidoNivel10 = new Audio("sonidos/empieza.mp3");
 
-// Imágenes
 var imgRojo = "imgs/rojo.webp";
 var imgVerde = "imgs/verde.avif";
 var imgAzul = "imgs/azul.png";
@@ -126,7 +124,6 @@ function verificar(pos) {
 
 function perder(texto) {
 	sonidoPierde.play();
-	// Calcular los puntos ganados según el nivel alcanzado
 	let puntosGanados = (secuencia.length - 1) * 5; 
 	mostrarMensaje(texto + " — Ganaste " + puntosGanados + " puntos", "#ff4b4b");
 	puedeJugar = false;

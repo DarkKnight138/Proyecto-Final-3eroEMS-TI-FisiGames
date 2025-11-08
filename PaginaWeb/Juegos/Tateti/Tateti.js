@@ -15,7 +15,7 @@ function reiniciar() {
         let btn = document.getElementById(index);
         btn.setAttribute("class", "vacio btn");
         btn.disabled = false;
-        btn.innerText = ""; // limpio X y O
+        btn.innerText = ""; 
         btn.setAttribute("onclick", "elijeCasilla(this.id)");
     }
     $casillas = [0, 1, 2, 3, 4, 5, 6, 7, 8];

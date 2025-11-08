@@ -22,7 +22,6 @@
   transform: scale(0.95);
 }
 
-/* Cuadro de mensaje */
 .mensaje-juego {
   margin-top: 20px;
   font-size: 1.3rem;
@@ -31,10 +30,6 @@
   color: #00ffe7;
   transition: color 0.3s ease;
 }
-
-/* ============================= */
-/* Estilos del juego Simon Dice  */
-/* ============================= */
 
 .simon-container {
   display: flex;
@@ -67,7 +62,6 @@
   box-shadow: 0 0 20px rgba(0, 255, 231, 0.15);
 }
 
-/* Botones de color */
 .color-btn {
   width: 180px;
   height: 180px;

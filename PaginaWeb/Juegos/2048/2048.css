@@ -41,7 +41,8 @@
   }
 }
 
-main h1, h1 {
+main h1,
+h1 {
   text-align: center;
   color: #00ffe7;
   font-size: 48px;
@@ -49,7 +50,6 @@ main h1, h1 {
   text-shadow: 0 0 10px #00ffe7;
 }
 
-/* Tabla y celdas */
 table {
   width: 500px;
   height: 500px;
@@ -76,19 +76,61 @@ td.empty {
   background-color: rgba(255, 255, 255, 0.05);
 }
 
-td[data-value="2"]    { background-color: #1e293b; color: #00ffe7; }
-td[data-value="4"]    { background-color: #273449; color: #00ffe7; }
-td[data-value="8"]    { background-color: #00ffe7; color: #1a1a2e; }
-td[data-value="16"]   { background-color: #12d4cb; color: #1a1a2e; }
-td[data-value="32"]   { background-color: #00b8a9; color: #1a1a2e; }
-td[data-value="64"]   { background-color: #009c8e; color: #fff; }
-td[data-value="128"]  { background-color: #00897b; color: #fff; }
-td[data-value="256"]  { background-color: #00796b; color: #fff; }
-td[data-value="512"]  { background-color: #00695c; color: #fff; }
-td[data-value="1024"] { background-color: #00574b; color: #fff; }
-td[data-value="2048"] { background-color: #004d40; color: #fff; }
+td[data-value="2"] {
+  background-color: #1e293b;
+  color: #00ffe7;
+}
 
-/* Botones */
+td[data-value="4"] {
+  background-color: #273449;
+  color: #00ffe7;
+}
+
+td[data-value="8"] {
+  background-color: #00ffe7;
+  color: #1a1a2e;
+}
+
+td[data-value="16"] {
+  background-color: #12d4cb;
+  color: #1a1a2e;
+}
+
+td[data-value="32"] {
+  background-color: #00b8a9;
+  color: #1a1a2e;
+}
+
+td[data-value="64"] {
+  background-color: #009c8e;
+  color: #fff;
+}
+
+td[data-value="128"] {
+  background-color: #00897b;
+  color: #fff;
+}
+
+td[data-value="256"] {
+  background-color: #00796b;
+  color: #fff;
+}
+
+td[data-value="512"] {
+  background-color: #00695c;
+  color: #fff;
+}
+
+td[data-value="1024"] {
+  background-color: #00574b;
+  color: #fff;
+}
+
+td[data-value="2048"] {
+  background-color: #004d40;
+  color: #fff;
+}
+
 #botonReglas,
 #AJugar,
 #reiniciarJuego {
@@ -112,7 +154,6 @@ td[data-value="2048"] { background-color: #004d40; color: #fff; }
   box-shadow: 0 0 15px #00ffe7;
 }
 
-/* Modal */
 .modal {
   display: none;
   position: fixed;

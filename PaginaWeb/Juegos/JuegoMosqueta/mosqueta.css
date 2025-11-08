@@ -54,7 +54,6 @@ input {
     color: #ff4d4d;
 }
 
-/* Animaciones */
 @keyframes blinkGreen {
     0%, 100% { box-shadow: 0 0 15px #00ff88; }
     50% { box-shadow: 0 0 30px #00ff88; }
@@ -73,7 +72,6 @@ input {
     animation: blinkRed 0.6s ease-in-out 3;
 }
 
-/* Botón reinicio */
 #reiniciarBtn {
     background: #00ffe7;
     color: #1a1a2e;

@@ -9,7 +9,7 @@ function jugar(vasoElegido) {
      document.getElementById("mensaje").innerHTML = "<span class='incorrecta'>No tienes suficiente dinero.</span>";
      return;
  }
- // Limpia animaciones previas
+
  for (let i = 1; i <= 3; i++) {
      document.getElementById("vaso" + i).classList.remove("blink-green", "blink-red");
  }

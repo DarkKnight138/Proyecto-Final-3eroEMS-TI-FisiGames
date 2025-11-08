@@ -1,7 +1,5 @@
 <?php
 session_start();
-
-// Si no está logueado, redirige a login
 if (!isset($_SESSION['usuario_id'])) {
     header("Location: ../../backend/login.php");
     exit;
