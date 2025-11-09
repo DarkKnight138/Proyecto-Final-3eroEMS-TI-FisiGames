@@ -40,7 +40,7 @@ if (!isset($_SESSION['usuario_id'])) {
   </nav>
 
   <main>
-      <br> <br>
+      
     <h1>Juego de Memoria</h1>
     <div class="botones-juego">
       <button onclick="iniciarJuego()">Iniciar Juego</button>

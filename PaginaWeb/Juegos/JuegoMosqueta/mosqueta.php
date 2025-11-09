@@ -15,6 +15,7 @@ if (!isset($_SESSION['usuario_id'])) {
   <title>Juego de la Mosqueta - FisiGames</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
   <link rel="stylesheet" href="mosqueta.css">
+  <link rel="stylesheet" href="../style.css">
 </head>
 <body>
   <nav id="navbar">

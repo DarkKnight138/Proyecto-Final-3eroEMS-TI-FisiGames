@@ -12,7 +12,8 @@ if (!isset($_SESSION['usuario_id'])) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tateti - FisiGames</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-  <link rel="stylesheet" href="tateti.css">
+  <link rel="stylesheet" href="Tateti.css">
+  <link rel="stylesheet" href="../style.css">
   <script src="tateti.js" defer></script>
 </head>
 <body>

@@ -1,3 +1,21 @@
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem 0;
+  color: #eee;
+  text-align: center;
+}
+
+h1 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 2.5rem;
+  color: #00ffe7;
+  text-shadow: 0 0 15px #00ffe7;
+  margin-bottom: 20px;
+}
+
 #start-btn {
   background: linear-gradient(135deg, #00ffe7, #00b3b3);
   color: #1a1a2e;
@@ -9,7 +27,7 @@
   cursor: pointer;
   transition: all 0.3s ease;
   box-shadow: 0 0 10px rgba(0, 255, 231, 0.6);
-  margin-top: 90px;
+  margin-top: 30px; 
 }
 
 #start-btn:hover {
@@ -21,76 +39,69 @@
 #start-btn:active {
   transform: scale(0.95);
 }
-.color-btn {
-  width: 200px;
-  height: 200px;
-  object-fit: cover;
-  cursor: pointer;
-  transition: transform 0.1s ease-in-out;
+
+.tablero {
+  display: grid;
+  grid-template-columns: repeat(3, 120px);
+  grid-auto-rows: 120px;
+  gap: 8px;
+  background: #2f2f45;
+  padding: 8px;
+  border-radius: 10px;
+  border: 4px solid #2b2b3a;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.6);
+  margin: 20px auto;
+  width: max-content;
 }
 
-.color-btn:active {
-  transform: scale(0.95);
+.tablero > button {
+  width: 100%;
+  height: 100%;
+  background-color: #1f1f1f;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 3rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color .12s ease, transform .08s ease;
 }
-.tablero {
-    display: grid;
-    grid-template-columns: repeat(3, 120px);
-    grid-auto-rows: 120px;
-    gap: 8px;
-    background: #2f2f45;
-    padding: 8px;
-    border-radius: 10px;
-    border: 4px solid #2b2b3a;
-    box-shadow: 0 6px 18px rgba(0,0,0,0.6);
-    margin: 20px auto;
-    width: max-content;
-  }
-  
-  .tablero > button {
-    width: 100%;
-    height: 100%;
-    background-color: #1f1f1f;
-    color: white;
-    border: none;
-    border-radius: 12px;
-    font-size: 3rem;
-    font-weight: 700;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: background-color .12s ease, transform .08s ease;
-  }
-  
-  .tablero > button:enabled:hover {
-    transform: scale(1.03);
-    background-color: #2b2b2b;
-  }
-  
-  .cruz { 
-    color: #00ffe7;  
-    text-shadow: 0 0 10px #00ffe7;
-  }
-  
-  .circulo { 
-    color: #ff4d4d;  
-    text-shadow: 0 0 10px #ff4d4d;
-  }
-  
-  .btnReinicio {
-    margin-top: 15px;
-    padding: 10px 18px;
-    font-size: 1.1rem;
-    font-weight: 700;
-    cursor: pointer;
-    background: #00ffe7;
-    color: #1a1a2e;
-    border: none;
-    border-radius: 8px;
-    font-family: 'Orbitron', sans-serif;
-    transition: background 0.3s, box-shadow 0.3s;
-  }
-  .btnReinicio:hover {
-    background: #00d4be;
-    box-shadow: 0 0 10px #00ffe7;
-  }
+
+.tablero > button:enabled:hover {
+  transform: scale(1.03);
+  background-color: #2b2b2b;
+}
+
+
+.cruz { 
+  color: #00ffe7;  
+  text-shadow: 0 0 10px #00ffe7;
+}
+
+.circulo { 
+  color: #ff4d4d;  
+  text-shadow: 0 0 10px #ff4d4d;
+}
+
+
+.btnReinicio {
+  margin-top: 15px;
+  padding: 10px 18px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  background: #00ffe7;
+  color: #1a1a2e;
+  border: none;
+  border-radius: 8px;
+  font-family: 'Orbitron', sans-serif;
+  transition: background 0.3s, box-shadow 0.3s;
+}
+
+.btnReinicio:hover {
+  background: #00d4be;
+  box-shadow: 0 0 10px #00ffe7;
+}
