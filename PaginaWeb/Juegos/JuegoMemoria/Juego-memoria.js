@@ -4,7 +4,7 @@ const menuToggle = document.getElementById('menu-toggle');
         menuToggle.addEventListener('click', () => {
             navbar.classList.toggle('expanded');
         });
-        const reversoImg = 'img/reverso.jpg'; /*Asignamos una imagen al reverso*/
+        const reversoImg = 'img/reverso.jpeg'; /*Asignamos una imagen al reverso*/
         const imagenesOriginales = [
             'img/Brim.jpg', 'img/Chamber.jpg', 'img/Fenix.jpg', 'img/gekko.jpg',
             'img/jett.jpg', 'img/Key_0.jpg', 'img/omen.jpg', 'img/reina.jpg'

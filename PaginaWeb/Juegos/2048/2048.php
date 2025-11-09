@@ -1,20 +1,22 @@
 <?php
 session_start();
 if (!isset($_SESSION['usuario_id'])) {
-    header("Location: ../../backend/login.php");
-    exit;
+  header("Location: ../../backend/login.php");
+  exit;
 }
 ?>
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>2048</title>
-  <link rel="stylesheet" href="./2048.css">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="2048.css">
+  <link rel="stylesheet" href="../style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
 </head>
+
 <body>
   <nav id="navbar">
     <div class="left-section">
@@ -37,17 +39,18 @@ if (!isset($_SESSION['usuario_id'])) {
 
   <br>
   <h1>Bienvenido al 2048</h1>
-  <button id="botonReglas" onclick="abrir()">Reglas</button> 
+  <button id="botonReglas" onclick="abrir()">Reglas</button>
   <div id="cajadeReglas" class="modal">
     <div class="modal-contenido">
       <span class="cerrarBoton" onclick="cerrar()">&times;</span>
       <h1>Reglas</h1>
       <p>
-        El objetivo del juego es crear una ficha con el número 2048 combinando fichas del mismo valor. 
-        El tablero es de 5x5 y las fichas se deslizan en cuatro direcciones: arriba, abajo, izquierda o derecha. 
-        Al deslizar las fichas, las que tienen el mismo número se combinan y se suman en una ficha con el valor resultante. 
-        Después de cada movimiento, aparece una nueva ficha con el número 2 o 4 en una casilla vacía aleatoria. 
-        El juego termina cuando el tablero está lleno y no hay más movimientos posibles. 
+        El objetivo del juego es crear una ficha con el número 2048 combinando fichas del mismo valor.
+        El tablero es de 5x5 y las fichas se deslizan en cuatro direcciones: arriba, abajo, izquierda o derecha.
+        Al deslizar las fichas, las que tienen el mismo número se combinan y se suman en una ficha con el valor
+        resultante.
+        Después de cada movimiento, aparece una nueva ficha con el número 2 o 4 en una casilla vacía aleatoria.
+        El juego termina cuando el tablero está lleno y no hay más movimientos posibles.
         Ganas al crear una ficha con el número 2048.
       </p>
     </div>
@@ -57,7 +60,7 @@ if (!isset($_SESSION['usuario_id'])) {
   <button id="reiniciarJuego" onclick="reiniciarJuego()">Reiniciar Juego</button>
 
   <div id="tabla" class="modal">
-    <div class="modal-contenido"> 
+    <div class="modal-contenido">
       <span class="cerrarBoton" onclick="cerrar2()">&times;</span>
       <table>
         <tr>
@@ -99,6 +102,7 @@ if (!isset($_SESSION['usuario_id'])) {
     </div>
   </div>
 
-  <script src="./2048.js"></script>
+  <script src="2048.js"></script>
 </body>
+
 </html>

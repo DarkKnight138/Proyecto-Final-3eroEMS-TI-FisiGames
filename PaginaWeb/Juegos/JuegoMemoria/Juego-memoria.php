@@ -16,7 +16,7 @@ if (!isset($_SESSION['usuario_id'])) {
 
  
   <link rel="stylesheet" href="Juego-memoria.css">
-     <link rel="stylesheet" href="style.css">
+     <link rel="stylesheet" href="../style.css">
 </head>
 <body>
 
