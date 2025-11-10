@@ -30,7 +30,7 @@ do
    done
            groupadd $grupocreado
            echo "Grupo $grupocreado creado correctamente." 
-           echo "$(date) Se creo el grupo $grupoCreado" >> /var/log/user&grupos.log ;;
+           echo "$(date +"%d/%m/%y %H:%M:%S") Se creo el grupo $grupoCreado" >> /var/log/user&grupos.log ;;
         2) echo "Grupos disponibles:"
            cut -d ":" -f1 /etc/group ;;
         3) echo "Ingrese nombre del grupo a listar usuarios:"
@@ -52,7 +52,7 @@ do
    done
            groupdel "$grupoborrado"
            echo "Grupo $grupoborrado eliminado correctamente." 
-           echo "$(date) Se elimino el grupo $grupoborrado" >> /var/log/user&grupos.log ;;
+           echo "$(date +"%d/%m/%y %H:%M:%S") Se elimino el grupo $grupoborrado" >> /var/log/user&grupos.log ;;
         0) echo "menucentral.sh" ;;
         *) echo "La opción $opcion no es correcta." ;;
     esac
