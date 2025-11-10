@@ -7,8 +7,8 @@ mkdir -p "$DESTINO"
 tar -czf "$DESTINO/$NOMBRE" "$ORIGEN"
 if [ $? -eq 0 ]; then
     echo "✅ Respaldo creado: $DESTINO/$NOMBRE"
-    echo "$(date) Se realizo respaldo manual del /home" >> /var/log/respaldos.log
+    echo "$(date +"%d/%m/%y %H:%M:%S") Se realizo respaldo manual del /home" >> /var/log/respaldos.log
 else
     echo "❌ Error al crear el respaldo"
-    echo "$(date) Error al crear respaldo manual del /home" >> /var/log/respaldos.log
+    echo "$(date +"%d/%m/%y %H:%M:%S") Error al crear respaldo manual del /home" >> /var/log/respaldos.log
 fi
