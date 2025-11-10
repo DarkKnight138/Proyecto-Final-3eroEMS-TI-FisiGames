@@ -7,25 +7,18 @@ if (!isset($_SESSION['usuario_id'])) {
     exit;
 }
 ?>
-
-
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tateti - FisiGames</title>
-
-  <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-
-  <!-- Estilos -->
-  <link rel="stylesheet" href="tateti.css">
+  <link rel="stylesheet" href="Tateti.css">
+  <link rel="stylesheet" href="../style.css">
   <script src="tateti.js" defer></script>
 </head>
 <body>
-  <!-- Navbar -->
   <nav id="navbar">
     <div class="left-section">
       <div class="logo" onclick="window.location.href='../../backend/inicio.php'">FisiGames</div>
@@ -44,8 +37,6 @@ if (!isset($_SESSION['usuario_id'])) {
       <div></div>
     </div>
   </nav>
-
-  <!-- Contenido -->
   <main>
     <h1>Tateti</h1>
     <div class="tablero">
@@ -61,8 +52,6 @@ if (!isset($_SESSION['usuario_id'])) {
     </div>
     <button id="reiniciar" class="btnReinicio">Reiniciar</button>
   </main>
-
-  <!-- Script para menú responsive -->
   <script>
     const menuToggle = document.getElementById('menu-toggle');
     const navbar = document.getElementById('navbar');

@@ -1,6 +1,7 @@
 var dinero = 1000;
 
 function jugar(vasoElegido) {
+<<<<<<< HEAD
     var apuesta = parseInt(document.getElementById("apuesta").value);
     if (isNaN(apuesta) || apuesta <= 0) {
         document.getElementById("mensaje").innerHTML = "<span class='incorrecta'>Ingresa una apuesta válida.</span>";
@@ -32,6 +33,32 @@ function jugar(vasoElegido) {
     }
 
     document.getElementById("dineroTxt").innerHTML = "Tienes $" + dinero;
+=======
+ var apuesta = parseInt(document.getElementById("apuesta").value);
+ if (isNaN(apuesta) || apuesta <= 0) {
+     document.getElementById("mensaje").innerHTML = "<span class='incorrecta'>Ingresa una apuesta válida.</span>";
+     return;
+ }
+ if (apuesta > dinero) {
+     document.getElementById("mensaje").innerHTML = "<span class='incorrecta'>No tienes suficiente dinero.</span>";
+     return;
+ }
+
+ for (let i = 1; i <= 3; i++) {
+     document.getElementById("vaso" + i).classList.remove("blink-green", "blink-red");
+ }
+ var vasoConPelota = Math.floor(Math.random() * 3) + 1;
+ if (vasoElegido === vasoConPelota) {
+     dinero += apuesta;
+     document.getElementById("mensaje").innerHTML = "<span class='correcta'>¡Ganaste! La pelotita estaba en el vaso " + vasoConPelota + ".</span>";
+     document.getElementById("vaso" + vasoConPelota).classList.add("blink-green");
+ } else {
+     dinero -= apuesta;
+     document.getElementById("mensaje").innerHTML = "<span class='incorrecta'>Perdiste. La pelotita estaba en el vaso " + vasoConPelota + ".</span>";
+     document.getElementById("vaso" + vasoConPelota).classList.add("blink-red");
+ }
+ document.getElementById("dineroTxt").innerHTML = "Tienes $" + dinero;
+>>>>>>> c237913e521d2a345deb2864ee4297ab73782591
 }
 
 function reiniciarJuego() {

@@ -2,6 +2,7 @@
 session_start();
 
 // Si no está logueado, redirige a login
+
 if (!isset($_SESSION['usuario_id'])) {
     header("Location: ../../backend/login.php");
     exit;
@@ -15,15 +16,11 @@ if (!isset($_SESSION['usuario_id'])) {
 <head>
   <meta charset="UTF-8">
   <title>Juego de la Mosqueta - FisiGames</title>
-
-  <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-
-  <!-- Estilos -->
   <link rel="stylesheet" href="mosqueta.css">
+  <link rel="stylesheet" href="../style.css">
 </head>
 <body>
-  <!-- Navbar igual al de inicio.php -->
   <nav id="navbar">
     <div class="left-section">
       <div class="logo">FisiGames</div>
@@ -42,8 +39,6 @@ if (!isset($_SESSION['usuario_id'])) {
       <div></div>
     </div>
   </nav>
-
-  <!-- Contenido del juego -->
   <main>
     <h1>Juego de la Mosqueta</h1>
     <p id="dineroTxt">Tienes $1000</p>
@@ -58,11 +53,8 @@ if (!isset($_SESSION['usuario_id'])) {
     <p id="mensaje"></p>
     <button id="reiniciarBtn" onclick="reiniciarJuego()">Reiniciar Juego</button>
   </main>
-
-  <!-- Scripts -->
   <script src="mosqueta.js"></script>
   <script>
-    // Script para el menú responsive
     const menuToggle = document.getElementById('menu-toggle');
     const navbar = document.getElementById('navbar');
     menuToggle.addEventListener('click', () => {

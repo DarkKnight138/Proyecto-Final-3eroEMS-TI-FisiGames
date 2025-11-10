@@ -39,9 +39,7 @@ if (!isset($_SESSION['usuario_id'])) {
     </div>
 
     <div class="menu-toggle" id="menu-toggle" aria-label="Menú de navegación">
-      <div></div>
-      <div></div>
-      <div></div>
+
     </div>
   </nav>
 
@@ -63,10 +61,19 @@ if (!isset($_SESSION['usuario_id'])) {
           <img id="amarillo" src="imgs/amarillo.jpg" class="color-btn">
         </div>
       </div>
+
+  <main class="simon-container">
+    <button id="start-btn">Empezar</button>
+    <div id="mensaje" class="mensaje-juego">Haz clic en "Empezar" para jugar</div>
+
+    <div class="simon-board mt-4">
+      <img id="rojo" src="imgs/rojo.webp" class="color-btn">
+      <img id="verde" src="imgs/verde.avif" class="color-btn">
+      <img id="azul" src="imgs/azul.png" class="color-btn">
+      <img id="amarillo" src="imgs/amarillo.jpg" class="color-btn">
     </div>
   </main>
 
-  <!-- Scripts -->
   <script src="simondice.js"></script>
   <script>
     const menuToggle = document.getElementById('menu-toggle');

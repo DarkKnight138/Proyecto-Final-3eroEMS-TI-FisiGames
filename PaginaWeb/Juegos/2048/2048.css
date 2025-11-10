@@ -1,75 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap');
-
-* {
-  box-sizing: border-box;
-}
-
-body {
-  margin: 0;
-  font-family: 'Orbitron', sans-serif;
-  background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
-  color: #eee;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
-
-/* Navbar */
-nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #1a1a2e;
-  padding: 0 2rem;
-  height: 60px;
-  box-shadow: 0 0 15px #00ffe7;
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-}
-
-.left-section {
-  display: flex;
-  align-items: center;
-  gap: 2rem;
-}
-
-.logo {
-  font-size: 1.8rem;
-  font-weight: 700;
-  color: #00ffe7;
-  letter-spacing: 2px;
-  user-select: none;
-  cursor: default;
-  white-space: nowrap;
-}
-
-.nav-links {
-  display: flex;
-  gap: 2rem;
-  align-items: center;
-}
-
-.nav-links a {
-  text-decoration: none;
-  color: #eee;
-  font-weight: 600;
-  font-size: 1rem;
-  padding: 8px 12px;
-  border-radius: 6px;
-  transition: background-color 0.3s ease, color 0.3s ease;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.nav-links a:hover,
-.nav-links a.active {
-  background-color: #00ffe7;
-  color: #1a1a2e;
-  box-shadow: 0 0 8px #00ffe7;
-}
-
 .menu-toggle {
   display: none;
   flex-direction: column;
@@ -113,7 +41,8 @@ nav {
   }
 }
 
-main h1, h1 {
+main h1,
+h1 {
   text-align: center;
   color: #00ffe7;
   font-size: 48px;
@@ -121,7 +50,6 @@ main h1, h1 {
   text-shadow: 0 0 10px #00ffe7;
 }
 
-/* Tabla y celdas */
 table {
   width: 500px;
   height: 500px;
@@ -148,19 +76,61 @@ td.empty {
   background-color: rgba(255, 255, 255, 0.05);
 }
 
-td[data-value="2"]    { background-color: #1e293b; color: #00ffe7; }
-td[data-value="4"]    { background-color: #273449; color: #00ffe7; }
-td[data-value="8"]    { background-color: #00ffe7; color: #1a1a2e; }
-td[data-value="16"]   { background-color: #12d4cb; color: #1a1a2e; }
-td[data-value="32"]   { background-color: #00b8a9; color: #1a1a2e; }
-td[data-value="64"]   { background-color: #009c8e; color: #fff; }
-td[data-value="128"]  { background-color: #00897b; color: #fff; }
-td[data-value="256"]  { background-color: #00796b; color: #fff; }
-td[data-value="512"]  { background-color: #00695c; color: #fff; }
-td[data-value="1024"] { background-color: #00574b; color: #fff; }
-td[data-value="2048"] { background-color: #004d40; color: #fff; }
+td[data-value="2"] {
+  background-color: #1e293b;
+  color: #00ffe7;
+}
 
-/* Botones */
+td[data-value="4"] {
+  background-color: #273449;
+  color: #00ffe7;
+}
+
+td[data-value="8"] {
+  background-color: #00ffe7;
+  color: #1a1a2e;
+}
+
+td[data-value="16"] {
+  background-color: #12d4cb;
+  color: #1a1a2e;
+}
+
+td[data-value="32"] {
+  background-color: #00b8a9;
+  color: #1a1a2e;
+}
+
+td[data-value="64"] {
+  background-color: #009c8e;
+  color: #fff;
+}
+
+td[data-value="128"] {
+  background-color: #00897b;
+  color: #fff;
+}
+
+td[data-value="256"] {
+  background-color: #00796b;
+  color: #fff;
+}
+
+td[data-value="512"] {
+  background-color: #00695c;
+  color: #fff;
+}
+
+td[data-value="1024"] {
+  background-color: #00574b;
+  color: #fff;
+}
+
+td[data-value="2048"] {
+  background-color: #004d40;
+  color: #fff;
+}
+
 #botonReglas,
 #AJugar,
 #reiniciarJuego {
@@ -184,7 +154,6 @@ td[data-value="2048"] { background-color: #004d40; color: #fff; }
   box-shadow: 0 0 15px #00ffe7;
 }
 
-/* Modal */
 .modal {
   display: none;
   position: fixed;

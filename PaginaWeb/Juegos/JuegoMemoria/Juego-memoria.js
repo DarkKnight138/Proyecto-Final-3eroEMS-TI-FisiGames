@@ -46,7 +46,33 @@ function iniciarJuego() {
             img.src = reversoImg;
             celda.appendChild(img);
             fila.appendChild(celda);
-        }
+
+puntuacion = 0;
+const menuToggle = document.getElementById('menu-toggle');
+        const navbar = document.getElementById('navbar');
+        menuToggle.addEventListener('click', () => {
+            navbar.classList.toggle('expanded');
+        });
+        const reversoImg = 'img/reverso.jpeg'; /*Asignamos una imagen al reverso*/
+        const imagenesOriginales = [
+            'img/Brim.jpg', 'img/Chamber.jpg', 'img/Fenix.jpg', 'img/gekko.jpg',
+            'img/jett.jpg', 'img/Key_0.jpg', 'img/omen.jpg', 'img/reina.jpg'
+        ]; /*Cargamos las imágenes que se van a mostrar(Las parejas)*/
+        let imagenes, cartasVolteadas, idCartasVolteadas, cartasEmparejadas, intentos, bloquearClicks;/*Creacion de variables*/
+        function mezclar(array) {
+            /*Esta función mezcla un array cualquiera que recibe */
+            let copia = [...array];
+            /*Crea un array llamado copia que va a ser igual al array que reciba y lo mezcla */
+            for (let i = copia.length - 1; i > 0; i--) {
+                /*Hace que la variable i sea igual a la posición del último objeto del array y mientras i sea mayor que 0 se va a repetir y por eso se va restando, usamos menos y no más para que nos quede más fácil mezclar cada elemento del array aleatoriamente */
+                const j = Math.floor(Math.random() * (i + 1));
+                /*Crea una variable j que va a ser igual a un número aleatorio entre 0 y el valor máximo del array*/
+                [copia[i], copia[j]] = [copia[j], copia[i]];
+                /*Esto hace que el array original cambie la última posición que es “i“ por la posición “j” que es la que sale aleatoriamente.*/
+            }
+            return copia;
+            /* Devuelve el array mezclado*/
+ }
         tablero.appendChild(fila);
     }
 }

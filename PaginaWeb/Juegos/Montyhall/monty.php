@@ -112,6 +112,7 @@ if (!isset($_SESSION['usuario_id'])) {
       .door { max-width:320px; font-size:3.4rem; }
     }
   </style>
+  <link rel="stylesheet" href="monty.css" />
 </head>
 <body>
   <nav id="navbar">
@@ -133,6 +134,7 @@ if (!isset($_SESSION['usuario_id'])) {
 
   <main>
     <h2 class="title">🎲 Monty Hall — Elige una puerta</h2>
+    <h2 class="title">Monty Hall</h2>
 
     <div class="doors" id="doors">
       <div class="door" data-index="0" id="door-0" role="button" aria-label="Puerta 1">🚪</div>
@@ -144,6 +146,7 @@ if (!isset($_SESSION['usuario_id'])) {
       <button class="btn" id="btn-mantener" style="display:none">Mantener</button>
       <button class="btn" id="btn-cambiar" style="display:none">Cambiar</button>
       <button class="btn-restart" id="btn-reiniciar" style="display:none">🔄 Reiniciar</button>
+      <button class="btn-restart" id="btn-reiniciar" style="display:none">Reiniciar</button>
     </div>
 
     <div class="message" id="message">Elige una puerta para empezar.</div>
@@ -245,7 +248,7 @@ if (!isset($_SESSION['usuario_id'])) {
         btnReiniciar.onclick = initGame;
       }
 
-      // 🔥 función para sumar puntos
+      // función para sumar puntos
       function sumarPuntos(puntos){
         fetch("../../backend/controladores/actualizar_puntos.php", {
           method: "POST",
@@ -260,5 +263,6 @@ if (!isset($_SESSION['usuario_id'])) {
       initGame();
     })();
   </script>
+  <script src="monty.js"></script>
 </body>
 </html>

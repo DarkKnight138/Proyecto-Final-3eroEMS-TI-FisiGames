@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  php:
+    build: ./Apache
+    container_name: pagina_web
+    ports:
+      - "8080:80"
+    depends_on:
+      - bd 
+    volumes:
+      - pagina_web:/var/www/html
+    networks:
+      - red_contenedores
+
+
+  bd:
+    build: ./Mysql
+    container_name: bd
+    ports:
+      - "6033:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: 123
+      MYSQL_DATABASE: fisigames
+    volumes:
+      - base_de_datos:/var/lib/mysql
+    networks:
+      - red_contenedores
+
+volumes:
+  pagina_web:
+  base_de_datos:
+
+
+networks:
+  red_contenedores:

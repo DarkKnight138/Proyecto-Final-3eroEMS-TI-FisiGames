@@ -2,12 +2,12 @@
 session_start();
 
 // Si no está logueado, redirige a login
+
 if (!isset($_SESSION['usuario_id'])) {
     header("Location: ../../backend/login.php");
     exit;
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -15,11 +15,11 @@ if (!isset($_SESSION['usuario_id'])) {
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Juego de Memoria - FisiGames</title>
 
-  <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
 
-  <!-- Estilos -->
+ 
   <link rel="stylesheet" href="Juego-memoria.css">
+     <link rel="stylesheet" href="../style.css">
 </head>
 <body>
   <!-- Navbar -->
@@ -44,7 +44,10 @@ if (!isset($_SESSION['usuario_id'])) {
 
   <!-- Contenido del juego -->
   <main class="text-center">
-    <h1>Juego de Memoria</h1>
+  <main>
+      
+
+  <h1>Juego de Memoria</h1>
     <div class="botones-juego">
       <button onclick="iniciarJuego()">Iniciar Juego</button>
       <button onclick="reiniciarJuego()">Reiniciar Juego</button>
@@ -53,7 +56,6 @@ if (!isset($_SESSION['usuario_id'])) {
     <div id="mensaje" class="mt-3"></div>
   </main>
 
-  <!-- Scripts -->
   <script src="Juego-memoria.js"></script>
   <script>
     // Menú responsive
