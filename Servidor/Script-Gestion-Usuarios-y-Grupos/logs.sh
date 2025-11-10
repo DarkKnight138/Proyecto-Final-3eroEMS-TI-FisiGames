@@ -27,11 +27,11 @@ do
             echo "Ingrese fecha (dd/mm/aa):"
             read fecha
             case $opcion2 in
-                1) 
+                1) grep "$fecha" /var/log/user&grupos.log
                 ;;
-                2)
+                2) grep "$fecha" /var/log/respaldos.log
                 ;;
-                3)
+                3) grep "$fecha" /var/log/firewall.log
                 ;;
             
         *)echo "La opción $opcion no es correcta." ;;
