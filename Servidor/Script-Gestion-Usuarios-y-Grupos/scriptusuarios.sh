@@ -86,8 +86,8 @@ case $usu in
    fi
    echo "$usuarioCreado:$usuarioCreado" | chpasswd
    chage -d 7 "$usuarioCreado"
-   echo "Usuario $usuarioCreado creado correctamente, recuerde cambiar su contraseña por defecto antes de que pasen 7 días." ;;
-
+   echo "Usuario $usuarioCreado creado correctamente, recuerde cambiar su contraseña por defecto antes de que pasen 7 días." 
+   echo "$(date) Se creo el usuario $usuarioCreado" >> /var/log/user&grupos.log ;;
 2) 
    ExisteUsuarioBorrado=false
    while [ "$ExisteUsuarioBorrado"=="false" ]; do 
@@ -103,7 +103,8 @@ case $usu in
        fi
    done
    userdel -r "$usuarioBorrado"
-   echo "Usuario $usuarioBorrado eliminado correctamente." ;;
+   echo "Usuario $usuarioBorrado eliminado correctamente." 
+   echo "$(date) Se elimino el usuario $usuarioBorrado" >> /var/log/user&grupos.log ;;
 3) sh modifyusu.sh ;;
 4) cut -d ":" -f1 /etc/passwd ;;
 5) sh menucentral.sh ;;
