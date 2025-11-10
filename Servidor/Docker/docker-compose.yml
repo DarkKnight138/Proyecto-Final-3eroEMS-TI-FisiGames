@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   php:
     build: ./Apache
@@ -9,13 +7,13 @@ services:
     depends_on:
       - bd 
     volumes:
-      - pagina_web:/var/www/html
+      - /home/frodriguez/App/Apache:/var/www/html
     networks:
       - red_contenedores
-
+    restart: always
 
   bd:
-    build: ./Mysql
+    build: ./MySQL
     container_name: bd
     ports:
       - "6033:3306"
@@ -26,9 +24,8 @@ services:
       - base_de_datos:/var/lib/mysql
     networks:
       - red_contenedores
-
+    restart: always
 volumes:
-  pagina_web:
   base_de_datos:
 
 
