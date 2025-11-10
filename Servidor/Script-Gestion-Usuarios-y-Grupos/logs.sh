@@ -23,7 +23,16 @@ do
             echo "* 2) Mostrar logs de Respaldos                                *"
             echo "* 3) Mostrar logs del Firewall                                *"
             echo "***************************************************************"
-        read opcion2
+            read opcion2
+            echo "Ingrese fecha (dd/mm/aa):"
+            read fecha
+            case $opcion2 in
+                1) 
+                ;;
+                2)
+                ;;
+                3)
+                ;;
             
         *)echo "La opción $opcion no es correcta." ;;
     esac
