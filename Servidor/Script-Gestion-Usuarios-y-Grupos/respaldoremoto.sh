@@ -7,4 +7,4 @@ echo "Ingrese ip del equipo:"
 read ip
 echo "Ingrese credenciales del usuario:"
 read usuario
-scp $usuario@$$ip $dir 
+scp $usuario@$$ip $dir /var/backups
