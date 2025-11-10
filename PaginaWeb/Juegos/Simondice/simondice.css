@@ -9,7 +9,7 @@
   cursor: pointer;
   transition: all 0.3s ease;
   box-shadow: 0 0 10px rgba(0, 255, 231, 0.6);
-  margin-top: 90px;
+  margin-top: 30px; /* reducido para pegarlo más al navbar */
 }
 
 #start-btn:hover {
@@ -22,7 +22,6 @@
   transform: scale(0.95);
 }
 
-/* Cuadro de mensaje */
 .mensaje-juego {
   margin-top: 20px;
   font-size: 1.3rem;
@@ -32,16 +31,12 @@
   transition: color 0.3s ease;
 }
 
-/* ============================= */
-/* Estilos del juego Simon Dice  */
-/* ============================= */
-
 .simon-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 2rem;
+  padding: 0.5rem 2rem 1.5rem; /* menos espacio arriba */
   color: #eee;
   text-align: center;
 }
@@ -67,7 +62,6 @@
   box-shadow: 0 0 20px rgba(0, 255, 231, 0.15);
 }
 
-/* Botones de color */
 .color-btn {
   width: 180px;
   height: 180px;
@@ -92,6 +86,7 @@
     grid-template-rows: repeat(2, 130px);
     gap: 15px;
   }
+
   .color-btn {
     width: 130px;
     height: 130px;

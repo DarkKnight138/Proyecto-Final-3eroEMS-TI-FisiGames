@@ -213,10 +213,10 @@ function sumarPuntos(puntos) {
 function Ganaste() {
     for (var i = 0; i < 5; i++) {
         for (var j = 0; j < 5; j++) {
-            // 🧩 Si llega a 2048 → 50 puntos
+            // 🧩 Si llega a 2048 → 80 puntos
             if (tablero[i][j] === 2048) {
-                alert("¡Felicidades! Llegaste a 2048 (+50 puntos)");
-                sumarPuntos(50);
+                alert("¡Felicidades! Llegaste a 2048 (+80 puntos)");
+                sumarPuntos(80);
                 return true;
             }
         }

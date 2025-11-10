@@ -21,9 +21,9 @@ function jugar(vasoElegido) {
     if (vasoElegido === vasoConPelota) {
         dinero += apuesta;
         document.getElementById("mensaje").innerHTML =
-            "<span class='correcta'>¡Ganaste! La pelotita estaba en el vaso " + vasoConPelota + ". (+30 puntos 🎉)</span>";
+            "<span class='correcta'>¡Ganaste! La pelotita estaba en el vaso " + vasoConPelota + ". (+10 puntos 🎉)</span>";
         document.getElementById("vaso" + vasoConPelota).classList.add("blink-green");
-        sumarPuntos(20); // ✅ SUMA 30 PUNTOS AL GANAR
+        sumarPuntos(10); // ✅ SUMA 30 PUNTOS AL GANAR
     } else {
         dinero -= apuesta;
         document.getElementById("mensaje").innerHTML =

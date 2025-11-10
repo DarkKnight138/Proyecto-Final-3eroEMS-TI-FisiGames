@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-// Si no está logueado, redirige a login
+// ✅ Redirección si no está logueado
 if (!isset($_SESSION['usuario_id'])) {
     header("Location: ../../backend/login.php");
     exit;
@@ -14,9 +14,7 @@ if (!isset($_SESSION['usuario_id'])) {
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Monty Hall - FisiGames</title>
-
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"/>
-
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Orbitron', sans-serif; }
     body {
@@ -150,115 +148,122 @@ if (!isset($_SESSION['usuario_id'])) {
   </main>
 
   <script>
-    (function(){
-      const doors = Array.from(document.querySelectorAll('.door'));
-      const message = document.getElementById('message');
-      const btnCambiar = document.getElementById('btn-cambiar');
-      const btnMantener = document.getElementById('btn-mantener');
-      const btnReiniciar = document.getElementById('btn-reiniciar');
-      const menuToggle = document.getElementById('menu-toggle');
-      const navbar = document.getElementById('navbar');
+(function() {
+  const doors = Array.from(document.querySelectorAll('.door'));
+  const message = document.getElementById('message');
+  const btnCambiar = document.getElementById('btn-cambiar');
+  const btnMantener = document.getElementById('btn-mantener');
+  const btnReiniciar = document.getElementById('btn-reiniciar');
+  const menuToggle = document.getElementById('menu-toggle');
+  const navbar = document.getElementById('navbar');
 
-      menuToggle?.addEventListener('click', ()=> navbar.classList.toggle('expanded'));
+  menuToggle?.addEventListener('click', ()=> navbar.classList.toggle('expanded'));
 
-      let prizeDoor = null;
-      let playerChoice = null;
-      let openedDoor = null;
-      let stage = 'idle';
+  let prizeDoor = null;
+  let playerChoice = null;
+  let openedDoor = null;
+  let stage = 'idle';
 
-      function initGame(){
-        prizeDoor = Math.floor(Math.random()*3);
-        playerChoice = null;
-        openedDoor = null;
-        stage = 'pick';
+  function initGame(){
+    prizeDoor = Math.floor(Math.random()*3);
+    playerChoice = null;
+    openedDoor = null;
+    stage = 'pick';
 
-        doors.forEach((d,i)=>{
-          d.className = 'door';
-          d.textContent = '🚪';
-          d.onclick = () => elegirPuerta(i);
-        });
-        btnCambiar.style.display = 'none';
-        btnMantener.style.display = 'none';
-        btnReiniciar.style.display = 'none';
-        message.textContent = 'Elige una puerta para empezar.';
-      }
+    doors.forEach((d,i)=>{
+      d.className = 'door';
+      d.textContent = '🚪';
+      d.onclick = () => elegirPuerta(i);
+    });
+    btnCambiar.style.display = 'none';
+    btnMantener.style.display = 'none';
+    btnReiniciar.style.display = 'none';
+    message.textContent = 'Elige una puerta para empezar.';
+  }
 
-      function elegirPuerta(index){
-        if(stage !== 'pick') return;
-        playerChoice = index;
-        doors.forEach((d,i)=> d.classList.toggle('selected', i===playerChoice));
-        abrirPuertaAnfitrion();
-      }
+  function elegirPuerta(index){
+    if(stage !== 'pick') return;
+    playerChoice = index;
+    doors.forEach((d,i)=> d.classList.toggle('selected', i===playerChoice));
+    abrirPuertaAnfitrion();
+  }
 
-      function abrirPuertaAnfitrion(){
-        const candidatos = [0,1,2].filter(i => i !== playerChoice && i !== prizeDoor);
-        openedDoor = candidatos[Math.floor(Math.random()*candidatos.length)];
-        const d = doors[openedDoor];
+  function abrirPuertaAnfitrion(){
+    const candidatos = [0,1,2].filter(i => i !== playerChoice && i !== prizeDoor);
+    openedDoor = candidatos[Math.floor(Math.random()*candidatos.length)];
+    const d = doors[openedDoor];
+    d.textContent = '🐐';
+    d.classList.add('opened','goat');
+    d.onclick = null;
+
+    stage = 'opened';
+    message.textContent = 'El anfitrión abrió una puerta. ¿Quieres cambiar tu elección?';
+    btnCambiar.style.display = 'inline-block';
+    btnMantener.style.display = 'inline-block';
+
+    btnCambiar.onclick = () => finalizar(true);
+    btnMantener.onclick = () => finalizar(false);
+  }
+
+  function finalizar(usarCambio){
+    if(stage !== 'opened') return;
+    let finalChoice = playerChoice;
+    if(usarCambio){
+      finalChoice = [0,1,2].find(i => i !== playerChoice && i !== openedDoor);
+    }
+    revealAll(finalChoice);
+  }
+
+  function revealAll(finalChoice){
+    doors.forEach((d,i)=>{
+      d.classList.remove('selected');
+      d.classList.add('opened');
+      d.onclick = null;
+      if(i === prizeDoor){
+        d.textContent = '🎁';
+        d.classList.add('prize');
+      } else {
         d.textContent = '🐐';
-        d.classList.add('opened','goat');
-        d.onclick = null;
-
-        stage = 'opened';
-        message.textContent = 'El anfitrión abrió una puerta. ¿Quieres cambiar tu elección?';
-        btnCambiar.style.display = 'inline-block';
-        btnMantener.style.display = 'inline-block';
-
-        btnCambiar.onclick = () => finalizar(true);
-        btnMantener.onclick = () => finalizar(false);
+        d.classList.add('goat');
       }
+    });
 
-      function finalizar(usarCambio){
-        if(stage !== 'opened') return;
-        let finalChoice = playerChoice;
-        if(usarCambio){
-          finalChoice = [0,1,2].find(i => i !== playerChoice && i !== openedDoor);
-        }
-        revealAll(finalChoice);
-      }
+    const win = finalChoice === prizeDoor;
+    if(win){
+      message.textContent = '¡Ganaste! 🎉 (+10 puntos)';
+      sumarPuntos(10); // ✅ suma 10 puntos
+    } else {
+      message.textContent = 'Perdiste. 😞';
+    }
 
-      function revealAll(finalChoice){
-        doors.forEach((d,i)=>{
-          d.classList.remove('selected');
-          d.classList.add('opened');
-          d.onclick = null;
-          if(i === prizeDoor){
-            d.textContent = '🎁';
-            d.classList.add('prize');
-          } else {
-            d.textContent = '🐐';
-            d.classList.add('goat');
-          }
-        });
+    btnCambiar.style.display = 'none';
+    btnMantener.style.display = 'none';
+    btnReiniciar.style.display = 'inline-block';
+    stage = 'result';
+    btnReiniciar.onclick = initGame;
+  }
 
-        const win = finalChoice === prizeDoor;
-        if(win){
-          message.textContent = '¡Ganaste! 🎉 (+20 puntos)';
-          sumarPuntos(20); // ✅ suma 20 puntos
-        } else {
-          message.textContent = 'Perdiste. 😞';
-        }
+  // ✅ función para sumar puntos
+  function sumarPuntos(puntos){
+    fetch("../../backend/controladores/actualizar_puntos.php", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: "puntos=" + puntos
+    })
+    .then(res => res.text())
+    .then(data => {
+      console.log("Respuesta del servidor:", data); // Ver respuesta del servidor
+    })
+    .catch(err => {
+      console.error("Error al enviar puntos:", err); 
+    });
+  }
 
-        btnCambiar.style.display = 'none';
-        btnMantener.style.display = 'none';
-        btnReiniciar.style.display = 'inline-block';
-        stage = 'result';
-        btnReiniciar.onclick = initGame;
-      }
+  // 🚀 Iniciar el juego al cargar
+  initGame();
 
-      // 🔥 función para sumar puntos
-      function sumarPuntos(puntos){
-        fetch("../../backend/controladores/actualizar_puntos.php", {
-          method: "POST",
-          headers: { "Content-Type": "application/x-www-form-urlencoded" },
-          body: "puntos=" + puntos
-        })
-        .then(res => res.text())
-        .then(data => console.log("Servidor:", data))
-        .catch(err => console.error("Error al enviar puntos:", err));
-      }
+})();
+</script>
 
-      initGame();
-    })();
-  </script>
 </body>
 </html>
