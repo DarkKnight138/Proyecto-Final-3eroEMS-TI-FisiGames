@@ -8,6 +8,7 @@ do
     echo "* 1) Mostrar logs de Usuarios/Grupos                          *"
     echo "* 2) Mostrar logs de Respaldos                                *"
     echo "* 3) Mostrar logs del Firewall                                *"
+    echo "* 4) Buscar por fecha                                         *"
     echo "* 0) Salir                                                    *"
     echo "***************************************************************"
     read opcion
@@ -16,5 +17,7 @@ do
         1) cat /var/log/user&grupos.log ;;
         2) cat /var/log/respaldos.log;;
         3) cat /var/log/firewall.log ;;
+        4)
+        *)
     esac
 done
