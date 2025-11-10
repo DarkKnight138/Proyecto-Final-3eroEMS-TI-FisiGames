@@ -1,4 +1,4 @@
-# Base de PHP con Apache
+# Imagen base de PHP con Apache
 FROM php:8.4-rc-apache-trixie
 
 # Instalar extensiones necesarias para MySQL
@@ -15,22 +15,34 @@ RUN apt-get update && apt-get install -y \
 # Copiar todo el proyecto al contenedor
 COPY . /var/www/html/
 
-# Ajustar permisos: dueño www-data, grupo www-data
+# Ajustar permisos de archivos y carpetas
 RUN chown -R www-data:www-data /var/www/html \
     && find /var/www/html -type d -exec chmod 755 {} \; \
     && find /var/www/html -type f -exec chmod 644 {} \;
 
-# Configurar login.php como página de inicio
-RUN echo '<Directory /var/www/html>\n\
-    DirectoryIndex login.php\n\
-    Options -Indexes +FollowSymLinks\n\
-    AllowOverride All\n\
-    Require all granted\n\
-</Directory>' > /etc/apache2/conf-available/proyecto.conf \
-    && a2enconf proyecto
+# Evitar el warning de ServerName
+RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
 
-# Habilitar mod_rewrite de Apache si lo necesitás
+# Configurar Apache para redirigir la raíz al login.php dentro de la subcarpeta
+RUN echo '<VirtualHost *:80>\n\
+    ServerName localhost\n\
+    DocumentRoot /var/www/html\n\
+\n\
+    # Redirigir raíz al login.php dentro de /backend/login.php\n\
+    RedirectMatch ^/$ /backend/login.php\n\
+\n\
+    <Directory /var/www/html>\n\
+        Options +Indexes +FollowSymLinks\n\
+        AllowOverride All\n\
+        Require all granted\n\
+    </Directory>\n\
+</VirtualHost>' > /etc/apache2/sites-available/000-default.conf
+
+# Habilitar mod_rewrite (por si lo necesitás para .htaccess)
 RUN a2enmod rewrite
 
-# Exponer puerto 80
+# Exponer el puerto 80
 EXPOSE 80
+
+# Iniciar Apache en primer plano
+CMD ["apache2-foreground"]
