@@ -8,3 +8,4 @@ read ip
 echo "Ingrese credenciales del usuario:"
 read usuario
 scp $usuario@$$ip $dir /var/backups
+tar -czf 
