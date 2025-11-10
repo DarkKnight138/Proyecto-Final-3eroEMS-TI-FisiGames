@@ -1,2 +1,2 @@
 0 14 * * 0 tar -czf /backups/home-backup-$(date +\%Y\%m\%d).tar.gz /home
-0 14 * * 0 echo $(date) Se realizo respaldo automatico >> /var/log/respaldos.log
+0 14 * * 0 echo $(date) Se realizo respaldo automatico del directorio /home >> /var/log/respaldos.log
