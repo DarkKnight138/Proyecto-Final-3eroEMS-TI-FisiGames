@@ -39,14 +39,14 @@ do
         read puerto 
         sudo firewall-cmd --permanent --add-port=$puerto/tcp
         sudo firewall-cmd --reload
-        echo "$(date) Se agrego el puerto $puerto" >> /var/log/firewall.log
+        echo "$(date +"%d/%m/%y %H:%M:%S") Se agrego el puerto $puerto" >> /var/log/firewall.log
         ;;
         2)
         echo "Ingrese servicio:"
         read servicio 
         sudo firewall-cmd --permanent --add-service=$servicio
         sudo firewall-cmd --reload
-        echo "$(date) Se agrego el servicio $servicio" >> /var/log/firewall.log
+        echo "$(date +"%d/%m/%y %H:%M:%S") Se agrego el servicio $servicio" >> /var/log/firewall.log
         ;; 
         0)echo "Volviendo ....";;
         *)echo "Eleccion $eleccion es invalida";;
@@ -66,7 +66,7 @@ do
         read puerto 
         sudo firewall-cmd --permanent --remove-port=$puerto/tcp
         sudo firewall-cmd --reload
-        echo "$(date) Se bloqueo el puerto $puerto" >> /var/log/firewall.log
+        echo "$(date +"%d/%m/%y %H:%M:%S") Se bloqueo el puerto $puerto" >> /var/log/firewall.log
         ;;
         2)
         echo "Ingrese servicio:"
@@ -86,7 +86,7 @@ do
          read puerto
          sudo firewall-cmd --permanent --add-rich-rule="rule family='ipv4' source address='${ip}' port port='${puerto}' protocol='tcp' accept"
          sudo firewall-cmd --reload
-         echo "$(date) Se agrego el puerto $puerto a la ip $ip" >> /var/log/firewall.log
+         echo "$(date +"%d/%m/%y %H:%M:%S") Se agrego el puerto $puerto a la ip $ip" >> /var/log/firewall.log
          ;;
       9) echo "Ingrese ip a agregar:"
          read ip
@@ -94,7 +94,7 @@ do
          read puerto
          sudo firewall-cmd --permanent --add-rich-rule="rule family='ipv4' source address='${ip}' port port='${puerto}' protocol='tcp' log prefix='conexion rechazada' limit value='1/m' reject"
          sudo firewall-cmd --reload
-         echo "$(date) Se bloqueo el puerto $puerto a la ip $ip" >> /var/log/firewall.log
+         echo "$(date +"%d/%m/%y %H:%M:%S") Se bloqueo el puerto $puerto a la ip $ip" >> /var/log/firewall.log
          ;;
       0) sh menucentral.sh;;
       *) echo "La opcion $opcion es invalida";;
