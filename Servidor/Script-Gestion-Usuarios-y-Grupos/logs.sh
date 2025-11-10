@@ -17,7 +17,14 @@ do
         1) cat /var/log/user&grupos.log ;;
         2) cat /var/log/respaldos.log;;
         3) cat /var/log/firewall.log ;;
-        4)
-        *)
+        4)  echo "***************************************************************"
+            echo "*                    Seleccione una opción                    *"
+            echo "* 1) Mostrar logs de Usuarios/Grupos                          *"
+            echo "* 2) Mostrar logs de Respaldos                                *"
+            echo "* 3) Mostrar logs del Firewall                                *"
+            echo "***************************************************************"
+        read opcion2
+            
+        *)echo "La opción $opcion no es correcta." ;;
     esac
 done
