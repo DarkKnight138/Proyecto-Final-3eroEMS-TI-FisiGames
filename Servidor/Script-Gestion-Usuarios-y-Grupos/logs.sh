@@ -1,3 +1,5 @@
+#!/bin/bash
+clear
 opcion=1
 while ((opcion != 0))
 do
