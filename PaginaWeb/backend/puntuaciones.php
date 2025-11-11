@@ -1,18 +1,20 @@
 <!DOCTYPE html>
 <html lang="es">
 <?php
-session_start();
-if (!isset($_SESSION['usuario_id'])) {
-    header("Location: login.php");
+session_start(); // Inicia la sesión
+if (!isset($_SESSION['usuario_id'])) { // Si no hay sesión activa
+    header("Location: login.php"); // Redirige al login
     exit();
 }
 ?>
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Puntuaciones - FisiGames</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+<meta charset="UTF-8" /> <!-- Define la codificación de caracteres -->
+<meta name="viewport" content="width=device-width, initial-scale=1" /> <!-- Diseño responsive -->
+<title>Puntuaciones - FisiGames</title> <!-- Título de la pestaña -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" /> <!-- Iconos Font Awesome -->
+
 <style>
+  /* Fuente de Google y estilos generales */
   @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap');
   body {
     margin: 0;
@@ -23,6 +25,7 @@ if (!isset($_SESSION['usuario_id'])) {
     display: flex;
     flex-direction: column;
   }
+  /* Barra de navegación superior */
   nav {
     display: flex;
     justify-content: space-between;
@@ -58,49 +61,54 @@ if (!isset($_SESSION['usuario_id'])) {
   }
 </style>
 </head>
+
 <body>
+<!-- Barra de navegación -->
 <nav>
   <div class="logo">FisiGames</div>
   <div class="nav-links">
     <div class="nav-left">
-      <a href="inicio.php"><i class="fas fa-home"></i> Inicio</a>
-      <a href="puntuaciones.php" class="active"><i class="fas fa-trophy"></i> Puntuaciones</a>
-      <a href="grupos.php"><i class="fas fa-users"></i> Grupos</a>
+      <a href="inicio.php"><i class="fas fa-home"></i> Inicio</a> <!-- Enlace al inicio -->
+      <a href="grupos.php"><i class="fas fa-users"></i> Grupos</a> <!-- Enlace a grupos -->
     </div>
     <div class="nav-right">
-      <a href="perfil.php"><i class="fas fa-user"></i> Perfil</a>
+      <a href="perfil.php"><i class="fas fa-user"></i> Perfil</a> <!-- Enlace al perfil -->
     </div>
   </div>
 </nav>
 
 <main>
-  <h1>Ranking de Puntuaciones</h1>
-  <button id="switchBtn" class="switch-button" type="button">Cambiar a vista de Grupos</button>
+  <h1>Ranking de Puntuaciones</h1> <!-- Título principal -->
+  <button id="switchBtn" class="switch-button" type="button">Cambiar a vista de Grupos</button> <!-- Botón para alternar -->
 
   <div class="ranking-container">
-    <!-- Ranking jugadores -->
+    <!-- Tabla de jugadores -->
     <div id="ranking-jugadores" class="ranking-table" aria-hidden="false">
       <div class="scrollable-table">
         <table>
-          <thead><tr><th>Posición</th><th>Jugador</th><th>Puntos</th></tr></thead>
+          <thead>
+            <tr><th>Posición</th><th>Jugador</th><th>Puntos</th></tr> <!-- Encabezado de tabla -->
+          </thead>
           <tbody>
 <?php
-require 'controladores/conexion.php';
+require 'controladores/conexion.php'; // Conexión a la base de datos
 
-if (!isset($conexion)) {
+if (!isset($conexion)) { // Si falla la conexión
     echo '<tr><td colspan="3">Error en la conexión.</td></tr>';
 } else {
+    // Consulta para obtener el top 10 de jugadores
     $sql_jug = "SELECT nombre, puntuacion_total FROM cuentas ORDER BY puntuacion_total DESC LIMIT 10";
     $res_jug = $conexion->query($sql_jug);
     if ($res_jug && $res_jug->num_rows > 0) {
         $pos = 1;
+        // Muestra los jugadores con su posición
         while ($row = $res_jug->fetch_assoc()) {
             $nombre = htmlspecialchars($row['nombre'], ENT_QUOTES, 'UTF-8');
             $puntos = (int)$row['puntuacion_total'];
             echo "<tr><td>{$pos}</td><td>{$nombre}</td><td>{$puntos}</td></tr>";
             $pos++;
         }
-        $res_jug->free();
+        $res_jug->free(); // Libera resultados
     } else {
         echo '<tr><td colspan="3">No hay puntuaciones para mostrar.</td></tr>';
     }
@@ -111,16 +119,19 @@ if (!isset($conexion)) {
       </div>
     </div>
 
-    <!-- Ranking grupos -->
+    <!-- Tabla de grupos -->
     <div id="ranking-grupos" class="ranking-table hidden" aria-hidden="true">
       <div class="scrollable-table">
         <table>
-          <thead><tr><th>Posición</th><th>Grupo</th><th>Puntos</th></tr></thead>
+          <thead>
+            <tr><th>Posición</th><th>Grupo</th><th>Puntos</th></tr> <!-- Encabezado de tabla -->
+          </thead>
           <tbody>
 <?php
-if (!isset($conexion)) {
+if (!isset($conexion)) { // Si no hay conexión
     echo '<tr><td colspan="3">Error en la conexión.</td></tr>';
 } else {
+    // Consulta para obtener los grupos y su puntuación total
     $sqlGrupos = "
         SELECT g.id_grupo, g.nombre AS grupo_nombre,
                SUM(c.puntuacion_total) AS puntos
@@ -134,6 +145,7 @@ if (!isset($conexion)) {
     $resGrupos = $conexion->query($sqlGrupos);
     if ($resGrupos && $resGrupos->num_rows > 0) {
         $pos = 1;
+        // Muestra los grupos con su posición
         while ($row = $resGrupos->fetch_assoc()) {
             $nombre = htmlspecialchars($row['grupo_nombre'], ENT_QUOTES, 'UTF-8');
             $puntos = (int)$row['puntos'];
@@ -151,15 +163,18 @@ if (!isset($conexion)) {
       </div>
     </div>
   </div>
+
+  <br><br><br><br> <!-- Espaciado -->
 </main>
 
 <script>
+// Script que controla el cambio de vista entre jugadores y grupos
 (function(){
-  const btn = document.getElementById('switchBtn');
-  const jugadores = document.getElementById('ranking-jugadores');
-  const grupos = document.getElementById('ranking-grupos');
+  const btn = document.getElementById('switchBtn'); // Botón de cambio
+  const jugadores = document.getElementById('ranking-jugadores'); // Tabla jugadores
+  const grupos = document.getElementById('ranking-grupos'); // Tabla grupos
 
-  function showJugadores() {
+  function showJugadores() { // Muestra jugadores
     jugadores.classList.remove('hidden');
     jugadores.setAttribute('aria-hidden','false');
     grupos.classList.add('hidden');
@@ -167,7 +182,7 @@ if (!isset($conexion)) {
     btn.textContent = 'Cambiar a vista de Grupos';
   }
 
-  function showGrupos() {
+  function showGrupos() { // Muestra grupos
     grupos.classList.remove('hidden');
     grupos.setAttribute('aria-hidden','false');
     jugadores.classList.add('hidden');
@@ -175,13 +190,16 @@ if (!isset($conexion)) {
     btn.textContent = 'Cambiar a vista de Jugadores';
   }
 
-  btn.addEventListener('click', () => {
-    if (jugadores.classList.contains('hidden')) showJugadores();
-    else showGrupos();
-  });
+  showJugadores(); // Estado inicial
 
-  // Estado inicial
-  showJugadores();
+  // Alterna la vista cuando se hace clic
+  btn.addEventListener('click', function(){
+    if (jugadores.classList.contains('hidden')) {
+      showJugadores();
+    } else {
+      showGrupos();
+    }
+  });
 })();
 </script>
 </body>

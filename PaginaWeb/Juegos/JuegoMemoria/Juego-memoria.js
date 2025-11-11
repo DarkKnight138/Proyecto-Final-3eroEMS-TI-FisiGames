@@ -1,158 +1,132 @@
-// Variables del juego
-let puntuacion = 0;
-const reversoImg = 'img/reverso.jpg'; // Imagen del reverso
-const imagenesOriginales = [
-    'img/Brim.jpg', 'img/Chamber.jpg', 'img/Fenix.jpg', 'img/gekko.jpg',
-    'img/jett.jpg', 'img/Key_0.jpg', 'img/omen.jpg', 'img/reina.jpg'
-]; // Cartas (pares)
+let cartas = []; // Guarda las cartas (imágenes duplicadas)
+let seleccionadas = []; // Guarda las cartas seleccionadas
+let aciertos = 0; // Cantidad de pares encontrados
+let intentos = 0; // Número de intentos realizados
+let puedeSeleccionar = false; // Controla si se puede seleccionar cartas
 
-// Variables internas del juego
-let imagenes, cartasVolteadas, idCartasVolteadas, cartasEmparejadas, intentos, bloquearClicks;
+const tablero = document.getElementById("tablero"); // Contenedor del tablero
+const mensaje = document.getElementById("mensaje"); // Elemento para mostrar mensajes
 
-// Mezcla aleatoria del array
-function mezclar(array) {
-    let copia = [...array];
-    for (let i = copia.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [copia[i], copia[j]] = [copia[j], copia[i]];
-    }
-    return copia;
+// Imágenes de los agentes (carpeta img/)
+const imagenes = [
+  "img/Brim.jpg",
+  "img/Chamber.jpg",
+  "img/Fenix.jpg",
+  "img/gekko.jpg",
+  "img/jett.jpg",
+  "img/Key_0.jpg",
+  "img/omen.jpg",
+  "img/reina.jpg"
+];
+
+// Genera las cartas duplicadas y las mezcla aleatoriamente
+function generarCartas() {
+  cartas = [...imagenes, ...imagenes].sort(() => 0.5 - Math.random());
 }
 
-// 🟢 Iniciar juego
+// Dibuja el tablero de 4x4 con las cartas boca abajo
+function dibujarTablero() {
+  tablero.innerHTML = ""; // Limpia el tablero
+  let index = 0;
+  for (let i = 0; i < 4; i++) {
+    const fila = document.createElement("tr"); // Crea una fila
+    for (let j = 0; j < 4; j++) {
+      const celda = document.createElement("td"); // Crea una celda
+      celda.dataset.index = index; // Asigna un índice a la celda
+      celda.classList.add("carta"); // Agrega clase de estilo
+
+      const img = document.createElement("img"); // Crea la imagen de la carta
+      img.src = "img/reverso.jpeg"; // Muestra el reverso por defecto
+      img.classList.add("img-carta"); // Clase para estilo de imagen
+      celda.appendChild(img); // Agrega la imagen a la celda
+
+      // Evento para seleccionar la carta
+      celda.addEventListener("click", () => seleccionarCarta(celda, img));
+      fila.appendChild(celda); // Agrega la celda a la fila
+      index++;
+    }
+    tablero.appendChild(fila); // Agrega la fila al tablero
+  }
+}
+
+// Inicia el juego (mezcla cartas y dibuja tablero)
 function iniciarJuego() {
-    const pares = [...imagenesOriginales, ...imagenesOriginales];
-    imagenes = mezclar(pares);
-    cartasVolteadas = [];
-    idCartasVolteadas = [];
-    cartasEmparejadas = new Array(imagenes.length).fill(false);
-    intentos = 0;
-    bloquearClicks = false;
-
-    const tablero = document.getElementById('tablero');
-    tablero.innerHTML = '';
-    document.getElementById('mensaje').textContent = '¡Encuentra todas las parejas de agentes!';
-
-    for (let i = 0; i < 4; i++) {
-        const fila = document.createElement('tr');
-        for (let j = 0; j < 4; j++) {
-            const id = i * 4 + j;
-            const celda = document.createElement('td');
-            celda.id = id;
-            celda.classList.add('carta');
-            celda.onclick = () => voltearCarta(id);
-
-            const img = document.createElement('img');
-            img.src = reversoImg;
-            celda.appendChild(img);
-            fila.appendChild(celda);
-
-puntuacion = 0;
-const menuToggle = document.getElementById('menu-toggle');
-        const navbar = document.getElementById('navbar');
-        menuToggle.addEventListener('click', () => {
-            navbar.classList.toggle('expanded');
-        });
-        const reversoImg = 'img/reverso.jpeg'; /*Asignamos una imagen al reverso*/
-        const imagenesOriginales = [
-            'img/Brim.jpg', 'img/Chamber.jpg', 'img/Fenix.jpg', 'img/gekko.jpg',
-            'img/jett.jpg', 'img/Key_0.jpg', 'img/omen.jpg', 'img/reina.jpg'
-        ]; /*Cargamos las imágenes que se van a mostrar(Las parejas)*/
-        let imagenes, cartasVolteadas, idCartasVolteadas, cartasEmparejadas, intentos, bloquearClicks;/*Creacion de variables*/
-        function mezclar(array) {
-            /*Esta función mezcla un array cualquiera que recibe */
-            let copia = [...array];
-            /*Crea un array llamado copia que va a ser igual al array que reciba y lo mezcla */
-            for (let i = copia.length - 1; i > 0; i--) {
-                /*Hace que la variable i sea igual a la posición del último objeto del array y mientras i sea mayor que 0 se va a repetir y por eso se va restando, usamos menos y no más para que nos quede más fácil mezclar cada elemento del array aleatoriamente */
-                const j = Math.floor(Math.random() * (i + 1));
-                /*Crea una variable j que va a ser igual a un número aleatorio entre 0 y el valor máximo del array*/
-                [copia[i], copia[j]] = [copia[j], copia[i]];
-                /*Esto hace que el array original cambie la última posición que es “i“ por la posición “j” que es la que sale aleatoriamente.*/
-            }
-            return copia;
-            /* Devuelve el array mezclado*/
- }
-        tablero.appendChild(fila);
-    }
+  generarCartas(); // Mezcla cartas
+  dibujarTablero(); // Dibuja tablero
+  aciertos = 0; // Reinicia aciertos
+  intentos = 0; // Reinicia intentos
+  mensaje.textContent = "¡Encuentra todas las parejas!"; // Mensaje inicial
+  puedeSeleccionar = true; // Permite seleccionar
 }
 
-// 🎯 Voltear carta
-function voltearCarta(i) {
-    if (bloquearClicks || cartasEmparejadas[i] || idCartasVolteadas.includes(i)) return;
-
-    const celda = document.getElementById(i);
-    const img = celda.querySelector('img');
-    img.src = imagenes[i];
-
-    cartasVolteadas.push(imagenes[i]);
-    idCartasVolteadas.push(i);
-
-    if (cartasVolteadas.length === 2) {
-        intentos++;
-        bloquearClicks = true;
-
-        if (cartasVolteadas[0] === cartasVolteadas[1]) {
-            setTimeout(() => {
-                idCartasVolteadas.forEach(id => {
-                    const celdaEmp = document.getElementById(id);
-                    celdaEmp.classList.add('emparejado');
-                });
-                cartasEmparejadas[idCartasVolteadas[0]] = true;
-                cartasEmparejadas[idCartasVolteadas[1]] = true;
-                resetTurno();
-                comprobarFin();
-            }, 700);
-        } else {
-            setTimeout(() => {
-                idCartasVolteadas.forEach(id => {
-                    const celda = document.getElementById(id);
-                    const img = celda.querySelector('img');
-                    img.src = reversoImg;
-                });
-                resetTurno();
-            }, 1000);
-        }
-    }
-}
-
-// 🔁 Reset turno
-function resetTurno() {
-    cartasVolteadas = [];
-    idCartasVolteadas = [];
-    bloquearClicks = false;
-}
-
-// 🧠 Comprobar si ganó
-function comprobarFin() {
-    if (cartasEmparejadas.every(val => val)) {
-        document.getElementById('mensaje').textContent = `🎉 ¡Felicidades! Terminaste en ${intentos} intentos.`;
-        puntuacion += 15;
-        sumarPuntos(15); // 🔥 Enviar puntos al backend
-    }
-}
-
-// 🔁 Reiniciar juego
+// Reinicia el juego completamente
 function reiniciarJuego() {
-    iniciarJuego();
-    document.getElementById('mensaje').textContent = 'Juego reiniciado.';
+  iniciarJuego();
 }
 
-// 📤 Enviar puntos al backend
-function sumarPuntos(puntos) {
-    fetch("../../backend/controladores/actualizar_puntos.php", {
-        method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: "puntos=" + puntos
-    })
-    .then(response => response.text())
+// Maneja la selección de una carta
+function seleccionarCarta(celda, img) {
+  if (!puedeSeleccionar) return; // Evita seleccionar mientras se comparan
+  const index = celda.dataset.index; // Obtiene el índice de la carta
+
+  // Evita seleccionar dos veces la misma carta o una ya descubierta
+  if (seleccionadas.includes(celda) || img.classList.contains("descubierta")) return;
+
+  img.src = cartas[index]; // Muestra la imagen de la carta
+  img.classList.add("descubierta"); // Marca como descubierta
+  seleccionadas.push(celda); // Guarda la carta seleccionada
+
+  // Cuando hay 2 cartas seleccionadas, las compara
+  if (seleccionadas.length === 2) {
+    puedeSeleccionar = false; // Bloquea nuevas selecciones
+    intentos++; // Aumenta los intentos
+    setTimeout(() => {
+      compararCartas(); // Compara después de 0.8 segundos
+      puedeSeleccionar = true; // Permite seleccionar nuevamente
+    }, 800);
+  }
+}
+
+// Compara las 2 cartas seleccionadas
+function compararCartas() {
+  const [c1, c2] = seleccionadas; // Obtiene las 2 cartas
+  const img1 = c1.querySelector("img");
+  const img2 = c2.querySelector("img");
+
+  // Si son iguales → acierto
+  if (img1.src === img2.src) {
+    aciertos++; // Suma un acierto
+    c1.style.backgroundColor = "#90EE90"; // Color verde de acierto
+    c2.style.backgroundColor = "#90EE90";
+    if (aciertos === 8) { // Si encontró todas las parejas
+      mensaje.textContent = `¡Ganaste en ${intentos} intentos! `;
+      sumarPuntos(); // Suma puntos al ganar
+    }
+  } else {
+    // Si no coinciden, se dan vuelta otra vez
+    img1.src = "img/reverso.jpeg";
+    img2.src = "img/reverso.jpeg";
+    img1.classList.remove("descubierta");
+    img2.classList.remove("descubierta");
+  }
+
+  seleccionadas = []; // Limpia la selección
+}
+
+// SUMAR 30 PUNTOS AL GANAR
+function sumarPuntos() {
+  const puntosGanados = 30; // Puntos que se suman
+
+  // Envía los puntos al backend PHP
+  fetch("../../backend/controladores/actualizar_puntos.php", {
+    method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: "puntos=" + puntosGanados
+  })
+    .then(res => res.text()) // Convierte la respuesta en texto
     .then(data => {
-        console.log("Servidor:", data);
-        document.getElementById("mensaje").textContent += " +15 puntos 🎯";
+      console.log(data); // Muestra la respuesta del servidor
+      alert(`¡Ganaste ${puntosGanados} puntos! `); // Muestra mensaje al jugador
     })
-    .catch(error => {
-        console.error("Error al enviar puntos:", error);
-        document.getElementById("mensaje").textContent += " ⚠️ Error al guardar puntos";
-    });
+    .catch(err => console.error("Error al actualizar puntos:", err)); // Captura errores
 }
-

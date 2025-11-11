@@ -1,7 +1,5 @@
 <?php
 session_start();
-
-// Si no está logueado, redirige a login
 if (!isset($_SESSION['usuario_id'])) {
     header("Location: ../../backend/login.php");
     exit;
@@ -14,16 +12,13 @@ if (!isset($_SESSION['usuario_id'])) {
   <meta charset="UTF-8">
   <title>Simon Dice - FisiGames</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <!-- Bootstrap -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
   <link rel="stylesheet" href="simondice.css">
   <link rel="stylesheet" href="../style.css">
-</head>
 
+</head>
 <body>
-  <!-- Navbar -->
   <nav id="navbar">
     <div class="left-section">
       <div class="logo">FisiGames</div>
@@ -33,35 +28,13 @@ if (!isset($_SESSION['usuario_id'])) {
         <a href="../../backend/grupos.php"><i class="fa-solid fa-users"></i> Grupos</a>
       </div>
     </div>
-
     <div class="nav-links right-links">
       <a href="../../backend/perfil.php"><i class="fa-solid fa-user"></i> Perfil</a>
     </div>
-
     <div class="menu-toggle" id="menu-toggle" aria-label="Menú de navegación">
 
     </div>
   </nav>
-
-  <!-- Contenido del juego -->
-  <main class="text-center mt-4">
-    <button id="start-btn" class="btn btn-primary mb-3">Empezar</button>
-    <div class="container">
-      <div class="row justify-content-center">
-        <div class="col-6 col-md-3 p-2">
-          <img id="rojo" src="imgs/rojo.webp" class="color-btn">
-        </div>
-        <div class="col-6 col-md-3 p-2">
-          <img id="verde" src="imgs/verde.avif" class="color-btn">
-        </div>
-        <div class="col-6 col-md-3 p-2">
-          <img id="azul" src="imgs/azul.png" class="color-btn">
-        </div>
-        <div class="col-6 col-md-3 p-2">
-          <img id="amarillo" src="imgs/amarillo.jpg" class="color-btn">
-        </div>
-      </div>
-
   <main class="simon-container">
     <button id="start-btn">Empezar</button>
     <div id="mensaje" class="mensaje-juego">Haz clic en "Empezar" para jugar</div>
@@ -76,6 +49,7 @@ if (!isset($_SESSION['usuario_id'])) {
 
   <script src="simondice.js"></script>
   <script>
+
     const menuToggle = document.getElementById('menu-toggle');
     const navbar = document.getElementById('navbar');
     menuToggle.addEventListener('click', () => {

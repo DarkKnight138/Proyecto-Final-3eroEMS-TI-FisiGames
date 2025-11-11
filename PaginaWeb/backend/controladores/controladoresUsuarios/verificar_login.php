@@ -1,13 +1,12 @@
 <?php
-session_start(); // mantiene la sesión activa
-require '../conexion.php'; // conecta a la base de datos
+session_start();
+require '../conexion.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = $_POST['email'] ?? '';
     $pass  = $_POST['password'] ?? '';
 
-    // Usar consultas preparadas
-    $stmt = $conexion->prepare("SELECT id_cuenta, nombre, permiso, password FROM cuentas WHERE email = ?");
+    $stmt = $conexion->prepare("SELECT id_cuenta, nombre, permiso, password, habilitado FROM cuentas WHERE email = ?");
     $stmt->bind_param("s", $email);
     $stmt->execute();
     $resultado = $stmt->get_result();
@@ -15,16 +14,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($resultado && $resultado->num_rows === 1) {
         $usuario = $resultado->fetch_assoc();
 
-        // Verificar el hash de la contraseña
+        // Si la cuenta está deshabilitada
+        if (isset($usuario['habilitado']) && intval($usuario['habilitado']) === 0) {
+            echo "Cuenta inhabilitada";
+            exit();
+        }
+
         if (password_verify($pass, $usuario['password'])) {
-            // Guardar datos en la sesión
             session_regenerate_id(true);
             $_SESSION['usuario_id'] = $usuario['id_cuenta'];
-            $_SESSION['id_cuenta'] = $usuario['id_cuenta'];
-            $_SESSION['nombre']    = $usuario['nombre'];
-            $_SESSION['permiso']   = $usuario['permiso'];
-
-            echo "ok"; // respuesta al JS
+            $_SESSION['id_cuenta']  = $usuario['id_cuenta'];
+            $_SESSION['nombre']     = $usuario['nombre'];
+            $_SESSION['permiso']    = $usuario['permiso'];
+            echo "ok";
             exit();
         } else {
             echo "contraseña incorrecta";
@@ -36,7 +38,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-// Si entran por GET u otro método, redirige al login
 header('Location: ../login.php');
 exit();
 ?>

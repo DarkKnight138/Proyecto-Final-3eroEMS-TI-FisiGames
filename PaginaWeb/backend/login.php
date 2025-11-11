@@ -204,7 +204,7 @@
       }
     };
 
-    xhr.send(formData); // 🔹 No olvides enviar los datos
+    xhr.send(formData); //  No olvides enviar los datos
   });
 </script>
 

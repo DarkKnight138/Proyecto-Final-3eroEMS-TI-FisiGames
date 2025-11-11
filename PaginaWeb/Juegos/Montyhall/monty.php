@@ -1,7 +1,9 @@
 <?php
+// Inicia la sesión del usuario
 session_start();
 
-// Si no está logueado, redirige a login
+// Verifica si el usuario no está logueado
+// Si no lo está, lo redirige al login
 if (!isset($_SESSION['usuario_id'])) {
     header("Location: ../../backend/login.php");
     exit;
@@ -11,13 +13,17 @@ if (!isset($_SESSION['usuario_id'])) {
 <!DOCTYPE html>
 <html lang="es">
 <head>
+  <!-- Configuración básica del documento -->
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Monty Hall - FisiGames</title>
 
+  <!-- Íconos de Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"/>
 
+  <!-- Estilos CSS -->
   <style>
+    /* Configuración general de la página */
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Orbitron', sans-serif; }
     body {
       background: linear-gradient(135deg,#0f0c29,#302b63,#24243e);
@@ -26,6 +32,7 @@ if (!isset($_SESSION['usuario_id'])) {
       text-align: center;
     }
 
+    /* Barra de navegación */
     nav#navbar {
       background-color: #1a1a2e;
       color: #eee;
@@ -48,6 +55,7 @@ if (!isset($_SESSION['usuario_id'])) {
     .menu-toggle { display:none; flex-direction:column; gap:5px; cursor:pointer; }
     .menu-toggle div { width:25px; height:3px; background:#00ffe7; border-radius:2px; }
 
+    /* Versión móvil del menú */
     @media (max-width:768px) {
       .nav-links.left-links { display:none; }
       .menu-toggle { display:flex; }
@@ -56,8 +64,10 @@ if (!isset($_SESSION['usuario_id'])) {
       }
     }
 
+    /* Contenedor principal */
     main { padding: 100px 1rem 40px; max-width:1100px; margin:0 auto; }
 
+    /* Título */
     h2.title {
       font-size:1.8rem;
       color:#ffcc00;
@@ -65,6 +75,7 @@ if (!isset($_SESSION['usuario_id'])) {
       text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
     }
 
+    /* Contenedor de puertas */
     .doors {
       display:grid;
       grid-template-columns: repeat(3, 1fr);
@@ -75,6 +86,7 @@ if (!isset($_SESSION['usuario_id'])) {
       max-width:900px;
     }
 
+    /* Estilo general de cada puerta */
     .door {
       width:100%;
       max-width:260px;
@@ -97,6 +109,7 @@ if (!isset($_SESSION['usuario_id'])) {
     .door.goat { background:#2b2622; color:#ffddcc; }
     .door.prize { background:#0f5236; color:#fff1c7; box-shadow:0 0 18px #00ffe7; }
 
+    /* Controles y botones */
     .controls { margin-top:1.4rem; display:flex; gap:1rem; justify-content:center; align-items:center; flex-wrap:wrap; }
     .btn {
       background:transparent; color:#00ffe7; border:2px solid #00ffe7; padding:10px 18px; border-radius:12px; font-weight:700; cursor:pointer;
@@ -107,14 +120,16 @@ if (!isset($_SESSION['usuario_id'])) {
     .message { margin-top:1rem; font-weight:700; color:#00ffe7; text-shadow:0 0 8px #00ffe7; min-height:1.2em; }
     .btn-restart { background:#00ffe7; color:#1a1a2e; padding:10px 18px; border-radius:10px; border:none; font-weight:700; cursor:pointer; }
 
+    /* Adaptación a pantallas pequeñas */
     @media (max-width:560px) {
       .doors { grid-template-columns: 1fr; max-width:320px; }
       .door { max-width:320px; font-size:3.4rem; }
     }
   </style>
-  <link rel="stylesheet" href="monty.css" />
 </head>
+
 <body>
+  <!-- Barra de navegación -->
   <nav id="navbar">
     <div class="left-section">
       <div class="logo">FisiGames</div>
@@ -132,137 +147,155 @@ if (!isset($_SESSION['usuario_id'])) {
     </div>
   </nav>
 
+  <!-- Contenido principal -->
   <main>
-    <h2 class="title">🎲 Monty Hall — Elige una puerta</h2>
-    <h2 class="title">Monty Hall</h2>
+    <h2 class="title">Monty Hall — Elige una puerta</h2>
 
+    <!-- Puertas del juego -->
     <div class="doors" id="doors">
       <div class="door" data-index="0" id="door-0" role="button" aria-label="Puerta 1">🚪</div>
       <div class="door" data-index="1" id="door-1" role="button" aria-label="Puerta 2">🚪</div>
       <div class="door" data-index="2" id="door-2" role="button" aria-label="Puerta 3">🚪</div>
     </div>
 
+    <!-- Botones de control -->
     <div class="controls" id="controls" aria-live="polite">
       <button class="btn" id="btn-mantener" style="display:none">Mantener</button>
       <button class="btn" id="btn-cambiar" style="display:none">Cambiar</button>
       <button class="btn-restart" id="btn-reiniciar" style="display:none">🔄 Reiniciar</button>
-      <button class="btn-restart" id="btn-reiniciar" style="display:none">Reiniciar</button>
     </div>
 
+    <!-- Mensaje al usuario -->
     <div class="message" id="message">Elige una puerta para empezar.</div>
   </main>
 
+  <!-- Script principal del juego -->
   <script>
-    (function(){
-      const doors = Array.from(document.querySelectorAll('.door'));
-      const message = document.getElementById('message');
-      const btnCambiar = document.getElementById('btn-cambiar');
-      const btnMantener = document.getElementById('btn-mantener');
-      const btnReiniciar = document.getElementById('btn-reiniciar');
-      const menuToggle = document.getElementById('menu-toggle');
-      const navbar = document.getElementById('navbar');
+  (function() {
+    // Referencias a elementos del DOM
+    const doors = Array.from(document.querySelectorAll('.door'));
+    const message = document.getElementById('message');
+    const btnCambiar = document.getElementById('btn-cambiar');
+    const btnMantener = document.getElementById('btn-mantener');
+    const btnReiniciar = document.getElementById('btn-reiniciar');
+    const menuToggle = document.getElementById('menu-toggle');
+    const navbar = document.getElementById('navbar');
 
-      menuToggle?.addEventListener('click', ()=> navbar.classList.toggle('expanded'));
+    // Evento para mostrar/ocultar menú móvil
+    menuToggle?.addEventListener('click', ()=> navbar.classList.toggle('expanded'));
 
-      let prizeDoor = null;
-      let playerChoice = null;
-      let openedDoor = null;
-      let stage = 'idle';
+    // Variables de estado del juego
+    let prizeDoor = null;
+    let playerChoice = null;
+    let openedDoor = null;
+    let stage = 'idle';
 
-      function initGame(){
-        prizeDoor = Math.floor(Math.random()*3);
-        playerChoice = null;
-        openedDoor = null;
-        stage = 'pick';
+    // Función que inicializa el juego
+    function initGame(){
+      prizeDoor = Math.floor(Math.random()*3);
+      playerChoice = null;
+      openedDoor = null;
+      stage = 'pick';
 
-        doors.forEach((d,i)=>{
-          d.className = 'door';
-          d.textContent = '🚪';
-          d.onclick = () => elegirPuerta(i);
-        });
-        btnCambiar.style.display = 'none';
-        btnMantener.style.display = 'none';
-        btnReiniciar.style.display = 'none';
-        message.textContent = 'Elige una puerta para empezar.';
+      // Restablece las puertas
+      doors.forEach((d,i)=>{
+        d.className = 'door';
+        d.textContent = '🚪';
+        d.onclick = () => elegirPuerta(i);
+      });
+      btnCambiar.style.display = 'none';
+      btnMantener.style.display = 'none';
+      btnReiniciar.style.display = 'none';
+      message.textContent = 'Elige una puerta para empezar.';
+    }
+
+    // Función cuando el jugador elige una puerta
+    function elegirPuerta(index){
+      if(stage !== 'pick') return;
+      playerChoice = index;
+      doors.forEach((d,i)=> d.classList.toggle('selected', i===playerChoice));
+      abrirPuertaAnfitrion();
+    }
+
+    // El anfitrión abre una puerta que no tiene el premio
+    function abrirPuertaAnfitrion(){
+      const candidatos = [0,1,2].filter(i => i !== playerChoice && i !== prizeDoor);
+      openedDoor = candidatos[Math.floor(Math.random()*candidatos.length)];
+      const d = doors[openedDoor];
+      d.textContent = '🐐';
+      d.classList.add('opened','goat');
+      d.onclick = null;
+
+      stage = 'opened';
+      message.textContent = 'El anfitrión abrió una puerta. ¿Quieres cambiar tu elección?';
+      btnCambiar.style.display = 'inline-block';
+      btnMantener.style.display = 'inline-block';
+
+      btnCambiar.onclick = () => finalizar(true);
+      btnMantener.onclick = () => finalizar(false);
+    }
+
+    // Finaliza el juego: muestra si gana o pierde
+    function finalizar(usarCambio){
+      if(stage !== 'opened') return;
+      let finalChoice = playerChoice;
+      if(usarCambio){
+        finalChoice = [0,1,2].find(i => i !== playerChoice && i !== openedDoor);
       }
+      revealAll(finalChoice);
+    }
 
-      function elegirPuerta(index){
-        if(stage !== 'pick') return;
-        playerChoice = index;
-        doors.forEach((d,i)=> d.classList.toggle('selected', i===playerChoice));
-        abrirPuertaAnfitrion();
-      }
-
-      function abrirPuertaAnfitrion(){
-        const candidatos = [0,1,2].filter(i => i !== playerChoice && i !== prizeDoor);
-        openedDoor = candidatos[Math.floor(Math.random()*candidatos.length)];
-        const d = doors[openedDoor];
-        d.textContent = '🐐';
-        d.classList.add('opened','goat');
+    // Revela todas las puertas
+    function revealAll(finalChoice){
+      doors.forEach((d,i)=>{
+        d.classList.remove('selected');
+        d.classList.add('opened');
         d.onclick = null;
-
-        stage = 'opened';
-        message.textContent = 'El anfitrión abrió una puerta. ¿Quieres cambiar tu elección?';
-        btnCambiar.style.display = 'inline-block';
-        btnMantener.style.display = 'inline-block';
-
-        btnCambiar.onclick = () => finalizar(true);
-        btnMantener.onclick = () => finalizar(false);
-      }
-
-      function finalizar(usarCambio){
-        if(stage !== 'opened') return;
-        let finalChoice = playerChoice;
-        if(usarCambio){
-          finalChoice = [0,1,2].find(i => i !== playerChoice && i !== openedDoor);
-        }
-        revealAll(finalChoice);
-      }
-
-      function revealAll(finalChoice){
-        doors.forEach((d,i)=>{
-          d.classList.remove('selected');
-          d.classList.add('opened');
-          d.onclick = null;
-          if(i === prizeDoor){
-            d.textContent = '🎁';
-            d.classList.add('prize');
-          } else {
-            d.textContent = '🐐';
-            d.classList.add('goat');
-          }
-        });
-
-        const win = finalChoice === prizeDoor;
-        if(win){
-          message.textContent = '¡Ganaste! 🎉 (+20 puntos)';
-          sumarPuntos(20); // ✅ suma 20 puntos
+        if(i === prizeDoor){
+          d.textContent = '🎁';
+          d.classList.add('prize');
         } else {
-          message.textContent = 'Perdiste. 😞';
+          d.textContent = '🐐';
+          d.classList.add('goat');
         }
+      });
 
-        btnCambiar.style.display = 'none';
-        btnMantener.style.display = 'none';
-        btnReiniciar.style.display = 'inline-block';
-        stage = 'result';
-        btnReiniciar.onclick = initGame;
+      const win = finalChoice === prizeDoor;
+      if(win){
+        message.textContent = '¡Ganaste!  (+10 puntos)';
+        sumarPuntos(10); // suma 10 puntos
+      } else {
+        message.textContent = 'Perdiste.';
       }
 
-      // función para sumar puntos
-      function sumarPuntos(puntos){
-        fetch("../../backend/controladores/actualizar_puntos.php", {
-          method: "POST",
-          headers: { "Content-Type": "application/x-www-form-urlencoded" },
-          body: "puntos=" + puntos
-        })
-        .then(res => res.text())
-        .then(data => console.log("Servidor:", data))
-        .catch(err => console.error("Error al enviar puntos:", err));
-      }
+      btnCambiar.style.display = 'none';
+      btnMantener.style.display = 'none';
+      btnReiniciar.style.display = 'inline-block';
+      stage = 'result';
+      btnReiniciar.onclick = initGame;
+    }
 
-      initGame();
-    })();
+    // Envía los puntos ganados al servidor
+    function sumarPuntos(puntos){
+      fetch("../../backend/controladores/actualizar_puntos.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: "puntos=" + puntos
+      })
+      .then(res => res.text())
+      .then(data => {
+        console.log("Respuesta del servidor:", data);
+      })
+      .catch(err => {
+        console.error("Error al enviar puntos:", err);
+      });
+    }
+
+    // Inicia el juego al cargar la página
+    initGame();
+
+  })();
   </script>
-  <script src="monty.js"></script>
+
 </body>
 </html>
