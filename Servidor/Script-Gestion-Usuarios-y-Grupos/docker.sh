@@ -16,6 +16,35 @@ do
     read opcion
     clear
     case $opcion in
-        *)echo "La opción $opcion no es correcta." ;;
+        1)
+            echo "Iniciando la aplicación..."
+            docker-compose up -d
+            ;;
+        2)
+            echo "Deteniendo la aplicación..."
+            docker-compose down
+            ;;
+        3)
+            echo "Iniciando Apache..."
+            docker-compose up -d php
+            ;;
+        4)
+            echo "Deteniendo Apache..."
+            docker-compose stop php
+            ;;
+        5)
+            echo "Iniciando MySQL..."
+            docker-compose up -d bd
+            ;;
+        6)
+            echo "Deteniendo MySQL..."
+            docker-compose stop bd
+            ;;
+        0)
+            echo "Saliendo del script..."
+            ;;
+        *)
+            echo "La opción $opcion no es correcta."
+            ;;
     esac
 done
