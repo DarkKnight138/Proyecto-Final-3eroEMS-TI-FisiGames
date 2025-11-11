@@ -3,6 +3,7 @@ clear
 usu=1
 while (($usu != 5))
 do
+
 echo "***************************************************************"
 echo "*                    Seleccione una opción                    *"
 echo "* 1) Crear Usuarios                                           *"
@@ -87,10 +88,10 @@ case $usu in
    echo "$usuarioCreado:$usuarioCreado" | chpasswd
    chage -d 7 "$usuarioCreado"
    echo "Usuario $usuarioCreado creado correctamente, recuerde cambiar su contraseña por defecto antes de que pasen 7 días." 
-   echo "$(date +"%d/%m/%y %H:%M:%S") Se creo el usuario $usuarioCreado" >> /var/log/user&grupos.log ;;
+   echo "$(date +"%d/%m/%y %H:%M:%S") Se creo el usuario $usuarioCreado" >> /var/log/userygrupos.log ;;
 2) 
    ExisteUsuarioBorrado=false
-   while [ "$ExisteUsuarioBorrado"=="false" ]; do 
+   while [ "$ExisteUsuarioBorrado" == "false" ]; do 
        echo "Ingrese nombre del usuario a borrar:"
        read usuarioBorrado
        clear
@@ -104,7 +105,7 @@ case $usu in
    done
    userdel -r "$usuarioBorrado"
    echo "Usuario $usuarioBorrado eliminado correctamente." 
-   echo "$(date +"%d/%m/%y %H:%M:%S") Se elimino el usuario $usuarioBorrado" >> /var/log/user&grupos.log ;;
+   echo "$(date +"%d/%m/%y %H:%M:%S") Se elimino el usuario $usuarioBorrado" >> /var/log/userygrupos.log ;;
 3) sh modifyusu.sh ;;
 4) cut -d ":" -f1 /etc/passwd ;;
 5) sh menucentral.sh ;;
