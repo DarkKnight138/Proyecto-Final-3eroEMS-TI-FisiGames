@@ -1,5 +1,3 @@
-#!/bin/bash
-clear
 opcion=1
 while ((opcion != 0))
 do
@@ -14,7 +12,7 @@ do
     read opcion
     clear
     case $opcion in
-        1) cat /var/log/user&grupos.log ;;
+        1) cat /var/log/userygrupos.log ;;
         2) cat /var/log/respaldos.log;;
         3) cat /var/log/firewall.log ;;
         4)  echo "***************************************************************"
@@ -27,13 +25,20 @@ do
             echo "Ingrese fecha (dd/mm/aa):"
             read fecha
             case $opcion2 in
-                1) grep "$fecha" /var/log/user&grupos.log
+                1) grep "$fecha" /var/log/userygrupos.log
+                echo "Enter"
+                read a
                 ;;
                 2) grep "$fecha" /var/log/respaldos.log
+                echo "Enter"
+                read a
                 ;;
                 3) grep "$fecha" /var/log/firewall.log
+                echo "Enter"
+                read a
                 ;;
-            
+            esac 
+            ;;
         *)echo "La opción $opcion no es correcta." ;;
     esac
 done
